@@ -1,0 +1,173 @@
+{
+  "name": "vlan",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-0ee8dc706328",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "2001:172:20:20::/64",
+        "ipv6-gw": "2001:172:20:20::1",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "client1": {
+      "index": "0",
+      "shortname": "client1",
+      "longname": "clab-vlan-client1",
+      "fqdn": "client1.vlan.io",
+      "group": "",
+      "labdir": "/home/david/openstack/vnx-kolla-openstack/conf/c9s/srlinux-vlan-handling-lab/clab-vlan/client1",
+      "kind": "linux",
+      "image": "ghcr.io/srl-labs/alpine",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.5",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::5",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-0ee8dc706328",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/david/openstack/vnx-kolla-openstack/conf/c9s/srlinux-vlan-handling-lab/clab-vlan/client1",
+        "clab-node-name": "client1",
+        "clab-node-type": "",
+        "clab-topo-file": "/home/david/openstack/vnx-kolla-openstack/conf/c9s/srlinux-vlan-handling-lab/vlan.clab.yml",
+        "containerlab": "vlan"
+      }
+    },
+    "client2": {
+      "index": "1",
+      "shortname": "client2",
+      "longname": "clab-vlan-client2",
+      "fqdn": "client2.vlan.io",
+      "group": "",
+      "labdir": "/home/david/openstack/vnx-kolla-openstack/conf/c9s/srlinux-vlan-handling-lab/clab-vlan/client2",
+      "kind": "linux",
+      "image": "ghcr.io/srl-labs/alpine",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-0ee8dc706328",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/david/openstack/vnx-kolla-openstack/conf/c9s/srlinux-vlan-handling-lab/clab-vlan/client2",
+        "clab-node-name": "client2",
+        "clab-node-type": "",
+        "clab-topo-file": "/home/david/openstack/vnx-kolla-openstack/conf/c9s/srlinux-vlan-handling-lab/vlan.clab.yml",
+        "containerlab": "vlan"
+      }
+    },
+    "srl1": {
+      "index": "2",
+      "shortname": "srl1",
+      "longname": "clab-vlan-srl1",
+      "fqdn": "srl1.vlan.io",
+      "group": "",
+      "labdir": "/home/david/openstack/vnx-kolla-openstack/conf/c9s/srlinux-vlan-handling-lab/clab-vlan/srl1",
+      "kind": "nokia_srlinux",
+      "image": "ghcr.io/nokia/srlinux:23.10.1",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-0ee8dc706328",
+        "clab-node-group": "",
+        "clab-node-kind": "nokia_srlinux",
+        "clab-node-lab-dir": "/home/david/openstack/vnx-kolla-openstack/conf/c9s/srlinux-vlan-handling-lab/clab-vlan/srl1",
+        "clab-node-name": "srl1",
+        "clab-node-type": "ixrd2",
+        "clab-topo-file": "/home/david/openstack/vnx-kolla-openstack/conf/c9s/srlinux-vlan-handling-lab/vlan.clab.yml",
+        "containerlab": "vlan"
+      }
+    },
+    "srl2": {
+      "index": "3",
+      "shortname": "srl2",
+      "longname": "clab-vlan-srl2",
+      "fqdn": "srl2.vlan.io",
+      "group": "",
+      "labdir": "/home/david/openstack/vnx-kolla-openstack/conf/c9s/srlinux-vlan-handling-lab/clab-vlan/srl2",
+      "kind": "nokia_srlinux",
+      "image": "ghcr.io/nokia/srlinux:23.10.1",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::4",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-0ee8dc706328",
+        "clab-node-group": "",
+        "clab-node-kind": "nokia_srlinux",
+        "clab-node-lab-dir": "/home/david/openstack/vnx-kolla-openstack/conf/c9s/srlinux-vlan-handling-lab/clab-vlan/srl2",
+        "clab-node-name": "srl2",
+        "clab-node-type": "ixrd2",
+        "clab-topo-file": "/home/david/openstack/vnx-kolla-openstack/conf/c9s/srlinux-vlan-handling-lab/vlan.clab.yml",
+        "containerlab": "vlan"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "client1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:97:07:3c",
+        "peer": "z"
+      },
+      "z": {
+        "node": "srl1",
+        "interface": "e1-1",
+        "mac": "aa:c1:ab:3e:2c:df",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "srl1",
+        "interface": "e1-10",
+        "mac": "aa:c1:ab:13:07:1e",
+        "peer": "z"
+      },
+      "z": {
+        "node": "srl2",
+        "interface": "e1-10",
+        "mac": "aa:c1:ab:b7:6e:d4",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "srl2",
+        "interface": "e1-1",
+        "mac": "aa:c1:ab:37:a0:0e",
+        "peer": "z"
+      },
+      "z": {
+        "node": "client2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:40:10:b8",
+        "peer": "a"
+      }
+    }
+  ]
+}

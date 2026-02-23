@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-web-server-pool
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-web-server
+  template:
+    metadata:
+      labels:
+        app: nginx-web-server
+    spec:
+      containers:
+        - image: nginx
+          name: nginx-web-server
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "echo $( hostname ) > /usr/share/nginx/html/index.html"]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 80
+#    nodePort: 30000
+  selector:
+    app: nginx-web-server
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+#  annotations:
+#    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+  - host: iaaas.pagoda.local
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: nginx-service
+            port:
+              number: 80

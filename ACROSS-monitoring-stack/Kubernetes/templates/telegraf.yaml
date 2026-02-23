@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: telegraf
+  labels:
+    app: telegraf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: telegraf
+  template:
+    metadata:
+      labels:
+        app: telegraf
+    spec:
+      containers:
+      - name: telegraf
+        image: telegraf:1.28
+        command: ["telegraf", "--config", "http://138.4.21.162:8086/api/v2/telegrafs/0e9e4735c3890000"]
+        env:
+        - name: INFLUX_TOKEN
+          value: 4WDrH26lX4TrcWulZeIvKqPq3iAQ35MYy8TdHP_Jlea8BI1alDzmbontSB6OZp2emKoPGfWQpiqTioIr5AQIgg==

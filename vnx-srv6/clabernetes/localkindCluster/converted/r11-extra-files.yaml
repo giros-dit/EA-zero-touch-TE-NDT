@@ -1,0 +1,103 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: srv6-r11-files
+  namespace: c9s-srv6
+data:
+  conf-r11-daemons: |-
+    zebra=yes
+    bgpd=no
+    ospfd=no
+    ospf6d=no
+    ripd=no
+    ripngd=no
+    isisd=yes
+    pimd=no
+    ldpd=no
+    nhrpd=no
+    eigrpd=no
+    babeld=no
+    sharpd=no
+    staticd=no
+    pbrd=no
+    bfdd=no
+    fabricd=no
+
+    vtysh_enable=yes
+    zebra_options=" -s 90000000 --daemon -A 127.0.0.1"
+    bgpd_options="   --daemon -A 127.0.0.1"
+    ospfd_options="  --daemon -A 127.0.0.1"
+    ospf6d_options=" --daemon -A ::1"
+    ripd_options="   --daemon -A 127.0.0.1"
+    ripngd_options=" --daemon -A ::1"
+    isisd_options="  --daemon -A 127.0.0.1"
+    pimd_options="  --daemon -A 127.0.0.1"
+    ldpd_options="  --daemon -A 127.0.0.1"
+    nhrpd_options="  --daemon -A 127.0.0.1"
+    eigrpd_options="  --daemon -A 127.0.0.1"
+    babeld_options="  --daemon -A 127.0.0.1"
+    sharpd_options="  --daemon -A 127.0.0.1"
+    staticd_options="  --daemon -A 127.0.0.1"
+    pbrd_options="  --daemon -A 127.0.0.1"
+    bfdd_options="  --daemon -A 127.0.0.1"
+    fabricd_options="  --daemon -A 127.0.0.1"
+
+  conf-r11-isisd.conf: |-
+    hostname r11
+    password zebra
+    log file nodeconf/r11/isisd.log
+    !
+    interface eth1
+     ipv6 router isis FOO
+     ip router isis FOO
+     isis hello-interval 5
+    !
+    interface eth2
+     ipv6 router isis FOO
+     ip router isis FOO
+     isis hello-interval 5
+    !
+    interface lo
+     ipv6 router isis FOO
+     ip router isis FOO
+     isis hello-interval 5
+    !
+    router isis FOO
+      net 47.0001.0110.0110.0110.00
+      is-type level-2-only
+      metric-style wide
+    !
+    line vty
+  conf-r11-zebra.conf: |-
+    ! -*- zebra -*-
+
+    !
+    hostname r11
+    log file nodeconf/r11/zebra.log
+    !
+    debug zebra events
+    debug zebra rib
+    !
+    interface eth1
+     ipv6 address fcf0:0:1:11::2/64
+    !
+    interface eth2
+     ipv6 address fcf0:0:4:11::2/64
+    !
+    interface eth3.111
+     ipv6 address fd00:0:2::/127
+    !
+    interface eth3.112
+     ipv6 address fd00:0:2::2/127
+    !
+    interface eth3.113
+     ipv6 address fd00:0:2::4/127
+    !
+    interface lo
+     ipv6 address fcff:11::1/32
+    !
+    ipv6 forwarding
+    !
+    line vty
+    !

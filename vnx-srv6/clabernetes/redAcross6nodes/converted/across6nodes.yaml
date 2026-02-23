@@ -1,0 +1,291 @@
+---
+apiVersion: clabernetes.containerlab.dev/v1alpha1
+kind: Topology
+metadata:
+  name: across6nodes
+  namespace: across-tc32
+spec:
+  deployment:
+    filesFromConfigMap:
+        r1:
+          - filePath: conf/r1/daemons
+            configMapName: across6nodes-r1-files
+            configMapPath: conf-r1-daemons
+            mode: read
+          - filePath: conf/r1/isisd.conf
+            configMapName: across6nodes-r1-files
+            configMapPath: conf-r1-isisd.conf
+            mode: read
+          - filePath: conf/r1/zebra.conf
+            configMapName: across6nodes-r1-files
+            configMapPath: conf-r1-zebra.conf
+            mode: execute
+        r2:
+          - filePath: conf/r2/daemons
+            configMapName: across6nodes-r2-files
+            configMapPath: conf-r2-daemons
+            mode: read
+          - filePath: conf/r2/isisd.conf
+            configMapName: across6nodes-r2-files
+            configMapPath: conf-r2-isisd.conf
+            mode: read
+          - filePath: conf/r2/zebra.conf
+            configMapName: across6nodes-r2-files
+            configMapPath: conf-r2-zebra.conf
+            mode: execute
+        r3:
+          - filePath: conf/r3/daemons
+            configMapName: across6nodes-r3-files
+            configMapPath: conf-r3-daemons
+            mode: read
+          - filePath: conf/r3/isisd.conf
+            configMapName: across6nodes-r3-files
+            configMapPath: conf-r3-isisd.conf
+            mode: read
+          - filePath: conf/r3/zebra.conf
+            configMapName: across6nodes-r3-files
+            configMapPath: conf-r3-zebra.conf
+            mode: execute
+        r4:
+          - filePath: conf/r4/daemons
+            configMapName: across6nodes-r4-files
+            configMapPath: conf-r4-daemons
+            mode: read
+          - filePath: conf/r4/isisd.conf
+            configMapName: across6nodes-r4-files
+            configMapPath: conf-r4-isisd.conf
+            mode: read
+          - filePath: conf/r4/zebra.conf
+            configMapName: across6nodes-r4-files
+            configMapPath: conf-r4-zebra.conf
+            mode: execute
+        rg1:
+          - filePath: conf/rg1/daemons
+            configMapName: across6nodes-rg1-files
+            configMapPath: conf-rg1-daemons
+            mode: read
+          - filePath: conf/rg1/isisd.conf
+            configMapName: across6nodes-rg1-files
+            configMapPath: conf-rg1-isisd.conf
+            mode: read
+          - filePath: conf/rg1/zebra.conf
+            configMapName: across6nodes-rg1-files
+            configMapPath: conf-rg1-zebra.conf
+            mode: execute
+        rgnb1:
+          - filePath: conf/rgnb1/daemons
+            configMapName: across6nodes-rgnb1-files
+            configMapPath: conf-rgnb1-daemons
+            mode: read
+          - filePath: conf/rgnb1/zebra.conf
+            configMapName: across6nodes-rgnb1-files
+            configMapPath: conf-rgnb1-zebra.conf
+            mode: execute
+        ru:
+          - filePath: conf/ru/daemons
+            configMapName: across6nodes-ru-files
+            configMapPath: conf-ru-daemons
+            mode: read
+          - filePath: conf/ru/isisd.conf
+            configMapName: across6nodes-ru-files
+            configMapPath: conf-ru-isisd.conf
+            mode: read
+          - filePath: conf/ru/zebra.conf
+            configMapName: across6nodes-ru-files
+            configMapPath: conf-ru-zebra.conf
+            mode: execute
+        rupf:
+          - filePath: conf/rupf/daemons
+            configMapName: across6nodes-rupf-files
+            configMapPath: conf-rupf-daemons
+            mode: read
+          - filePath: conf/rupf/zebra.conf
+            configMapName: across6nodes-rupf-files
+            configMapPath: conf-rupf-zebra.conf
+            mode: execute
+  naming: non-prefixed
+  definition:
+    containerlab: |-
+          name: across6nodes
+          topology:
+            defaults:
+              ports: []
+            nodes:
+              hgnb1-h1:
+                kind: linux
+                image: avillaseca01/acrossfinal
+                exec:
+                - ip link set eth1 up
+                - ip -6 addr add fd00:0:2::2/64 dev eth1
+                - ip -6 route add fd00:0:1::1/127 via fd00:0:2::1
+                ports: []
+              hgnb1-h2:
+                kind: linux
+                image: avillaseca01/acrossfinal
+                exec:
+                - ip link set eth1 up
+                - ip -6 addr add fd00:0:2::3/64 dev eth1
+                - ip -6 route add fd00:0:1::1/127 via fd00:0:2::1
+                ports: []
+              hgnb1-h3:
+                kind: linux
+                image: avillaseca01/acrossfinal
+                exec:
+                - ip link set eth1 up
+                - ip -6 addr add fd00:0:2::4/64 dev eth1
+                - ip -6 route add fd00:0:1::1/127 via fd00:0:2::1
+                ports: []
+              hupf-h1:
+                kind: linux
+                image: avillaseca01/acrossfinal
+                exec:
+                - ip link set eth1 up
+                - ip -6 addr add fd00:0:1::1/127 dev eth1
+                - ip -6 route add fd00:0:2::/64 via fd00:0:1::0
+                ports: []
+              r1:
+                kind: linux
+                image: avillaseca01/srv6-frr
+                exec:
+                - service frr start
+                - sysctl -p
+                - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+                - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+                - sysctl -w net.ipv6.conf.eth1.seg6_enabled=1
+                - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+                - ip link set eth1 up
+                - ip link set eth2 up
+                binds:
+                - conf/r1/daemons:/etc/frr/daemons
+                - conf/r1/isisd.conf:/etc/frr/isisd.conf
+                - conf/r1/zebra.conf:/etc/frr/zebra.conf
+                ports:
+                - 9100:9100
+              r2:
+                kind: linux
+                image: avillaseca01/srv6-frr
+                exec:
+                - service frr start
+                - sysctl -p
+                - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+                - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+                - sysctl -w net.ipv6.conf.eth1.seg6_enabled=1
+                - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+                - ip link set eth1 up
+                - ip link set eth2 up
+                binds:
+                - conf/r2/daemons:/etc/frr/daemons
+                - conf/r2/isisd.conf:/etc/frr/isisd.conf
+                - conf/r2/zebra.conf:/etc/frr/zebra.conf
+                ports:
+                - 9100:9100
+              r3:
+                kind: linux
+                image: avillaseca01/srv6-frr
+                exec:
+                - service frr start
+                - sysctl -p
+                - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+                - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+                - sysctl -w net.ipv6.conf.eth1.seg6_enabled=1
+                - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+                - ip link set eth1 up
+                - ip link set eth2 up
+                binds:
+                - conf/r3/daemons:/etc/frr/daemons
+                - conf/r3/isisd.conf:/etc/frr/isisd.conf
+                - conf/r3/zebra.conf:/etc/frr/zebra.conf
+                ports:
+                - 9100:9100
+              r4:
+                kind: linux
+                image: avillaseca01/srv6-frr
+                exec:
+                - service frr start
+                - sysctl -p
+                - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+                - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+                - sysctl -w net.ipv6.conf.eth1.seg6_enabled=1
+                - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+                - ip link set eth1 up
+                - ip link set eth2 up
+                binds:
+                - conf/r4/daemons:/etc/frr/daemons
+                - conf/r4/isisd.conf:/etc/frr/isisd.conf
+                - conf/r4/zebra.conf:/etc/frr/zebra.conf
+                ports:
+                - 9100:9100
+              rg1:
+                kind: linux
+                image: avillaseca01/srv6-frr
+                exec:
+                - service frr start
+                - sysctl -p
+                - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+                - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+                - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+                - sysctl -w net.ipv6.conf.eth3.seg6_enabled=1
+                - ip link set eth1 up
+                - ip link set eth2 up
+                - ip link set eth3 up
+                - ip -6 addr add fd00:0:4::0/127 dev eth1
+                - ip -6 route add fd00:0:2::0/64 via fd00:0:4::1
+                binds:
+                - conf/rg1/daemons:/etc/frr/daemons
+                - conf/rg1/isisd.conf:/etc/frr/isisd.conf
+                - conf/rg1/zebra.conf:/etc/frr/zebra.conf
+                ports: []
+              rgnb1:
+                kind: linux
+                image: avillaseca01/srv6-frr
+                exec:
+                - service frr start
+                - sysctl -p
+                - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+                - ip link set eth1 up
+                - ip link set eth2 up
+                - ip -6 addr add fd00:0:4::1/127 dev eth1
+                - ip -6 addr add fd00:0:2::1/64 dev eth2
+                - ip -6 route add fd00:0:1::1/127 via fd00:0:4::0
+                binds:
+                - conf/rgnb1/daemons:/etc/frr/daemons
+                - conf/rgnb1/zebra.conf:/etc/frr/zebra.conf
+                ports: []
+              ru:
+                kind: linux
+                image: avillaseca01/srv6-frr
+                exec:
+                - service frr start
+                - sysctl -p
+                - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+                - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+                - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+                - sysctl -w net.ipv6.conf.eth3.seg6_enabled=1
+                - ip link set eth1 up
+                - ip link set eth2 up
+                - ip link set eth3 up
+                - ip -6 addr add fd00:0:3::/127 dev eth1
+                - ip -6 route add fd00:0:1::0/127 via fd00:0:3::1
+                binds:
+                - conf/ru/daemons:/etc/frr/daemons
+                - conf/ru/isisd.conf:/etc/frr/isisd.conf
+                - conf/ru/zebra.conf:/etc/frr/zebra.conf
+                ports:
+                - "22:22"
+              rupf:
+                kind: linux
+                image: avillaseca01/srv6-frr
+                exec:
+                - service frr start
+                - sysctl -p
+                - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+                - ip link set eth1 up
+                - ip link set eth2 up
+                - ip -6 addr add fd00:0:3::1/127 dev eth1
+                - ip -6 addr add fd00:0:1::/127 dev eth2
+                - ip -6 route add fd00:0:2::0/64 via fd00:0:3::0
+                binds:
+                - conf/rupf/daemons:/etc/frr/daemons
+                - conf/rupf/zebra.conf:/etc/frr/zebra.conf
+                ports: []
+          debug: false

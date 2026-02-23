@@ -1,0 +1,723 @@
+{
+  "name": "srv6",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-4cf5d1a27341",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "3fff:172:20:20::/64",
+        "ipv6-gw": "3fff:172:20:20::1",
+        "mtu": 1500,
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "UPF": {
+      "index": "0",
+      "shortname": "UPF",
+      "longname": "clab-srv6-UPF",
+      "fqdn": "UPF.srv6.io",
+      "group": "",
+      "labdir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/UPF",
+      "kind": "linux",
+      "image": "praqma/network-multitool:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.13",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::d",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-4cf5d1a27341",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/UPF",
+        "clab-node-name": "UPF",
+        "clab-node-type": "",
+        "clab-owner": "alex",
+        "clab-topo-file": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/srv6.yml",
+        "containerlab": "srv6"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 11443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 1180,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 80,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "gNB1": {
+      "index": "1",
+      "shortname": "gNB1",
+      "longname": "clab-srv6-gNB1",
+      "fqdn": "gNB1.srv6.io",
+      "group": "",
+      "labdir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/gNB1",
+      "kind": "linux",
+      "image": "praqma/network-multitool:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.10",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::a",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-4cf5d1a27341",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/gNB1",
+        "clab-node-name": "gNB1",
+        "clab-node-type": "",
+        "clab-owner": "alex",
+        "clab-topo-file": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/srv6.yml",
+        "containerlab": "srv6"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 11443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 1180,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 80,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "gNB2": {
+      "index": "2",
+      "shortname": "gNB2",
+      "longname": "clab-srv6-gNB2",
+      "fqdn": "gNB2.srv6.io",
+      "group": "",
+      "labdir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/gNB2",
+      "kind": "linux",
+      "image": "praqma/network-multitool:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.12",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::c",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-4cf5d1a27341",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/gNB2",
+        "clab-node-name": "gNB2",
+        "clab-node-type": "",
+        "clab-owner": "alex",
+        "clab-topo-file": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/srv6.yml",
+        "containerlab": "srv6"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 80,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 11443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 1180,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 443,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "r1": {
+      "index": "3",
+      "shortname": "r1",
+      "longname": "clab-srv6-r1",
+      "fqdn": "r1.srv6.io",
+      "group": "",
+      "labdir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/r1",
+      "kind": "linux",
+      "image": "avillaseca01/srv6-frr:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::4",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-4cf5d1a27341",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/r1",
+        "clab-node-name": "r1",
+        "clab-node-type": "",
+        "clab-owner": "alex",
+        "clab-topo-file": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/srv6.yml",
+        "containerlab": "srv6"
+      },
+      "port-bindings": [
+      ]
+    },
+    "r11": {
+      "index": "4",
+      "shortname": "r11",
+      "longname": "clab-srv6-r11",
+      "fqdn": "r11.srv6.io",
+      "group": "",
+      "labdir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/r11",
+      "kind": "linux",
+      "image": "avillaseca01/srv6-frr:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.9",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::9",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-4cf5d1a27341",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/r11",
+        "clab-node-name": "r11",
+        "clab-node-type": "",
+        "clab-owner": "alex",
+        "clab-topo-file": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/srv6.yml",
+        "containerlab": "srv6"
+      },
+      "port-bindings": [
+      ]
+    },
+    "r12": {
+      "index": "5",
+      "shortname": "r12",
+      "longname": "clab-srv6-r12",
+      "fqdn": "r12.srv6.io",
+      "group": "",
+      "labdir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/r12",
+      "kind": "linux",
+      "image": "avillaseca01/srv6-frr:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::2",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-4cf5d1a27341",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/r12",
+        "clab-node-name": "r12",
+        "clab-node-type": "",
+        "clab-owner": "alex",
+        "clab-topo-file": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/srv6.yml",
+        "containerlab": "srv6"
+      },
+      "port-bindings": [
+      ]
+    },
+    "r13": {
+      "index": "6",
+      "shortname": "r13",
+      "longname": "clab-srv6-r13",
+      "fqdn": "r13.srv6.io",
+      "group": "",
+      "labdir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/r13",
+      "kind": "linux",
+      "image": "avillaseca01/srv6-frr:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.5",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::5",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-4cf5d1a27341",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/r13",
+        "clab-node-name": "r13",
+        "clab-node-type": "",
+        "clab-owner": "alex",
+        "clab-topo-file": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/srv6.yml",
+        "containerlab": "srv6"
+      },
+      "port-bindings": [
+      ]
+    },
+    "r2": {
+      "index": "7",
+      "shortname": "r2",
+      "longname": "clab-srv6-r2",
+      "fqdn": "r2.srv6.io",
+      "group": "",
+      "labdir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/r2",
+      "kind": "linux",
+      "image": "avillaseca01/srv6-frr:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::3",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-4cf5d1a27341",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/r2",
+        "clab-node-name": "r2",
+        "clab-node-type": "",
+        "clab-owner": "alex",
+        "clab-topo-file": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/srv6.yml",
+        "containerlab": "srv6"
+      },
+      "port-bindings": [
+      ]
+    },
+    "r3": {
+      "index": "8",
+      "shortname": "r3",
+      "longname": "clab-srv6-r3",
+      "fqdn": "r3.srv6.io",
+      "group": "",
+      "labdir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/r3",
+      "kind": "linux",
+      "image": "avillaseca01/srv6-frr:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.6",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::6",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-4cf5d1a27341",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/r3",
+        "clab-node-name": "r3",
+        "clab-node-type": "",
+        "clab-owner": "alex",
+        "clab-topo-file": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/srv6.yml",
+        "containerlab": "srv6"
+      },
+      "port-bindings": [
+      ]
+    },
+    "r4": {
+      "index": "9",
+      "shortname": "r4",
+      "longname": "clab-srv6-r4",
+      "fqdn": "r4.srv6.io",
+      "group": "",
+      "labdir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/r4",
+      "kind": "linux",
+      "image": "avillaseca01/srv6-frr:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.8",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::8",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-4cf5d1a27341",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/r4",
+        "clab-node-name": "r4",
+        "clab-node-type": "",
+        "clab-owner": "alex",
+        "clab-topo-file": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/srv6.yml",
+        "containerlab": "srv6"
+      },
+      "port-bindings": [
+      ]
+    },
+    "r5": {
+      "index": "10",
+      "shortname": "r5",
+      "longname": "clab-srv6-r5",
+      "fqdn": "r5.srv6.io",
+      "group": "",
+      "labdir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/r5",
+      "kind": "linux",
+      "image": "avillaseca01/srv6-frr:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.11",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::b",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-4cf5d1a27341",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/r5",
+        "clab-node-name": "r5",
+        "clab-node-type": "",
+        "clab-owner": "alex",
+        "clab-topo-file": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/srv6.yml",
+        "containerlab": "srv6"
+      },
+      "port-bindings": [
+      ]
+    },
+    "r6": {
+      "index": "11",
+      "shortname": "r6",
+      "longname": "clab-srv6-r6",
+      "fqdn": "r6.srv6.io",
+      "group": "",
+      "labdir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/r6",
+      "kind": "linux",
+      "image": "avillaseca01/srv6-frr:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.7",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::7",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-4cf5d1a27341",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/r6",
+        "clab-node-name": "r6",
+        "clab-node-type": "",
+        "clab-owner": "alex",
+        "clab-topo-file": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/srv6.yml",
+        "containerlab": "srv6"
+      },
+      "port-bindings": [
+      ]
+    },
+    "r7": {
+      "index": "12",
+      "shortname": "r7",
+      "longname": "clab-srv6-r7",
+      "fqdn": "r7.srv6.io",
+      "group": "",
+      "labdir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/r7",
+      "kind": "linux",
+      "image": "avillaseca01/srv6-frr:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.14",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::e",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-4cf5d1a27341",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/clab-srv6/r7",
+        "clab-node-name": "r7",
+        "clab-node-type": "",
+        "clab-owner": "alex",
+        "clab-topo-file": "/home/alex/Escritorio/vnx-srv6/containerlabAcross/srv6.yml",
+        "containerlab": "srv6"
+      },
+      "port-bindings": [
+      ]
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "r1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:00:30:3a",
+        "peer": "z"
+      },
+      "z": {
+        "node": "r2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:99:c9:23",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "r1",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:cf:e1:c1",
+        "peer": "z"
+      },
+      "z": {
+        "node": "r4",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:53:bf:61",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "r1",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:0b:4e:e6",
+        "peer": "z"
+      },
+      "z": {
+        "node": "r11",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:75:5f:9e",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "r2",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:64:6c:b9",
+        "peer": "z"
+      },
+      "z": {
+        "node": "r3",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:0b:33:f2",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "r2",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:ec:bc:e3",
+        "peer": "z"
+      },
+      "z": {
+        "node": "r5",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:da:13:c0",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "r2",
+        "interface": "eth4",
+        "mac": "aa:c1:ab:45:69:73",
+        "peer": "z"
+      },
+      "z": {
+        "node": "r12",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:80:1e:19",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "r3",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:3d:df:42",
+        "peer": "z"
+      },
+      "z": {
+        "node": "r7",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:4b:45:67",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "r3",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:af:a8:33",
+        "peer": "z"
+      },
+      "z": {
+        "node": "r12",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:3c:27:d4",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "r3",
+        "interface": "eth4",
+        "mac": "aa:c1:ab:d1:2b:6e",
+        "peer": "z"
+      },
+      "z": {
+        "node": "r13",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:71:aa:30",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "r4",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:b6:37:aa",
+        "peer": "z"
+      },
+      "z": {
+        "node": "r6",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:9a:68:88",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "r4",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:dd:99:fd",
+        "peer": "z"
+      },
+      "z": {
+        "node": "r11",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:4e:9c:9b",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "r5",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:fa:7a:30",
+        "peer": "z"
+      },
+      "z": {
+        "node": "r6",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:79:45:9a",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "r6",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:0a:b9:3a",
+        "peer": "z"
+      },
+      "z": {
+        "node": "r7",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:0f:2a:0d",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "r7",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:69:77:53",
+        "peer": "z"
+      },
+      "z": {
+        "node": "r13",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:1a:ff:5b",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "gNB1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:fa:3b:3b",
+        "peer": "z"
+      },
+      "z": {
+        "node": "r11",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:ae:fd:3f",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "gNB2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:ec:a9:30",
+        "peer": "z"
+      },
+      "z": {
+        "node": "r12",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:54:db:21",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "UPF",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:3b:31:73",
+        "peer": "z"
+      },
+      "z": {
+        "node": "r13",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:c1:1d:01",
+        "peer": "a"
+      }
+    }
+  ]
+}

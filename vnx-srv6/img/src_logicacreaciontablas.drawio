@@ -1,0 +1,49 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36" version="27.0.9">
+  <diagram name="Página-1" id="-_cVvq4YNkn3PqrrVznx">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="tPcdo-_syElZPCtLr8Bc-1" value="¿args.new_table O&#xa;    NOT table_entry_exists(tid)?" style="rhombus;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="200" y="30" width="302" height="302" as="geometry" />
+        </mxCell>
+        <mxCell id="tPcdo-_syElZPCtLr8Bc-2" value="Continuar con la ejecución" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="258" y="707" width="187" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="tPcdo-_syElZPCtLr8Bc-3" value="ssh_ru: Añadir entrada&#xa;    echo &#39;tid tunneltid&#39; &gt;&gt; rt_tables" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="304" y="405" width="260" height="102" as="geometry" />
+        </mxCell>
+        <mxCell id="tPcdo-_syElZPCtLr8Bc-4" value="Imprimir resultado rt_tables" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="304" y="579" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="tPcdo-_syElZPCtLr8Bc-5" value="No" style="curved=1;startArrow=none;endArrow=block;exitX=0.28;exitY=1;entryX=0.27;entryY=0;rounded=0;" edge="1" parent="1" source="tPcdo-_syElZPCtLr8Bc-1" target="tPcdo-_syElZPCtLr8Bc-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="269" y="369" />
+              <mxPoint x="269" y="682" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tPcdo-_syElZPCtLr8Bc-6" value="Sí" style="curved=1;startArrow=none;endArrow=block;exitX=0.72;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="tPcdo-_syElZPCtLr8Bc-1" target="tPcdo-_syElZPCtLr8Bc-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="434" y="369" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tPcdo-_syElZPCtLr8Bc-7" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="tPcdo-_syElZPCtLr8Bc-3" target="tPcdo-_syElZPCtLr8Bc-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tPcdo-_syElZPCtLr8Bc-8" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.73;entryY=0;rounded=0;" edge="1" parent="1" source="tPcdo-_syElZPCtLr8Bc-4" target="tPcdo-_syElZPCtLr8Bc-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="434" y="682" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

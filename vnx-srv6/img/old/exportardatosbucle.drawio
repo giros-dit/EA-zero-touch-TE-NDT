@@ -1,0 +1,30 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.2.2 Chrome/134.0.6998.178 Electron/35.1.2 Safari/537.36" version="26.2.2">
+  <diagram name="Página-1" id="eqjOnO7Gvo-85zCGQlQS">
+    <mxGraphModel dx="1098" dy="771" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="boX53UYX1-WF3tNRa1Cb-4" value="Recibir métricas del router por Kafka" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="220" y="360" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="boX53UYX1-WF3tNRa1Cb-5" value="Actualizar estado interno del router" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="220" y="488" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="boX53UYX1-WF3tNRa1Cb-18" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.33;exitY=1;entryX=0.33;entryY=0;rounded=0;" parent="1" source="boX53UYX1-WF3tNRa1Cb-4" target="boX53UYX1-WF3tNRa1Cb-5" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="278" y="463" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="boX53UYX1-WF3tNRa1Cb-19" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.67;exitY=0;entryX=0.67;entryY=1;rounded=0;" parent="1" source="boX53UYX1-WF3tNRa1Cb-5" target="boX53UYX1-WF3tNRa1Cb-4" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="423" y="463" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

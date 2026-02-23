@@ -1,0 +1,7 @@
+networkx
+boto3
+kafka-python
+kubernetes
+pytest
+ipaddress
+Flask==3.0.0

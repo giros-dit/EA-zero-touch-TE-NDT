@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-producer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: kafka-producer-app
+  template:
+    metadata:
+      labels:
+        app: kafka-producer-app
+    spec:
+      volumes:
+      - configMap:
+          defaultMode: 0755
+          name: config-json
+        name: config-json
+      - configMap:
+          defaultMode: 0755
+          name: test-metrics-configmap
+        name: test-metrics-configmap
+      containers:
+      - name: kafka-producer-service
+        image: ghcr.io/giros-dit/across-monitoring-stack/kafka-producer:latest
+        command: ["python3", "-u", "/kafka_producer/kafka_producer.py"]
+        args: ["kafka-service:9092"]
+        volumeMounts:
+        - name: config-json
+          mountPath: /kafka_producer/config.json
+          subPath: config.json
+        - name: test-metrics-configmap
+          mountPath: /kafka_producer/test_metrics/test_metrics_r1.json
+          subPath: test_metrics_r1.json
+        - name: test-metrics-configmap
+          mountPath: /kafka_producer/test_metrics/test_metrics_r2.json
+          subPath: test_metrics_r2.json
+        - name: test-metrics-configmap
+          mountPath: /kafka_producer/test_metrics/test_metrics_r3.json
+          subPath: test_metrics_r3.json
+        - name: test-metrics-configmap
+          mountPath: /kafka_producer/test_metrics/test_metrics_r4.json
+          subPath: test_metrics_r4.json
+        - name: test-metrics-configmap
+          mountPath: /kafka_producer/test_metrics/test_metrics_r5.json
+          subPath: test_metrics_r5.json
+        - name: test-metrics-configmap
+          mountPath: /kafka_producer/test_metrics/test_metrics_r6.json
+          subPath: test_metrics_r6.json
+        - name: test-metrics-configmap
+          mountPath: /kafka_producer/test_metrics/test_metrics_r7.json
+          subPath: test_metrics_r7.json
+        - name: test-metrics-configmap
+          mountPath: /kafka_producer/test_metrics/test_metrics_r8.json
+          subPath: test_metrics_r8.json
+        - name: test-metrics-configmap
+          mountPath: /kafka_producer/test_metrics/test_metrics_r9.json
+          subPath: test_metrics_r9.json
+        - name: test-metrics-configmap
+          mountPath: /kafka_producer/test_metrics/test_metrics_ru.json
+          subPath: test_metrics_ru.json
+        - name: test-metrics-configmap
+          mountPath: /kafka_producer/test_metrics/test_metrics_rg.json
+          subPath: test_metrics_rg.json

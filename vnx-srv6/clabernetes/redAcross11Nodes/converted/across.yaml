@@ -1,0 +1,439 @@
+---
+apiVersion: clabernetes.containerlab.dev/v1alpha1
+kind: Topology
+metadata:
+  name: across
+  namespace: across-tc32
+spec:
+  deployment:
+    filesFromConfigMap:
+        r1:
+          - filePath: conf/r1/daemons
+            configMapName: across-r1-files
+            configMapPath: conf-r1-daemons
+            mode: read
+          - filePath: conf/r1/isisd.conf
+            configMapName: across-r1-files
+            configMapPath: conf-r1-isisd.conf
+            mode: read
+          - filePath: conf/r1/zebra.conf
+            configMapName: across-r1-files
+            configMapPath: conf-r1-zebra.conf
+            mode: read
+        r2:
+          - filePath: conf/r2/daemons
+            configMapName: across-r2-files
+            configMapPath: conf-r2-daemons
+            mode: read
+          - filePath: conf/r2/isisd.conf
+            configMapName: across-r2-files
+            configMapPath: conf-r2-isisd.conf
+            mode: read
+          - filePath: conf/r2/zebra.conf
+            configMapName: across-r2-files
+            configMapPath: conf-r2-zebra.conf
+            mode: read
+        r3:
+          - filePath: conf/r3/daemons
+            configMapName: across-r3-files
+            configMapPath: conf-r3-daemons
+            mode: read
+          - filePath: conf/r3/isisd.conf
+            configMapName: across-r3-files
+            configMapPath: conf-r3-isisd.conf
+            mode: read
+          - filePath: conf/r3/zebra.conf
+            configMapName: across-r3-files
+            configMapPath: conf-r3-zebra.conf
+            mode: read
+        r4:
+          - filePath: conf/r4/daemons
+            configMapName: across-r4-files
+            configMapPath: conf-r4-daemons
+            mode: read
+          - filePath: conf/r4/isisd.conf
+            configMapName: across-r4-files
+            configMapPath: conf-r4-isisd.conf
+            mode: read
+          - filePath: conf/r4/zebra.conf
+            configMapName: across-r4-files
+            configMapPath: conf-r4-zebra.conf
+            mode: read
+        r5:
+          - filePath: conf/r5/daemons
+            configMapName: across-r5-files
+            configMapPath: conf-r5-daemons
+            mode: read
+          - filePath: conf/r5/isisd.conf
+            configMapName: across-r5-files
+            configMapPath: conf-r5-isisd.conf
+            mode: read
+          - filePath: conf/r5/zebra.conf
+            configMapName: across-r5-files
+            configMapPath: conf-r5-zebra.conf
+            mode: read
+        r6:
+          - filePath: conf/r6/daemons
+            configMapName: across-r6-files
+            configMapPath: conf-r6-daemons
+            mode: read
+          - filePath: conf/r6/isisd.conf
+            configMapName: across-r6-files
+            configMapPath: conf-r6-isisd.conf
+            mode: read
+          - filePath: conf/r6/zebra.conf
+            configMapName: across-r6-files
+            configMapPath: conf-r6-zebra.conf
+            mode: read
+        r7:
+          - filePath: conf/r7/daemons
+            configMapName: across-r7-files
+            configMapPath: conf-r7-daemons
+            mode: read
+          - filePath: conf/r7/isisd.conf
+            configMapName: across-r7-files
+            configMapPath: conf-r7-isisd.conf
+            mode: read
+          - filePath: conf/r7/zebra.conf
+            configMapName: across-r7-files
+            configMapPath: conf-r7-zebra.conf
+            mode: read
+        r8:
+          - filePath: conf/r8/daemons
+            configMapName: across-r8-files
+            configMapPath: conf-r8-daemons
+            mode: read
+          - filePath: conf/r8/isisd.conf
+            configMapName: across-r8-files
+            configMapPath: conf-r8-isisd.conf
+            mode: read
+          - filePath: conf/r8/zebra.conf
+            configMapName: across-r8-files
+            configMapPath: conf-r8-zebra.conf
+            mode: read
+        r9:
+          - filePath: conf/r9/daemons
+            configMapName: across-r9-files
+            configMapPath: conf-r9-daemons
+            mode: read
+          - filePath: conf/r9/isisd.conf
+            configMapName: across-r9-files
+            configMapPath: conf-r9-isisd.conf
+            mode: read
+          - filePath: conf/r9/zebra.conf
+            configMapName: across-r9-files
+            configMapPath: conf-r9-zebra.conf
+            mode: read
+        rg:
+          - filePath: conf/rg/daemons
+            configMapName: across-rg-files
+            configMapPath: conf-rg-daemons
+            mode: read
+          - filePath: conf/rg/isisd.conf
+            configMapName: across-rg-files
+            configMapPath: conf-rg-isisd.conf
+            mode: read
+          - filePath: conf/rg/zebra.conf
+            configMapName: across-rg-files
+            configMapPath: conf-rg-zebra.conf
+            mode: read
+        rgnb:
+          - filePath: conf/rgnb/daemons
+            configMapName: across-rgnb-files
+            configMapPath: conf-rgnb-daemons
+            mode: read
+          - filePath: conf/rgnb/zebra.conf
+            configMapName: across-rgnb-files
+            configMapPath: conf-rgnb-zebra.conf
+            mode: read
+        ru:
+          - filePath: conf/ru/daemons
+            configMapName: across-ru-files
+            configMapPath: conf-ru-daemons
+            mode: read
+          - filePath: conf/ru/isisd.conf
+            configMapName: across-ru-files
+            configMapPath: conf-ru-isisd.conf
+            mode: read
+          - filePath: conf/ru/zebra.conf
+            configMapName: across-ru-files
+            configMapPath: conf-ru-zebra.conf
+            mode: read
+        rupf:
+          - filePath: conf/rupf/daemons
+            configMapName: across-rupf-files
+            configMapPath: conf-rupf-daemons
+            mode: read
+          - filePath: conf/rupf/zebra.conf
+            configMapName: across-rupf-files
+            configMapPath: conf-rupf-zebra.conf
+            mode: read
+  naming: non-prefixed
+  definition:
+    containerlab: |-
+          name: across
+          topology:
+            defaults:
+              ports: []
+            nodes:
+              ixia-c:
+                kind: keysight_ixia-c-one
+                image: ghcr.io/open-traffic-generator/ixia-c-one:1.28.0-6
+                ports:
+                - 8443:8443
+              r1:
+                kind: linux
+                image: ghcr.io/giros-dit/vnx-srv6/srv6-frr-nodeexporter:latest
+                exec:
+                - service frr start
+                - sysctl -p
+                - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+                - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+                - sysctl -w net.ipv6.conf.eth1.seg6_enabled=1
+                - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+                - sysctl -w net.ipv6.conf.eth3.seg6_enabled=1
+                - sysctl -w net.ipv6.conf.eth4.seg6_enabled=1
+                - ip link set eth1 up
+                - ip link set eth2 up
+                - ip link set eth3 up
+                - ip link set eth4 up
+                binds:
+                - conf/r1/daemons:/etc/frr/daemons
+                - conf/r1/isisd.conf:/etc/frr/isisd.conf
+                - conf/r1/zebra.conf:/etc/frr/zebra.conf
+                ports:
+                - 9100:9100
+              r2:
+                kind: linux
+                image: ghcr.io/giros-dit/vnx-srv6/srv6-frr-nodeexporter:latest
+                exec:
+                - service frr start
+                - sysctl -p
+                - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+                - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+                - sysctl -w net.ipv6.conf.eth1.seg6_enabled=1
+                - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+                - sysctl -w net.ipv6.conf.eth3.seg6_enabled=1
+                - ip link set eth1 up
+                - ip link set eth2 up
+                - ip link set eth3 up
+                binds:
+                - conf/r2/daemons:/etc/frr/daemons
+                - conf/r2/isisd.conf:/etc/frr/isisd.conf
+                - conf/r2/zebra.conf:/etc/frr/zebra.conf
+                ports:
+                - 9100:9100
+              r3:
+                kind: linux
+                image: ghcr.io/giros-dit/vnx-srv6/srv6-frr-nodeexporter:latest
+                exec:
+                - service frr start
+                - sysctl -p
+                - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+                - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+                - sysctl -w net.ipv6.conf.eth1.seg6_enabled=1
+                - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+                - sysctl -w net.ipv6.conf.eth3.seg6_enabled=1
+                - ip link set eth1 up
+                - ip link set eth2 up
+                - ip link set eth3 up
+                binds:
+                - conf/r3/daemons:/etc/frr/daemons
+                - conf/r3/isisd.conf:/etc/frr/isisd.conf
+                - conf/r3/zebra.conf:/etc/frr/zebra.conf
+                ports:
+                - 9100:9100
+              r4:
+                kind: linux
+                image: ghcr.io/giros-dit/vnx-srv6/srv6-frr-nodeexporter:latest
+                exec:
+                - service frr start
+                - sysctl -p
+                - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+                - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+                - sysctl -w net.ipv6.conf.eth1.seg6_enabled=1
+                - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+                - ip link set eth1 up
+                - ip link set eth2 up
+                binds:
+                - conf/r4/daemons:/etc/frr/daemons
+                - conf/r4/isisd.conf:/etc/frr/isisd.conf
+                - conf/r4/zebra.conf:/etc/frr/zebra.conf
+                ports:
+                - 9100:9100
+              r5:
+                kind: linux
+                image: ghcr.io/giros-dit/vnx-srv6/srv6-frr-nodeexporter:latest
+                exec:
+                - service frr start
+                - sysctl -p
+                - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+                - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+                - sysctl -w net.ipv6.conf.eth1.seg6_enabled=1
+                - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+                - sysctl -w net.ipv6.conf.eth3.seg6_enabled=1
+                - ip link set eth1 up
+                - ip link set eth2 up
+                - ip link set eth3 up
+                binds:
+                - conf/r5/daemons:/etc/frr/daemons
+                - conf/r5/isisd.conf:/etc/frr/isisd.conf
+                - conf/r5/zebra.conf:/etc/frr/zebra.conf
+                ports:
+                - 9100:9100
+              r6:
+                kind: linux
+                image: ghcr.io/giros-dit/vnx-srv6/srv6-frr-nodeexporter:latest
+                exec:
+                - service frr start
+                - sysctl -p
+                - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+                - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+                - sysctl -w net.ipv6.conf.eth1.seg6_enabled=1
+                - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+                - sysctl -w net.ipv6.conf.eth3.seg6_enabled=1
+                - ip link set eth1 up
+                - ip link set eth2 up
+                - ip link set eth3 up
+                binds:
+                - conf/r6/daemons:/etc/frr/daemons
+                - conf/r6/isisd.conf:/etc/frr/isisd.conf
+                - conf/r6/zebra.conf:/etc/frr/zebra.conf
+                ports:
+                - 9100:9100
+              r7:
+                kind: linux
+                image: ghcr.io/giros-dit/vnx-srv6/srv6-frr-nodeexporter:latest
+                exec:
+                - service frr start
+                - sysctl -p
+                - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+                - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+                - sysctl -w net.ipv6.conf.eth1.seg6_enabled=1
+                - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+                - ip link set eth1 up
+                - ip link set eth2 up
+                binds:
+                - conf/r7/daemons:/etc/frr/daemons
+                - conf/r7/isisd.conf:/etc/frr/isisd.conf
+                - conf/r7/zebra.conf:/etc/frr/zebra.conf
+                ports:
+                - 9100:9100
+              r8:
+                kind: linux
+                image: ghcr.io/giros-dit/vnx-srv6/srv6-frr-nodeexporter:latest
+                exec:
+                - service frr start
+                - sysctl -p
+                - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+                - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+                - sysctl -w net.ipv6.conf.eth1.seg6_enabled=1
+                - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+                - sysctl -w net.ipv6.conf.eth3.seg6_enabled=1
+                - ip link set eth1 up
+                - ip link set eth2 up
+                - ip link set eth3 up
+                binds:
+                - conf/r8/daemons:/etc/frr/daemons
+                - conf/r8/isisd.conf:/etc/frr/isisd.conf
+                - conf/r8/zebra.conf:/etc/frr/zebra.conf
+                ports:
+                - 9100:9100
+              r9:
+                kind: linux
+                image: ghcr.io/giros-dit/vnx-srv6/srv6-frr-nodeexporter:latest
+                exec:
+                - service frr start
+                - sysctl -p
+                - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+                - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+                - sysctl -w net.ipv6.conf.eth1.seg6_enabled=1
+                - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+                - sysctl -w net.ipv6.conf.eth3.seg6_enabled=1
+                - ip link set eth1 up
+                - ip link set eth2 up
+                - ip link set eth3 up
+                binds:
+                - conf/r9/daemons:/etc/frr/daemons
+                - conf/r9/isisd.conf:/etc/frr/isisd.conf
+                - conf/r9/zebra.conf:/etc/frr/zebra.conf
+                ports:
+                - 9100:9100
+              rg:
+                kind: linux
+                image: ghcr.io/giros-dit/vnx-srv6/srv6-frr-nodeexporter:latest
+                exec:
+                - service frr start
+                - sysctl -p
+                - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+                - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+                - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+                - sysctl -w net.ipv6.conf.eth3.seg6_enabled=1
+                - ip link set eth1 up
+                - ip link set eth2 up
+                - ip link set eth3 up
+                - ip -6 addr add fd00:0:5::0/127 dev eth1
+                - ip -6 route add fd00:0:2::0/64 via fd00:0:5::1
+                binds:
+                - conf/rg/daemons:/etc/frr/daemons
+                - conf/rg/isisd.conf:/etc/frr/isisd.conf
+                - conf/rg/zebra.conf:/etc/frr/zebra.conf
+                ports:
+                - 9100:9100
+                - "22:22"
+              rgnb:
+                kind: linux
+                image: ghcr.io/giros-dit/vnx-srv6/srv6-frr:latest
+                exec:
+                - service frr start
+                - sysctl -p
+                - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+                - ip link set eth1 up
+                - ip link set eth2 up
+                - ip -6 addr add fd00:0:5::1/127 dev eth1
+                - ip -6 addr add fd00:0:2::1/64 dev eth2
+                - ip -6 route add fd00:0:1::0/64 via fd00:0:5::0
+                binds:
+                - conf/rgnb/daemons:/etc/frr/daemons
+                - conf/rgnb/zebra.conf:/etc/frr/zebra.conf
+                ports: []
+              ru:
+                kind: linux
+                image: ghcr.io/giros-dit/vnx-srv6/srv6-frr-nodeexporter:testing
+                exec:
+                - service frr start
+                - sysctl -p
+                - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+                - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+                - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+                - sysctl -w net.ipv6.conf.eth3.seg6_enabled=1
+                - ip link set eth1 up
+                - ip link set eth2 up
+                - ip link set eth3 up
+                - ip -6 addr add fd00:0:4::0/127 dev eth1
+                - ip -6 route add fd00:0:1::0/64 via fd00:0:4::1
+                binds:
+                - conf/ru/daemons:/etc/frr/daemons
+                - conf/ru/isisd.conf:/etc/frr/isisd.conf
+                - conf/ru/zebra.conf:/etc/frr/zebra.conf
+                ports:
+                - 9100:9100
+                - "22:22"
+              rupf:
+                kind: linux
+                image: ghcr.io/giros-dit/vnx-srv6/srv6-frr:latest
+                exec:
+                - service frr start
+                - sysctl -p
+                - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+                - ip link set dev eth2 address 02:00:00:00:02:aa
+                - ip link set eth1 up
+                - ip link set eth2 up
+                - ip -6 addr add fd00:0:4::1/127 dev eth1
+                - ip -6 addr add fd00:0:1::1/64 dev eth2
+                - ip -6 route add fd00:0:2::0/64 via fd00:0:4::0
+                binds:
+                - conf/rupf/daemons:/etc/frr/daemons
+                - conf/rupf/zebra.conf:/etc/frr/zebra.conf
+                ports: []
+          debug: false

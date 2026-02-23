@@ -1,0 +1,48 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36" version="27.1.3">
+  <diagram name="Página-1" id="VujOJm8pvmnxTpEVs6Z2">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="AIessBJb6d2RMfnvtIvK-1" value="start_kafka_consumers()" style="shape=trapezoid;perimeter=trapezoidPerimeter;fixedSize=1;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="24" y="50" width="230" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="AIessBJb6d2RMfnvtIvK-2" value="Leer networkinfo.json &#xa;y &#xa;filtrar nodos que exportan datos" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="30" y="109" width="219" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="AIessBJb6d2RMfnvtIvK-5" value="Continuar bucle" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="52.5" y="280" width="174" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="AIessBJb6d2RMfnvtIvK-6" value="Iniciar hilo kafka_consumer_thread()&#xa;para cada nodo" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="0.5" y="180" width="278" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="AIessBJb6d2RMfnvtIvK-7" value="Fin de función" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="58.5" y="362" width="162" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="AIessBJb6d2RMfnvtIvK-8" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="AIessBJb6d2RMfnvtIvK-1" target="AIessBJb6d2RMfnvtIvK-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AIessBJb6d2RMfnvtIvK-9" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="AIessBJb6d2RMfnvtIvK-2" target="AIessBJb6d2RMfnvtIvK-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="139.5" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AIessBJb6d2RMfnvtIvK-14" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="AIessBJb6d2RMfnvtIvK-5" target="AIessBJb6d2RMfnvtIvK-7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WU6DG4OH0-lzemPIvi_Z-1" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;exitDx=0;exitDy=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="AIessBJb6d2RMfnvtIvK-6" target="AIessBJb6d2RMfnvtIvK-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="150.5" y="190" as="sourcePoint" />
+            <mxPoint x="150" y="207" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

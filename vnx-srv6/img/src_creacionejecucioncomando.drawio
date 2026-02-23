@@ -1,0 +1,74 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36" version="27.0.9">
+  <diagram name="Página-1" id="PBDb_C12WS6DSh3pNtUG">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="nyLeJSHeUVy3eWA1c3vF-1" value="determineMethod" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="272" y="40" width="187" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="nyLeJSHeUVy3eWA1c3vF-2" value="¿args.delete_old es None Y &#xa;    route_exists(dest, tid)?" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="239" y="144" width="252" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="nyLeJSHeUVy3eWA1c3vF-3" value="method = &#39;replace&#39;&#xa;    Imprimir: &#39;actualizando misma tabla&#39;" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="80" y="295" width="260" height="102" as="geometry" />
+        </mxCell>
+        <mxCell id="nyLeJSHeUVy3eWA1c3vF-4" value="method = &#39;add&#39;&#xa;    Imprimir: &#39;nueva tabla o nuevo destino&#39;" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="390" y="295" width="260" height="102" as="geometry" />
+        </mxCell>
+        <mxCell id="nyLeJSHeUVy3eWA1c3vF-5" value="Construir segs y cmd_route" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="238" y="447" width="255" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="nyLeJSHeUVy3eWA1c3vF-6" value="ssh_ru: Instalar ruta&#xa;    ip -6 route add/replace" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="250" y="551" width="229" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="nyLeJSHeUVy3eWA1c3vF-7" value="Imprimir resultado instalación" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="235" y="679" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="nyLeJSHeUVy3eWA1c3vF-8" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="nyLeJSHeUVy3eWA1c3vF-1" target="nyLeJSHeUVy3eWA1c3vF-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nyLeJSHeUVy3eWA1c3vF-9" value="Sí" style="curved=1;startArrow=none;endArrow=block;exitX=0.18;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="nyLeJSHeUVy3eWA1c3vF-2" target="nyLeJSHeUVy3eWA1c3vF-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="210" y="259" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nyLeJSHeUVy3eWA1c3vF-10" value="No" style="curved=1;startArrow=none;endArrow=block;exitX=0.82;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="nyLeJSHeUVy3eWA1c3vF-2" target="nyLeJSHeUVy3eWA1c3vF-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="520" y="259" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nyLeJSHeUVy3eWA1c3vF-11" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.18;entryY=0;rounded=0;" edge="1" parent="1" source="nyLeJSHeUVy3eWA1c3vF-3" target="nyLeJSHeUVy3eWA1c3vF-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="210" y="422" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nyLeJSHeUVy3eWA1c3vF-12" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.81;entryY=0;rounded=0;" edge="1" parent="1" source="nyLeJSHeUVy3eWA1c3vF-4" target="nyLeJSHeUVy3eWA1c3vF-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="520" y="422" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nyLeJSHeUVy3eWA1c3vF-13" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="nyLeJSHeUVy3eWA1c3vF-5" target="nyLeJSHeUVy3eWA1c3vF-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nyLeJSHeUVy3eWA1c3vF-14" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="nyLeJSHeUVy3eWA1c3vF-6" target="nyLeJSHeUVy3eWA1c3vF-7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

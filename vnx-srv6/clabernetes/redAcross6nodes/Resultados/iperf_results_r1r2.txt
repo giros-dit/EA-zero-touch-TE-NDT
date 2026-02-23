@@ -1,0 +1,102 @@
+Salida completa del comando:
+------------------------------------------------------------
+Client connecting to fcff:2::1, TCP port 5001
+TCP window size: 45.0 KByte (default)
+------------------------------------------------------------
+[  1] local fcf0:0:1:2::1 port 35752 connected with fcff:2::1 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  1] 0.0000-10.0096 sec  10.2 GBytes  8.77 Gbits/sec
+
+Bandwidth leído: 8.77 Gbits/sec
+Salida completa del comando:
+------------------------------------------------------------
+Client connecting to fcff:2::1, TCP port 5001
+TCP window size: 45.0 KByte (default)
+------------------------------------------------------------
+[  1] local fcf0:0:1:2::1 port 58728 connected with fcff:2::1 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  1] 0.0000-10.0099 sec  10.7 GBytes  9.18 Gbits/sec
+
+Bandwidth leído: 9.18 Gbits/sec
+Salida completa del comando:
+------------------------------------------------------------
+Client connecting to fcff:2::1, TCP port 5001
+TCP window size: 45.0 KByte (default)
+------------------------------------------------------------
+[  1] local fcf0:0:1:2::1 port 47750 connected with fcff:2::1 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  1] 0.0000-10.0175 sec  10.6 GBytes  9.12 Gbits/sec
+
+Bandwidth leído: 9.12 Gbits/sec
+Salida completa del comando:
+------------------------------------------------------------
+Client connecting to fcff:2::1, TCP port 5001
+TCP window size: 45.0 KByte (default)
+------------------------------------------------------------
+[  1] local fcf0:0:1:2::1 port 45430 connected with fcff:2::1 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  1] 0.0000-10.0091 sec  10.6 GBytes  9.08 Gbits/sec
+
+Bandwidth leído: 9.08 Gbits/sec
+Salida completa del comando:
+------------------------------------------------------------
+Client connecting to fcff:2::1, TCP port 5001
+TCP window size: 45.0 KByte (default)
+------------------------------------------------------------
+[  1] local fcf0:0:1:2::1 port 48560 connected with fcff:2::1 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  1] 0.0000-10.0141 sec  10.7 GBytes  9.14 Gbits/sec
+
+Bandwidth leído: 9.14 Gbits/sec
+Salida completa del comando:
+------------------------------------------------------------
+Client connecting to fcff:2::1, TCP port 5001
+TCP window size: 45.0 KByte (default)
+------------------------------------------------------------
+[  1] local fcf0:0:1:2::1 port 48970 connected with fcff:2::1 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  1] 0.0000-10.0055 sec  10.6 GBytes  9.13 Gbits/sec
+
+Bandwidth leído: 9.13 Gbits/sec
+Salida completa del comando:
+------------------------------------------------------------
+Client connecting to fcff:2::1, TCP port 5001
+TCP window size: 45.0 KByte (default)
+------------------------------------------------------------
+[  1] local fcf0:0:1:2::1 port 51356 connected with fcff:2::1 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  1] 0.0000-10.0059 sec  10.7 GBytes  9.19 Gbits/sec
+
+Bandwidth leído: 9.19 Gbits/sec
+Salida completa del comando:
+------------------------------------------------------------
+Client connecting to fcff:2::1, TCP port 5001
+TCP window size: 45.0 KByte (default)
+------------------------------------------------------------
+[  1] local fcf0:0:1:2::1 port 42916 connected with fcff:2::1 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  1] 0.0000-10.0045 sec  10.6 GBytes  9.11 Gbits/sec
+
+Bandwidth leído: 9.11 Gbits/sec
+Salida completa del comando:
+------------------------------------------------------------
+Client connecting to fcff:2::1, TCP port 5001
+TCP window size: 45.0 KByte (default)
+------------------------------------------------------------
+[  1] local fcf0:0:1:2::1 port 42284 connected with fcff:2::1 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  1] 0.0000-10.0094 sec  10.6 GBytes  9.08 Gbits/sec
+
+Bandwidth leído: 9.08 Gbits/sec
+Salida completa del comando:
+------------------------------------------------------------
+Client connecting to fcff:2::1, TCP port 5001
+TCP window size: 45.0 KByte (default)
+------------------------------------------------------------
+[  1] local fcf0:0:1:2::1 port 48510 connected with fcff:2::1 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  1] 0.0000-10.0049 sec  10.6 GBytes  9.14 Gbits/sec
+
+Bandwidth leído: 9.14 Gbits/sec
+Bandwidths: [8.77, 9.18, 9.12, 9.08, 9.14, 9.13, 9.19, 9.11, 9.08, 9.14]
+Bandwidth: media=9.094 Gbits/sec, min=8.77 Gbits/sec, max=9.19 Gbits/sec

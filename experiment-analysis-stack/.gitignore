@@ -1,0 +1,5 @@
+env/
+*.env
+influx-config
+influx-data
+minio-data

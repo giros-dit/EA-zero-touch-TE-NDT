@@ -1,0 +1,116 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36" version="27.0.8">
+  <diagram name="Página-1" id="Bgf7g9mFxYqHOJv3XBw9">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="vSGlU-fJpTm064Gl_MIT-1" value="modified = False" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="325" y="50" width="178" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="vSGlU-fJpTm064Gl_MIT-2" value="¿Tiene &#39;table&#39;?" style="rhombus;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="336" y="154" width="157" height="157" as="geometry" />
+        </mxCell>
+        <mxCell id="vSGlU-fJpTm064Gl_MIT-3" value="needs_recalc = True&#xa;    Imprimir: sin tabla o tabla inexistente" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="120" y="412" width="260" height="102" as="geometry" />
+        </mxCell>
+        <mxCell id="vSGlU-fJpTm064Gl_MIT-4" value="¿Tabla existe?" style="rhombus;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="445.5" y="282" width="157" height="157" as="geometry" />
+        </mxCell>
+        <mxCell id="vSGlU-fJpTm064Gl_MIT-5" value="Obtener ruta actual de la tabla" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="434" y="482" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="vSGlU-fJpTm064Gl_MIT-6" value="¿Ruta válida?" style="rhombus;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="487.5" y="599" width="153" height="153" as="geometry" />
+        </mxCell>
+        <mxCell id="vSGlU-fJpTm064Gl_MIT-7" value="needs_recalc = False" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="331" y="782" width="213" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="vSGlU-fJpTm064Gl_MIT-8" value="needs_recalc = True&#xa;    Imprimir: ruta inválida" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="577" y="782" width="213" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="vSGlU-fJpTm064Gl_MIT-9" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="vSGlU-fJpTm064Gl_MIT-1" target="vSGlU-fJpTm064Gl_MIT-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="424.5" y="153.99999999999977" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vSGlU-fJpTm064Gl_MIT-10" value="No" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0.76;entryX=0.46;entryY=0;rounded=0;" edge="1" parent="1" source="vSGlU-fJpTm064Gl_MIT-2" target="vSGlU-fJpTm064Gl_MIT-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="273" y="292" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vSGlU-fJpTm064Gl_MIT-11" value="Sí" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.93;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="vSGlU-fJpTm064Gl_MIT-2" target="vSGlU-fJpTm064Gl_MIT-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="483" y="262" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vSGlU-fJpTm064Gl_MIT-12" value="No" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0.78;entryX=0.8;entryY=0;rounded=0;" edge="1" parent="1" source="vSGlU-fJpTm064Gl_MIT-4" target="vSGlU-fJpTm064Gl_MIT-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="373" y="372" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vSGlU-fJpTm064Gl_MIT-13" value="Sí" style="curved=1;startArrow=none;endArrow=block;exitX=0.59;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="vSGlU-fJpTm064Gl_MIT-4" target="vSGlU-fJpTm064Gl_MIT-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="564" y="442" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vSGlU-fJpTm064Gl_MIT-14" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="vSGlU-fJpTm064Gl_MIT-5" target="vSGlU-fJpTm064Gl_MIT-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vSGlU-fJpTm064Gl_MIT-15" value="Sí" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0.93;entryX=0.5;entryY=-0.01;rounded=0;" edge="1" parent="1" source="vSGlU-fJpTm064Gl_MIT-6" target="vSGlU-fJpTm064Gl_MIT-7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="463" y="732" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vSGlU-fJpTm064Gl_MIT-16" value="No" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.93;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="vSGlU-fJpTm064Gl_MIT-6" target="vSGlU-fJpTm064Gl_MIT-8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="643" y="711" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vSGlU-fJpTm064Gl_MIT-17" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;entryDx=0;entryDy=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="vSGlU-fJpTm064Gl_MIT-7" target="vSGlU-fJpTm064Gl_MIT-19">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="420" y="870" />
+            </Array>
+            <mxPoint x="438" y="860" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vSGlU-fJpTm064Gl_MIT-19" value="Continuar recalc_routes" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="307" y="910" width="213" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="vSGlU-fJpTm064Gl_MIT-20" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=1;entryY=0.5;rounded=0;entryDx=0;entryDy=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="vSGlU-fJpTm064Gl_MIT-8" target="vSGlU-fJpTm064Gl_MIT-19">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="630" y="910" />
+            </Array>
+            <mxPoint x="420" y="934" as="targetPoint" />
+            <mxPoint x="444" y="860" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vSGlU-fJpTm064Gl_MIT-21" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0;entryY=0.5;rounded=0;entryDx=0;entryDy=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="vSGlU-fJpTm064Gl_MIT-3" target="vSGlU-fJpTm064Gl_MIT-19">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="180" y="780" />
+            </Array>
+            <mxPoint x="610" y="977" as="targetPoint" />
+            <mxPoint x="774" y="900" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

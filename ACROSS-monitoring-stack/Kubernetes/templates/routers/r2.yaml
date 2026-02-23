@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: r2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: r2-app
+  template:
+    metadata:
+      labels:
+        app: r2-app
+    spec:
+      containers:
+      - name: r2-service
+        image: mariovicente/router-node-exporter:latest
+        ports:
+        - containerPort: 9100
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: r2-service
+  labels:
+    name: r2-app
+spec:
+  ports:
+  - name: r2-port
+    port: 9100
+    protocol: TCP
+  selector:
+    app: r2-app

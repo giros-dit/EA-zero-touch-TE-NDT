@@ -1,0 +1,88 @@
+{
+  "graph": {
+    "nodes": [
+      "rg",
+      "r4",
+      "ru",
+      "r3",
+      "r2",
+      "r1"
+    ],
+    "edges": [
+      {
+        "source": "r4",
+        "target": "r3",
+        "cost": 0.0
+      },
+      {
+        "source": "r3",
+        "target": "rg",
+        "cost": 0.0
+      },
+      {
+        "source": "r1",
+        "target": "r2",
+        "cost": 0.0
+      },
+      {
+        "source": "ru",
+        "target": "r2",
+        "cost": 0.0
+      },
+      {
+        "source": "ru",
+        "target": "r4",
+        "cost": 0.0
+      },
+      {
+        "source": "rg",
+        "target": "r3",
+        "cost": 0.0
+      },
+      {
+        "source": "r2",
+        "target": "ru",
+        "cost": 0.0
+      },
+      {
+        "source": "r3",
+        "target": "r4",
+        "cost": 0.0
+      },
+      {
+        "source": "r4",
+        "target": "ru",
+        "cost": 0.0
+      },
+      {
+        "source": "r1",
+        "target": "rg",
+        "cost": 0.0
+      },
+      {
+        "source": "r2",
+        "target": "r1",
+        "cost": 0.0
+      },
+      {
+        "source": "rg",
+        "target": "r1",
+        "cost": 0.0
+      }
+    ]
+  },
+  "extremos": {
+    "origen": "ru",
+    "destinos": [
+      "rg"
+    ]
+  },
+  "loopbacks": {
+    "rg": "fcff:6::1/32",
+    "r4": "fcff:4::1/32",
+    "ru": "fcff:5::1/32",
+    "r3": "fcff:3::1/32",
+    "r2": "fcff:2::1/32",
+    "r1": "fcff:1::1/32"
+  }
+}

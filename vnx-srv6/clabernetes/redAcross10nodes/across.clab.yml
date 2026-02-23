@@ -1,0 +1,432 @@
+name: across
+
+topology:
+  nodes:
+    r1:
+      kind: linux
+      image: ghcr.io/giros-dit/vnx-srv6/srv6-frr-nodeexporter:latest
+      ports:
+        - 9100:9100
+      binds:
+        - conf/r1/daemons:/etc/frr/daemons
+        - conf/r1/isisd.conf:/etc/frr/isisd.conf
+        - conf/r1/zebra.conf:/etc/frr/zebra.conf
+      exec:
+        - service frr start
+        - sysctl -p
+        - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+        - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+        - sysctl -w net.ipv6.conf.eth1.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.eth3.seg6_enabled=1
+        - ip link set eth1 up
+        - ip link set eth2 up
+        - ip link set eth3 up
+
+    r2:
+      kind: linux
+      image: ghcr.io/giros-dit/vnx-srv6/srv6-frr-nodeexporter:latest
+      ports:
+        - 9100:9100
+      binds:
+        - conf/r2/daemons:/etc/frr/daemons
+        - conf/r2/isisd.conf:/etc/frr/isisd.conf
+        - conf/r2/zebra.conf:/etc/frr/zebra.conf
+      exec:
+        - service frr start
+        - sysctl -p
+        - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+        - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+        - sysctl -w net.ipv6.conf.eth1.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.eth3.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.eth4.seg6_enabled=1
+        - ip link set eth1 up
+        - ip link set eth2 up
+        - ip link set eth3 up
+        - ip link set eth4 up
+
+    r3:
+      kind: linux
+      image: ghcr.io/giros-dit/vnx-srv6/srv6-frr-nodeexporter:latest
+      ports:
+        - 9100:9100
+      binds:
+        - conf/r3/daemons:/etc/frr/daemons
+        - conf/r3/isisd.conf:/etc/frr/isisd.conf
+        - conf/r3/zebra.conf:/etc/frr/zebra.conf
+      exec:
+        - service frr start
+        - sysctl -p
+        - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+        - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+        - sysctl -w net.ipv6.conf.eth1.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.eth3.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.eth4.seg6_enabled=1
+        - ip link set eth1 up
+        - ip link set eth2 up
+        - ip link set eth3 up
+        - ip link set eth4 up
+
+    r4:
+      kind: linux
+      image: ghcr.io/giros-dit/vnx-srv6/srv6-frr-nodeexporter:latest
+      ports:
+        - 9100:9100
+      binds:
+        - conf/r4/daemons:/etc/frr/daemons
+        - conf/r4/isisd.conf:/etc/frr/isisd.conf
+        - conf/r4/zebra.conf:/etc/frr/zebra.conf
+      exec:
+        - service frr start
+        - sysctl -p
+        - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+        - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+        - sysctl -w net.ipv6.conf.eth1.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.eth3.seg6_enabled=1
+        - ip link set eth1 up
+        - ip link set eth2 up
+        - ip link set eth3 up
+
+    r5:
+      kind: linux
+      image: ghcr.io/giros-dit/vnx-srv6/srv6-frr-nodeexporter:latest
+      ports:
+        - 9100:9100
+      binds:
+        - conf/r5/daemons:/etc/frr/daemons
+        - conf/r5/isisd.conf:/etc/frr/isisd.conf
+        - conf/r5/zebra.conf:/etc/frr/zebra.conf
+      exec:
+        - service frr start
+        - sysctl -p
+        - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+        - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+        - sysctl -w net.ipv6.conf.eth1.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+        - ip link set eth1 up
+        - ip link set eth2 up
+
+    r6:
+      kind: linux
+      image: ghcr.io/giros-dit/vnx-srv6/srv6-frr-nodeexporter:latest
+      ports:
+        - 9100:9100
+      binds:
+        - conf/r6/daemons:/etc/frr/daemons
+        - conf/r6/isisd.conf:/etc/frr/isisd.conf
+        - conf/r6/zebra.conf:/etc/frr/zebra.conf
+      exec:
+        - service frr start
+        - sysctl -p
+        - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+        - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+        - sysctl -w net.ipv6.conf.eth1.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.eth3.seg6_enabled=1
+        - ip link set eth1 up
+        - ip link set eth2 up
+        - ip link set eth3 up
+
+    r7:
+      kind: linux
+      image: ghcr.io/giros-dit/vnx-srv6/srv6-frr-nodeexporter:latest
+      ports:
+        - 9100:9100
+      binds:
+        - conf/r7/daemons:/etc/frr/daemons
+        - conf/r7/isisd.conf:/etc/frr/isisd.conf
+        - conf/r7/zebra.conf:/etc/frr/zebra.conf
+      exec:
+        - service frr start
+        - sysctl -p
+        - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+        - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+        - sysctl -w net.ipv6.conf.eth1.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.eth3.seg6_enabled=1
+        - ip link set eth1 up
+        - ip link set eth2 up
+        - ip link set eth3 up
+    
+    rg:
+      kind: linux
+      image: ghcr.io/giros-dit/vnx-srv6/srv6-frr:latest
+      binds:
+        - conf/rg/daemons:/etc/frr/daemons
+        - conf/rg/isisd.conf:/etc/frr/isisd.conf
+        - conf/rg/zebra.conf:/etc/frr/zebra.conf
+      exec:
+        - service frr start
+        - sysctl -p
+        - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+        - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+        - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.eth3.seg6_enabled=1
+        - ip link set eth1 up
+        - ip link set eth2 up
+        - ip link set eth3 up
+        - ip -6 addr add fd00:0:5::0/127 dev eth1
+        - ip -6 route add fd00:0:2::0/64 via fd00:0:5::1
+
+    rc:
+      kind: linux
+      image: ghcr.io/giros-dit/vnx-srv6/srv6-frr:latest
+      binds:
+        - conf/rc/daemons:/etc/frr/daemons
+        - conf/rc/isisd.conf:/etc/frr/isisd.conf
+        - conf/rc/zebra.conf:/etc/frr/zebra.conf
+      exec:
+        - service frr start
+        - sysctl -p
+        - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+        - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+        - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.eth3.seg6_enabled=1
+        - ip link set eth1 up
+        - ip link set eth2 up
+        - ip link set eth3 up
+        - ip -6 addr add fd00:0:6::0/127 dev eth1
+        - ip -6 route add fd00:0:3::0/64 via fd00:0:6::1
+
+    ru:
+      kind: linux
+      image: ghcr.io/giros-dit/vnx-srv6/srv6-frr:latest
+      binds:
+        - conf/ru/daemons:/etc/frr/daemons
+        - conf/ru/isisd.conf:/etc/frr/isisd.conf
+        - conf/ru/zebra.conf:/etc/frr/zebra.conf
+      exec:
+        - service frr start
+        - sysctl -p
+        - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+        - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+        - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.eth3.seg6_enabled=1
+        - ip link set eth1 up
+        - ip link set eth2 up
+        - ip link set eth3 up
+        - ip -6 addr add fd00:0:4::0/127 dev eth1
+        - ip -6 route add fd00:0:1::2/64 via fd00:0:4::1
+    
+    rgnb:
+      kind: linux
+      image: ghcr.io/giros-dit/vnx-srv6/srv6-frr:latest
+      binds:
+        - conf/rgnb/daemons:/etc/frr/daemons
+        - conf/rgnb/zebra.conf:/etc/frr/zebra.conf
+      exec:
+        - service frr start
+        - sysctl -p
+        - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+        - ip link set eth1 up
+        - ip link set eth2 up
+        - ip -6 addr add fd00:0:5::1/127 dev eth2
+        - ip -6 addr add fd00:0:2::1/64 dev eth1
+        - ip -6 addr add fd00:1:2::1/64 dev eth1
+        - ip -6 route add fd00:0:1::2/64 via fd00:0:5::0
+        # - ip -6 route add fd00:0:2::/64 via fd00:1:2::b1 metric 10
+
+    
+    rcpd:
+      kind: linux
+      image: ghcr.io/giros-dit/vnx-srv6/srv6-frr:latest
+      binds:
+        - conf/rcpd/daemons:/etc/frr/daemons
+        - conf/rcpd/zebra.conf:/etc/frr/zebra.conf
+      exec:
+        - service frr start
+        - sysctl -p
+        - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+        - ip link set eth1 up
+        - ip link set eth2 up
+        - ip -6 addr add fd00:0:6::1/127 dev eth2
+        - ip -6 addr add fd00:0:3::1/64 dev eth1
+        - ip -6 route add fd00:0:1::2/64 via fd00:0:6::0
+    
+    rupf:
+      kind: linux
+      image: ghcr.io/giros-dit/vnx-srv6/srv6-frr:latest
+      binds:
+        - conf/rupf/daemons:/etc/frr/daemons
+        - conf/rupf/zebra.conf:/etc/frr/zebra.conf
+      exec:
+        - service frr start
+        - sysctl -p
+        - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+        - ip link set dev eth1 address 02:00:00:00:02:aa
+        - ip link set eth1 up
+        - ip link set eth2 up
+        - ip -6 addr add fd00:0:4::1/127 dev eth2
+        - ip -6 addr add fd00:0:1::1/64 dev eth1
+        - ip -6 route add fd00:0:2::0/64 via fd00:0:4::0
+        - ip -6 route add fd00:0:3::0/64 via fd00:0:4::0
+
+    # hgnb-h1:
+    #   kind: linux
+    #   image: avillaseca01/acrossfinal
+    #   exec:
+    #     - ip link set eth1 up
+    #     - ip -6 addr add fd00:0:2::2/64 dev eth1
+    #     - ip -6 route add fd00:0:1::2/64 via fd00:0:2::1
+
+    # hgnb-h2:
+    #   kind: linux
+    #   image: avillaseca01/acrossfinal
+    #   exec:
+    #     - ip link set eth1 up
+    #     - ip -6 addr add fd00:0:2::3/64 dev eth1
+    #     - ip -6 route add fd00:0:1::2/64 via fd00:0:2::1
+
+    # hgnb-h3:
+    #   kind: linux
+    #   image: avillaseca01/acrossfinal
+    #   exec:
+    #     - ip link set eth1 up
+    #     - ip -6 addr add fd00:0:2::4/64 dev eth1
+    #     - ip -6 route add fd00:0:1::2/64 via fd00:0:2::1
+    
+    # hgnb-h4:
+    #   kind: linux
+    #   image: avillaseca01/acrossfinal
+    #   exec:
+    #     - ip link set eth1 up
+    #     - ip -6 addr add fd00:0:2::5/64 dev eth1
+    #     - ip -6 route add fd00:0:1::2/64 via fd00:0:2::1
+
+    # hgnb-h5:
+    #   kind: linux
+    #   image: avillaseca01/acrossfinal
+    #   exec:
+    #     - ip link set eth1 up
+    #     - ip -6 addr add fd00:0:2::6/64 dev eth1
+    #     - ip -6 route add fd00:0:1::2/64 via fd00:0:2::1
+    
+    # hgnb-h6:
+    #   kind: linux
+    #   image: avillaseca01/acrossfinal
+    #   exec:
+    #     - ip link set eth1 up
+    #     - ip -6 addr add fd00:0:2::7/64 dev eth1
+    #     - ip -6 route add fd00:0:1::2/64 via fd00:0:2::1
+    
+    # hgnb-h7:
+    #   kind: linux
+    #   image: avillaseca01/acrossfinal
+    #   exec:
+    #     - ip link set eth1 up
+    #     - ip -6 addr add fd00:0:2::8/64 dev eth1
+    #     - ip -6 route add fd00:0:1::2/64 via fd00:0:2::1
+    
+    # hgnb-h8:
+    #   kind: linux
+    #   image: avillaseca01/acrossfinal
+    #   exec:
+    #     - ip link set eth1 up
+    #     - ip -6 addr add fd00:0:2::9/64 dev eth1
+    #     - ip -6 route add fd00:0:1::2/64 via fd00:0:2::1
+    
+    # hgnb-h9:
+    #   kind: linux
+    #   image: avillaseca01/acrossfinal
+    #   exec:
+    #     - ip link set eth1 up
+    #     - ip -6 addr add fd00:0:2::a/64 dev eth1
+    #     - ip -6 route add fd00:0:1::2/64 via fd00:0:2::1
+
+    # hcpd-h1:
+    #   kind: linux
+    #   image: avillaseca01/acrossfinal
+    #   exec:
+    #     - ip link set eth1 up
+    #     - ip -6 addr add fd00:0:3::2/64 dev eth1
+    #     - ip -6 route add fd00:0:1::2/64 via fd00:0:3::1
+
+    # hcpd-h2:
+    #   kind: linux
+    #   image: avillaseca01/acrossfinal
+    #   exec:
+    #     - ip link set eth1 up
+    #     - ip -6 addr add fd00:0:3::3/64 dev eth1
+    #     - ip -6 route add fd00:0:1::2/64 via fd00:0:3::1
+
+    # hcpd-h3:
+    #   kind: linux
+    #   image: avillaseca01/acrossfinal
+    #   exec:
+    #     - ip link set eth1 up
+    #     - ip -6 addr add fd00:0:3::4/64 dev eth1
+    #     - ip -6 route add fd00:0:1::2/64 via fd00:0:3::1
+
+    # hupf-h1:
+    #   kind: linux
+    #   image: avillaseca01/acrossfinal
+    #   exec:
+    #     - ip link set eth1 up
+    #     - ip -6 addr add fd00:0:1::2/64 dev eth1
+    #     - ip -6 route add fd00:0:2::/64 via fd00:0:1::0
+    #     - ip -6 route add fd00:0:3::/64 via fd00:0:1::0
+    
+    ixia-c:
+      kind: keysight_ixia-c-one
+      image: ghcr.io/open-traffic-generator/ixia-c-one:1.28.0-6
+      ports:
+        - 8443:8443
+
+  links:
+    - endpoints: ["r1:eth1", "multus:net1001"]
+    - endpoints: ["r1:eth2", "multus:net1009"]
+    - endpoints: ["r1:eth3", "multus:net1002"]
+    - endpoints: ["r2:eth1", "multus:net1002"]
+    - endpoints: ["r2:eth2", "multus:net1010"]
+    - endpoints: ["r2:eth3", "multus:net1003"]
+    - endpoints: ["r2:eth4", "multus:net1013"]
+    - endpoints: ["r3:eth1", "multus:net1004"]
+    - endpoints: ["r3:eth2", "multus:net1012"]
+    - endpoints: ["r3:eth3", "multus:net1003"]
+    - endpoints: ["r3:eth4", "multus:net1014"]
+    - endpoints: ["r4:eth1", "multus:net1005"]
+    - endpoints: ["r4:eth2", "multus:net1009"]
+    - endpoints: ["r4:eth3", "multus:net1006"]
+    - endpoints: ["r5:eth1", "multus:net1010"]
+    - endpoints: ["r5:eth2", "multus:net1011"]
+    - endpoints: ["r6:eth1", "multus:net1006"]
+    - endpoints: ["r6:eth2", "multus:net1011"]
+    - endpoints: ["r6:eth3", "multus:net1007"]
+    - endpoints: ["r7:eth1", "multus:net1008"]
+    - endpoints: ["r7:eth2", "multus:net1012"]
+    - endpoints: ["r7:eth3", "multus:net1007"]
+    - endpoints: ["rg:eth1", "multus:net2005"]
+    - endpoints: ["rg:eth2", "multus:net1001"]
+    - endpoints: ["rg:eth3", "multus:net1005"]
+    - endpoints: ["rc:eth1", "multus:net2006"]
+    - endpoints: ["rc:eth2", "multus:net1013"]
+    - endpoints: ["rc:eth3", "multus:net1014"]
+    - endpoints: ["ru:eth1", "multus:net2004"]
+    - endpoints: ["ru:eth2", "multus:net1004"]
+    - endpoints: ["ru:eth3", "multus:net1008"]
+    - endpoints: ["rupf:eth1", "multus:net2001"]
+    - endpoints: ["rupf:eth2", "multus:net2004"]
+    - endpoints: ["rgnb:eth1", "multus:net2002"]
+    - endpoints: ["rgnb:eth2", "multus:net2005"]
+    - endpoints: ["rcpd:eth1", "multus:net2003"]
+    - endpoints: ["rcpd:eth2", "multus:net2006"]
+    # - endpoints: ["hupf-h1:eth1", "multus:net2001"]
+    # - endpoints: ["hgnb-h1:eth1", "multus:net2002"]
+    # - endpoints: ["hgnb-h2:eth1", "multus:net2002"]
+    # - endpoints: ["hgnb-h3:eth1", "multus:net2002"]
+    # - endpoints: ["hgnb-h4:eth1", "multus:net2002"]
+    # - endpoints: ["hgnb-h5:eth1", "multus:net2002"]
+    # - endpoints: ["hgnb-h6:eth1", "multus:net2002"]
+    # - endpoints: ["hgnb-h7:eth1", "multus:net2002"]
+    # - endpoints: ["hgnb-h8:eth1", "multus:net2002"]
+    # - endpoints: ["hgnb-h9:eth1", "multus:net2002"]
+    # - endpoints: ["hcpd-h1:eth1", "multus:net2003"]
+    # - endpoints: ["hcpd-h2:eth1", "multus:net2003"]
+    # - endpoints: ["hcpd-h3:eth1", "multus:net2003"]
+    - endpoints: ["ixia-c:eth1", "multus:net2001"]
+    - endpoints: ["ixia-c:eth2", "multus:net2002"]
+    - endpoints: ["ixia-c:eth3", "multus:net2003"]
+

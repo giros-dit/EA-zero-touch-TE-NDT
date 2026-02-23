@@ -1,0 +1,171 @@
+name: testacross
+
+topology:
+  nodes:
+    r1:
+      kind: linux
+      image: avillaseca01/srv6-frr
+      binds:
+        - conf/r1/daemons:/etc/frr/daemons
+        - conf/r1/isisd.conf:/etc/frr/isisd.conf
+        - conf/r1/zebra.conf:/etc/frr/zebra.conf
+      exec:
+        - service frr start
+        - sysctl -p
+        - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+        - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+        - sysctl -w net.ipv6.conf.eth1.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+        - ip link set eth1 up
+        - ip link set eth2 up
+
+    r2:
+      kind: linux
+      image: avillaseca01/srv6-frr
+      binds:
+        - conf/r2/daemons:/etc/frr/daemons
+        - conf/r2/isisd.conf:/etc/frr/isisd.conf
+        - conf/r2/zebra.conf:/etc/frr/zebra.conf
+      exec:
+        - service frr start
+        - sysctl -p
+        - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+        - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+        - sysctl -w net.ipv6.conf.eth1.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+        - ip link set eth1 up
+        - ip link set eth2 up
+
+    r3:
+      kind: linux
+      image: avillaseca01/srv6-frr
+      binds:
+        - conf/r3/daemons:/etc/frr/daemons
+        - conf/r3/isisd.conf:/etc/frr/isisd.conf
+        - conf/r3/zebra.conf:/etc/frr/zebra.conf
+      exec:
+        - service frr start
+        - sysctl -p
+        - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+        - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+        - sysctl -w net.ipv6.conf.eth1.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+        - ip link set eth1 up
+        - ip link set eth2 up
+
+    r4:
+      kind: linux
+      image: avillaseca01/srv6-frr
+      binds:
+        - conf/r4/daemons:/etc/frr/daemons
+        - conf/r4/isisd.conf:/etc/frr/isisd.conf
+        - conf/r4/zebra.conf:/etc/frr/zebra.conf
+      exec:
+        - service frr start
+        - sysctl -p
+        - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+        - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+        - sysctl -w net.ipv6.conf.eth1.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+        - ip link set eth1 up
+        - ip link set eth2 up
+
+    rg:
+      kind: linux
+      image: avillaseca01/srv6-frr
+      binds:
+        - conf/rg/daemons:/etc/frr/daemons
+        - conf/rg/isisd.conf:/etc/frr/isisd.conf
+        - conf/rg/zebra.conf:/etc/frr/zebra.conf
+      exec:
+        - service frr start
+        - sysctl -p
+        - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+        - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+        - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.eth3.seg6_enabled=1
+        - ip link set eth1 up
+        - ip link set eth2 up
+        - ip link set eth3 up
+        - ip -6 addr add fd00:0:2::1/64 dev eth1
+
+
+
+    ru:
+      kind: linux
+      image: avillaseca01/srv6-frr
+      binds:
+        - conf/ru/daemons:/etc/frr/daemons
+        - conf/ru/isisd.conf:/etc/frr/isisd.conf
+        - conf/ru/zebra.conf:/etc/frr/zebra.conf
+      exec:
+        - service frr start
+        - sysctl -p
+        - vtysh -c 'configure terminal' -f /etc/frr/zebra.conf
+        - vtysh -c 'configure terminal' -f /etc/frr/isisd.conf
+        - sysctl -w net.ipv6.conf.eth2.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.eth3.seg6_enabled=1
+        - ip link set eth1 up
+        - ip link set eth2 up
+        - ip link set eth3 up
+        - ip -6 addr add fd00:0:1::/127 dev eth1
+
+    hgnb-h1:
+      kind: linux
+      image: avillaseca01/acrossfinal
+      exec:
+        - apt-get update
+        - apt-get install -y iperf
+        - ip link set eth1 up
+        - ip -6 addr add fd00:0:2::2/64 dev eth1
+        - ip -6 route add fd00:0:1::1/127 via fd00:0:2::1
+
+    hgnb-h2:
+      kind: linux
+      image: avillaseca01/acrossfinal
+      exec:
+        - apt-get update
+        - apt-get install -y iperf
+        - ip link set eth1 up
+        - ip -6 addr add fd00:0:2::3/64 dev eth1
+        - ip -6 route add fd00:0:1::1/127 via fd00:0:2::1
+
+    hgnb-h3:
+      kind: linux
+      image: avillaseca01/acrossfinal
+      exec:
+        - apt-get update
+        - apt-get install -y iperf
+        - ip link set eth1 up
+        - ip -6 addr add fd00:0:2::4/64 dev eth1
+        - ip -6 route add fd00:0:1::1/127 via fd00:0:2::1
+
+    hupf-h1:
+      kind: linux
+      image: avillaseca01/acrossfinal
+      exec:
+        - apt-get update
+        - apt-get install -y iperf
+        - ip link set eth1 up
+        - ip -6 addr add fd00:0:1::1/64 dev eth1
+        - ip -6 route add fd00:0:2::/64 via fd00:0:1::0
+
+  links:
+    - endpoints: ["rg:eth1", "multus:net2002"]
+    - endpoints: ["rg:eth2", "multus:net1001"]
+    - endpoints: ["rg:eth3", "multus:net1004"]
+    - endpoints: ["r1:eth1", "multus:net1001"]
+    - endpoints: ["r1:eth2", "multus:net1002"]
+    - endpoints: ["r2:eth1", "multus:net1002"]
+    - endpoints: ["r2:eth2", "multus:net1003"]
+    - endpoints: ["r3:eth1", "multus:net1004"]
+    - endpoints: ["r3:eth2", "multus:net1005"]
+    - endpoints: ["r4:eth1", "multus:net1005"]
+    - endpoints: ["r4:eth2", "multus:net1006"]
+    - endpoints: ["ru:eth1", "multus:net2001"]
+    - endpoints: ["ru:eth2", "multus:net1003"]
+    - endpoints: ["ru:eth3", "multus:net1006"]
+    - endpoints: ["hgnb-h1:eth1", "multus:net2002"]
+    - endpoints: ["hgnb-h2:eth1", "multus:net2002"]
+    - endpoints: ["hgnb-h3:eth1", "multus:net2002"]
+    - endpoints: ["hupf-h1:eth1", "multus:net2001"]

@@ -1,0 +1,106 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.2.2 Chrome/134.0.6998.178 Electron/35.1.2 Safari/537.36" version="26.2.2">
+  <diagram name="Página-1" id="eqjOnO7Gvo-85zCGQlQS">
+    <mxGraphModel dx="1292" dy="907" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="boX53UYX1-WF3tNRa1Cb-3" value="Inicio bucle cálculo de rutas cada 5s" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="341" y="80" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="boX53UYX1-WF3tNRa1Cb-6" value="Cargar topología desde final_output.json" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="248" y="208" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="boX53UYX1-WF3tNRa1Cb-7" value="Leer flujos actuales desde Minio" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="248" y="361" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="boX53UYX1-WF3tNRa1Cb-8" value="Eliminar nodos inactivos según timeout 15s" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="248" y="489" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="boX53UYX1-WF3tNRa1Cb-9" value="Actualizar costes en grafo con NetworkX" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="248" y="617" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="boX53UYX1-WF3tNRa1Cb-10" value="¿Hay flujos sin ruta o afectados por routers caídos?" style="rhombus;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="227" y="745" width="302" height="302" as="geometry" />
+        </mxCell>
+        <mxCell id="boX53UYX1-WF3tNRa1Cb-11" value="Recalcular rutas óptimas con NetworkX" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="160" y="1119" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="boX53UYX1-WF3tNRa1Cb-12" value="Ejecutar tunnelmaker.py para aplicar rutas actualizadas" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="160" y="1247" width="260" height="102" as="geometry" />
+        </mxCell>
+        <mxCell id="boX53UYX1-WF3tNRa1Cb-13" value="Actualizar flujos en Minio" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="169" y="1399" width="242" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="boX53UYX1-WF3tNRa1Cb-14" value="Esperar 5 segundos" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="368" y="1503" width="196" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="boX53UYX1-WF3tNRa1Cb-20" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.28;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="boX53UYX1-WF3tNRa1Cb-3" target="boX53UYX1-WF3tNRa1Cb-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="378" y="183" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="boX53UYX1-WF3tNRa1Cb-21" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="boX53UYX1-WF3tNRa1Cb-6" target="boX53UYX1-WF3tNRa1Cb-7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="boX53UYX1-WF3tNRa1Cb-22" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="boX53UYX1-WF3tNRa1Cb-7" target="boX53UYX1-WF3tNRa1Cb-8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="boX53UYX1-WF3tNRa1Cb-23" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="boX53UYX1-WF3tNRa1Cb-8" target="boX53UYX1-WF3tNRa1Cb-9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="boX53UYX1-WF3tNRa1Cb-24" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="boX53UYX1-WF3tNRa1Cb-9" target="boX53UYX1-WF3tNRa1Cb-10">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="boX53UYX1-WF3tNRa1Cb-25" value="Sí" style="curved=1;startArrow=none;endArrow=block;exitX=0.26;exitY=1;entryX=0.5;entryY=0.01;rounded=0;" edge="1" parent="1" source="boX53UYX1-WF3tNRa1Cb-10" target="boX53UYX1-WF3tNRa1Cb-11">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="290" y="1083" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="boX53UYX1-WF3tNRa1Cb-26" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1.01;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="boX53UYX1-WF3tNRa1Cb-11" target="boX53UYX1-WF3tNRa1Cb-12">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="boX53UYX1-WF3tNRa1Cb-27" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0.01;rounded=0;" edge="1" parent="1" source="boX53UYX1-WF3tNRa1Cb-12" target="boX53UYX1-WF3tNRa1Cb-13">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="boX53UYX1-WF3tNRa1Cb-28" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1.01;entryX=0.03;entryY=0.01;rounded=0;" edge="1" parent="1" source="boX53UYX1-WF3tNRa1Cb-13" target="boX53UYX1-WF3tNRa1Cb-14">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="290" y="1478" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="boX53UYX1-WF3tNRa1Cb-29" value="No" style="curved=1;startArrow=none;endArrow=block;exitX=0.74;exitY=1;entryX=0.5;entryY=0.01;rounded=0;" edge="1" parent="1" source="boX53UYX1-WF3tNRa1Cb-10" target="boX53UYX1-WF3tNRa1Cb-14">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="466" y="1083" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="boX53UYX1-WF3tNRa1Cb-30" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.79;exitY=0.01;entryX=0.74;entryY=1;rounded=0;" edge="1" parent="1" source="boX53UYX1-WF3tNRa1Cb-14" target="boX53UYX1-WF3tNRa1Cb-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="575" y="1478" />
+              <mxPoint x="575" y="183" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

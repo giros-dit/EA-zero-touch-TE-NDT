@@ -1,0 +1,3 @@
+https://wdenniss.com/isolating-namespaces-with-networkpolicy
+
+https://stackoverflow.com/questions/78001025/how-to-deny-all-traffic-from-other-kubernetes-namespaces

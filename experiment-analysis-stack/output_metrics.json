@@ -1,0 +1,106 @@
+{
+  "node_exporter": "r1-service:9100",
+  "epoch_timestamp": "1739275713.4362452",
+  "experiment_id": "1",
+  "debug_params": {
+    "flag_original_metrics": true,
+    "max_throughput(Mbps)": 100,
+    "interfaces": ["eth0", "lo"],
+    "unit": "bytes",
+    "polling_interval": 1
+},
+  "metrics": [
+    {
+      "name": "node_network_receive_bytes_total",
+      "description": "Network device statistic receive_bytes.",
+      "type": "counter",
+      "values": [
+        {
+          "labels": [
+            {
+              "name": "device",
+              "value": "eth0"
+            }
+          ],
+          "value": "42002"
+        },
+        {
+          "labels": [
+            {
+              "name": "device",
+              "value": "lo"
+            }
+          ],
+          "value": "0"
+        }
+      ]
+    },
+    {
+      "name": "node_network_receive_packets_total",
+      "description": "Network device statistic receive_packets.",
+      "type": "counter",
+      "values": [
+        {
+          "labels": [
+            {
+              "name": "device",
+              "value": "eth0"
+            }
+          ],
+          "value": "495"
+        },
+        {
+          "labels": [
+            {
+              "name": "device",
+              "value": "lo"
+            }
+          ],
+          "value": "0"
+        }
+      ]
+    }
+  ],
+  "ml_metrics": [
+    {
+      "name": "node_network_receive_bytes_total_rate",
+      "description": "Calculated rate metric for node_network_receive_bytes_total",
+      "type": "rate",
+      "value": 621.0693752248079,
+      "labels": {
+        "name": "device",
+        "value": ["eth0", "lo"]
+      }
+    },
+    {
+      "name": "node_network_receive_packets_total_rate",
+      "description": "Calculated rate metric for node_network_receive_packets_total",
+      "type": "rate",
+      "value": 7.33546506171033,
+      "labels": {
+        "name": "device",
+        "value": ["eth0", "lo"]
+      }
+    },
+    {
+      "name": "node_network_average_received_packet_size",
+      "description": "Average size of received packets",
+      "type": "size",
+      "value": 84.85252525252525,
+      "labels": {
+        "name": "device",
+        "value": ["eth0", "lo"]
+      }
+    },
+    {
+      "name": "node_network_router_capacity_occupation",
+      "description": "Router capacity occupation",
+      "type": "percentage",
+      "value": 0.0024842775008992314,
+      "labels": {
+        "name": "device",
+        "value": ["eth0", "lo"]
+      }
+    }
+  ]
+}

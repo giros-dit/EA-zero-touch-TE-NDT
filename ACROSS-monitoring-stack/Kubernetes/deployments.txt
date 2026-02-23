@@ -1,0 +1,71 @@
+Kubernetes Deployments for Telemetry System:
+ 
+ 1.- CertManager:
+  
+   - Namespace (cert-manager)
+   
+   - Deployment: cert-manager, cert-manager-cainjector, cert-manager-webhook
+   
+   - ConfigMap (cert-manager-webhook)
+   
+   - MutatingWebhookConfiguration (cert-manager-webhook)
+   
+   - ValidatingWebhookConfiguration (cert-manager-webhook)
+   
+   - Service: cert-manager, cert-manager-webhook
+   
+   - ServiceAccount: cert-manager, cert-manager-cainjector, cert-manager-webhook
+   
+   - Role: cert-manager-cainjector:leaderelection, cert-manager:leaderelection, cert-manager-webhook:dynamic-serving
+   
+   - RoleBinding: cert-manager-cainjector:leaderelection, cert-manager:leaderelection, cert-manager-webhook:dynamic-serving
+   
+   - ClusterRole: cert-manager-cainjector, cert-manager-controller-issuers, cert-manager-controller-clusterissuers, cert-manager-controller-certificates, cert-manager-controller-orders, cert-manager-controller-challenges, cert-manager-controller-ingress-shim, cert-manager-view, cert-manager-edit, cert-manager-controller-approve:cert-manager-io, cert-manager-controller-certificatesigningrequests, cert-manager-webhook:subjectaccessreviews
+   
+   - ClusterRoleBinding: cert-manager-cainjector, cert-manager-controller-issuers, cert-manager-controller-clusterissuers, cert-manager-controller-certificates, cert-manager-controller-orders, cert-manager-controller-challenges, cert-manager-controller-ingress-shim, cert-manager-controller-approve:cert-manager-io, cert-manager-controller-certificatesigningrequests, cert-manager-webhook:subjectaccessreviews
+   
+   - CustomResourceDefinition : CertificateRequest, CertificateList, ChallengeList, IssuerList, ClusterIssuerList OrderList
+   
+ 2.- Flink-Operator:
+ 
+   - Namespace (flink-operator-system)
+   
+   - Deployment: flink-operator-controller-manager
+   
+   - ServiceAccount: flink-operator-controller-manager
+   
+   - Role: flink-operator-leader-election-role
+   
+   - RoleBinding: flink-operator-leader-election-rolebinding
+   
+   - ClusterRole: flink-operator-manager-role, flink-operator-metrics-reader, flink-operator-proxy-role
+   
+   - ClusterRoleBinding: flink-operator-manager-rolebinding, flink-operator-proxy-rolebinding
+   
+   - Service: flink-operator-controller-manager-metrics-service, flink-operator-webhook-service
+   
+   - MutatingWebhookConfiguration: flink-operator-mutating-webhook-configuration
+   
+   - ValidatingWebhookConfiguration: flink-operator-validating-webhook-configuration
+   
+   - Certificate: flink-operator-serving-cert
+   
+   - Issuer: flink-operator-selfsigned-issuer
+   
+   - CustomResourceDefinition: FlinkCluster 
+ 
+ 3.- Routers (Deployment + Service): r1, r2, r3, r4
+ 
+ 4.- Node Exporter Collector (Deployment + Service)
+ 
+ 5.- Zookeeper (Deployment + Service)
+ 
+ 6.- Kafka (Deployment + Service)
+ 
+ 7.- Kafka Producer (Deployment) <- ConfigMap (config-json)
+ 
+ 8.- Flink Operator (Flink Cluster + Job) -> Job Submitters (Job): flink-job-submitter-2, flink-job-submitter-3, flink-job-submitter-4
+ 
+ 9.- Machine Learning Inference Engine (Deployment): ml1, ml2, ml3, ml4
+   
+   				

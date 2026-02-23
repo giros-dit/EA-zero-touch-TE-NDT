@@ -1,0 +1,36 @@
+iperf3 -c fd00:0:2::2 -V -u -b 20M -l 1000 -t 600
+iperf3 -s -V -B fd00:0:2::2
+
+iperf3 -c fd00:0:2::3 -V -u -b 20M -l 1000 -t 600
+iperf3 -s -V -B fd00:0:2::3
+
+iperf3 -c fd00:0:2::4 -V -u -b 50M -l 1000 -t 600
+iperf3 -s -V -B fd00:0:2::4
+
+iperf3 -c fd00:0:2::5 -V -u -b 20M -l 1000 -t 600
+iperf3 -s -V -B fd00:0:2::5
+
+iperf3 -c fd00:0:2::6 -V -u -b 45M -l 1000 -t 600
+iperf3 -s -V -B fd00:0:2::6
+
+iperf3 -c fd00:0:2::7 -V -u -b 15M -l 1000 -t 600
+iperf3 -s -V -B fd00:0:2::7
+
+iperf3 -c fd00:0:2::8 -V -u -b 17M -l 1000 -t 600
+iperf3 -s -V -B fd00:0:2::8
+
+
+Video2:
+
+iperf3 -c fd00:0:2::2 -V -u -b 20M -l 1000 -t 900
+iperf3 -c fd00:0:2::3 -V -u -b 20M -l 1000 -t 900
+iperf3 -c fd00:0:2::4 -V -u -b 40M -l 1000 -t 900
+iperf3 -c fd00:0:2::5 -V -u -b 40M -l 1000 -t 900
+iperf3 -c fd00:0:2::6 -V -u -b 50M -l 1000 -t 900
+iperf3 -c fd00:0:2::7 -V -u -b 15M -l 1000 -t 900
+iperf3 -c fd00:0:2::8 -V -u -b 20M -l 1000 -t 900
+
+
+
+
+

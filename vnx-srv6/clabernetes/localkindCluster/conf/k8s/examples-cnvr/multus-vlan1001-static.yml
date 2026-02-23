@@ -1,0 +1,17 @@
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: vlan-conf1001
+spec:
+  config: '{
+      "cniVersion": "0.3.1",
+      "type": "vlan",
+      "master": "vlannet",
+      "vlanId": 1001,
+      "mode": "bridge",
+      "ipam": {
+        "type": "static",
+                "addresses": [ { "address": "10.1.3.200/24" } ],
+                "routes": [ { "dst": "10.1.0.0/16", "gw":"10.1.3.1" } ]
+      }
+    }'

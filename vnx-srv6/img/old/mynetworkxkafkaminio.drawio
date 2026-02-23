@@ -1,0 +1,41 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.2.2 Chrome/134.0.6998.178 Electron/35.1.2 Safari/537.36" version="26.2.2">
+  <diagram name="Página-1" id="EoC__BzI-oONEPc4IVxR">
+    <mxGraphModel dx="1098" dy="771" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="4vQmANhQldCweIZBYpdn-33" value="Inicio" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="335.5" y="500" width="99" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="4vQmANhQldCweIZBYpdn-34" value="Iniciar consumidores Kafka por router" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="255" y="610" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="4vQmANhQldCweIZBYpdn-35" value="Bucle de asignación de rutas" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="488" y="767" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="4vQmANhQldCweIZBYpdn-36" value="Bucle de actualización &#xa;del estado de los routers" style="whiteSpace=wrap;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="55" y="767" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="4vQmANhQldCweIZBYpdn-47" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.49;exitY=1;entryX=0.5;entryY=0;rounded=0;" parent="1" source="4vQmANhQldCweIZBYpdn-33" target="4vQmANhQldCweIZBYpdn-34" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4vQmANhQldCweIZBYpdn-48" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.67;exitY=1;entryX=0.5;entryY=0;rounded=0;entryDx=0;entryDy=0;" parent="1" source="4vQmANhQldCweIZBYpdn-34" target="4vQmANhQldCweIZBYpdn-35" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="620" y="740" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4vQmANhQldCweIZBYpdn-49" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.48;exitY=1;entryX=0.5;entryY=0;rounded=0;" parent="1" source="4vQmANhQldCweIZBYpdn-34" target="4vQmANhQldCweIZBYpdn-36" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="185" y="742" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

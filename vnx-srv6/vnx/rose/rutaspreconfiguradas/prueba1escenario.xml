@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vnx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="/usr/share/xml/vnx/vnx-2.00.xsd">
+  <global>
+    <version>2.0</version>
+    <scenario_name>pruebaSRIPv6</scenario_name>
+    <automac/>
+    <vm_mgmt type="none" />
+    <vm_defaults>
+        <console id="0" display="yes"/>
+    </vm_defaults>
+    
+  </global>
+
+  <net name="Net111" mode="virtual_bridge" />
+  <net name="Net12" mode="virtual_bridge" />
+  <net name="Net221" mode="virtual_bridge" />
+
+  <vm name="h1" type="lxc" exec_mode="lxc-attach" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-22.04-v025</filesystem>
+    <if id="1" net="Net111">
+      <ipv6>fd00:0:11::2/64</ipv6>
+    </if>
+    <route type="ipv6" gw="fd00:0:11::1">default</route>   
+  </vm>
+
+  <vm name="h2" type="lxc" exec_mode="lxc-attach" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-22.04-v025</filesystem>
+    <if id="1" net="Net221">
+      <ipv6>fd00:0:21::2/64</ipv6>
+    </if>
+    <route type="ipv6" gw="fd00:0:21::1">default</route>
+  </vm>
+
+  <vm name="r1" type="lxc" exec_mode="lxc-attach" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-22.04-v025</filesystem>
+    <if net="lo" id="1">
+        <ipv6>fcff:1::1</ipv6> 
+    </if> 
+    <if id="2" net="Net111">
+      <ipv6>fd00:0:11::1/64</ipv6>
+    </if>
+    <if id="3" net="Net12">
+      <ipv6>fcf0:0:1:2::1/64</ipv6>
+    </if>
+    <route type="ipv6" gw="fcf0:0:1:2::2">fd00:0:21::/64</route>
+    <forwarding type="ip" />
+  </vm>
+
+  <vm name="r2" type="lxc" exec_mode="lxc-attach" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-22.04-v025</filesystem>
+     <if net="lo" id="1">
+        <ipv6>fcff:2::1</ipv6> 
+    </if>
+    <if id="2" net="Net221">
+      <ipv6>fd00:0:21::1/64</ipv6>
+    </if>
+    <if id="3" net="Net12">
+      <ipv6>fcf0:0:1:2::2/64</ipv6>
+    </if>
+    <route type="ipv6" gw="fcf0:0:1:2::1">fd00:0:11::/64</route>
+    <forwarding type="ip" />
+  </vm>
+
+</vnx>

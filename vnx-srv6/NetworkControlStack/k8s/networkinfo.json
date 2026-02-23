@@ -1,0 +1,182 @@
+{
+  "graph": {
+    "nodes": [
+      "r6",
+      "r8",
+      "rg",
+      "r9",
+      "r1",
+      "ru",
+      "r7",
+      "r3",
+      "r4",
+      "r5",
+      "r2"
+    ],
+    "edges": [
+      {
+        "source": "r7",
+        "target": "r1",
+        "cost": 0.0
+      },
+      {
+        "source": "r1",
+        "target": "r2",
+        "cost": 0.0
+      },
+      {
+        "source": "r6",
+        "target": "r5",
+        "cost": 0.0
+      },
+      {
+        "source": "r6",
+        "target": "r2",
+        "cost": 0.0
+      },
+      {
+        "source": "r9",
+        "target": "ru",
+        "cost": 0.0
+      },
+      {
+        "source": "r2",
+        "target": "r1",
+        "cost": 0.0
+      },
+      {
+        "source": "r3",
+        "target": "r2",
+        "cost": 0.0
+      },
+      {
+        "source": "rg",
+        "target": "r6",
+        "cost": 0.0
+      },
+      {
+        "source": "r8",
+        "target": "r7",
+        "cost": 0.0
+      },
+      {
+        "source": "r4",
+        "target": "r5",
+        "cost": 0.0
+      },
+      {
+        "source": "ru",
+        "target": "r8",
+        "cost": 0.0
+      },
+      {
+        "source": "r5",
+        "target": "rg",
+        "cost": 0.0
+      },
+      {
+        "source": "r5",
+        "target": "r4",
+        "cost": 0.0
+      },
+      {
+        "source": "r1",
+        "target": "r4",
+        "cost": 0.0
+      },
+      {
+        "source": "r3",
+        "target": "r1",
+        "cost": 0.0
+      },
+      {
+        "source": "r6",
+        "target": "rg",
+        "cost": 0.0
+      },
+      {
+        "source": "r9",
+        "target": "r3",
+        "cost": 0.0
+      },
+      {
+        "source": "r4",
+        "target": "r1",
+        "cost": 0.0
+      },
+      {
+        "source": "r2",
+        "target": "r6",
+        "cost": 0.0
+      },
+      {
+        "source": "r3",
+        "target": "r9",
+        "cost": 0.0
+      },
+      {
+        "source": "r5",
+        "target": "r6",
+        "cost": 0.0
+      },
+      {
+        "source": "r2",
+        "target": "r3",
+        "cost": 0.0
+      },
+      {
+        "source": "rg",
+        "target": "r5",
+        "cost": 0.0
+      },
+      {
+        "source": "ru",
+        "target": "r9",
+        "cost": 0.0
+      },
+      {
+        "source": "r1",
+        "target": "r3",
+        "cost": 0.0
+      },
+      {
+        "source": "r7",
+        "target": "r8",
+        "cost": 0.0
+      },
+      {
+        "source": "r9",
+        "target": "r8",
+        "cost": 0.0
+      },
+      {
+        "source": "r8",
+        "target": "ru",
+        "cost": 0.0
+      },
+      {
+        "source": "r8",
+        "target": "r9",
+        "cost": 0.0
+      },
+      {
+        "source": "r1",
+        "target": "r7",
+        "cost": 0.0
+      }
+    ]
+  },
+  "loopbacks": {
+    "r6": "fcff:6::1/32",
+    "r8": "fcff:8::1/32",
+    "rg": "fcff:11::1/32",
+    "r9": "fcff:9::1/32",
+    "r1": "fcff:1::1/32",
+    "ru": "fcff:13::1/32",
+    "r7": "fcff:7::1/32",
+    "r3": "fcff:3::1/32",
+    "r4": "fcff:4::1/32",
+    "r5": "fcff:5::1/32",
+    "r2": "fcff:2::1/32"
+  }
+}

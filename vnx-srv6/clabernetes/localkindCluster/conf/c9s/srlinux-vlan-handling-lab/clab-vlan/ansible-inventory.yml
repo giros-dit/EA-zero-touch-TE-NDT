@@ -1,0 +1,14 @@
+all:
+  children:
+    linux:
+      hosts:
+        clab-vlan-client1:
+          ansible_host: 172.20.20.5
+        clab-vlan-client2:
+          ansible_host: 172.20.20.3
+    nokia_srlinux:
+      hosts:
+        clab-vlan-srl1:
+          ansible_host: 172.20.20.2
+        clab-vlan-srl2:
+          ansible_host: 172.20.20.4

@@ -1,0 +1,110 @@
+{
+  "node_exporter": "r3:9100",
+  "epoch_timestamp": "1753260918.0025058",
+  "experiment_id": "EA_1",
+  "interfaces": ["eth1", "eth2"],
+  "flag_debug_params": true,
+  "debug_params": {
+    "flag_original_metrics": true,
+    "max_throughput_mbps": 100,
+    "unit": "bytes",
+    "polling_interval": 5,
+    "test_metrics": false,
+    "multiplier": 2000,
+    "metric_timestamp": "1753260918.0025058",
+    "collector_timestamp": "1753260918.0657341",
+    "process_timestamp": "1753260918.100",
+    "ml_timestamp": "1753260918.1231303"
+  },
+  "metrics": [
+  {
+    "name": "node_network_receive_bytes_total",
+    "description": "Network device statistic receive_bytes.",
+    "type": "counter",
+    "values": [
+      {
+        "value": "1.90641936e+08",
+        "labels": [
+          { 
+            "name": "device", 
+            "value": "eth1" 
+          }
+        ]
+      },
+      {
+        "value": "5.1034221e+07",
+        "labels": [
+          { 
+            "name": "device", 
+            "value": "eth2" 
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "node_network_receive_packets_total",
+    "description": "Network device statistic receive_packets.",
+    "type": "counter",
+    "values": [
+      {
+        "value": "216597",
+        "labels": [
+          { 
+            "name": "device", 
+            "value": "eth1" 
+          }
+        ]
+      },
+      {
+        "value": "37462",
+        "labels": [
+          { 
+            "name": "device", 
+            "value": "eth2" 
+          }
+        ]
+      }
+    ]
+  }
+],
+  "input_ml_metrics": [
+    {
+      "name": "node_network_receive_bytes_total_rate",
+      "type": "rate",
+      "value": 0.005032853907197749
+    },
+    {
+      "name": "node_network_receive_packets_total_rate",
+      "type": "rate",
+      "value": 0.42564731962091923
+    },
+    {
+      "name": "node_network_average_received_packet_length",
+      "type": "length",
+      "value": 1478
+    },
+    {
+      "name": "node_network_router_capacity_occupation",
+      "type": "percentage",
+      "value": 0.00005032853907197748
+    }
+  ],
+  "output_ml_metrics": [
+    {
+      "name": "node_network_power_consumption_wats",
+      "type": "power_consumption_wats",
+      "value": [703.0383064954024]
+    },
+    {
+      "name": "node_network_power_consumption_variation_rate_occupation",
+      "type": "power_consumption_variation_rate",
+      "value": [39.40591186559977]
+    },
+    {
+      "name": "node_network_power_consumption_variation_rate_packet_length",
+      "type": "power_consumption_variation_rate",
+      "value": 0.0
+    }
+  ]
+}

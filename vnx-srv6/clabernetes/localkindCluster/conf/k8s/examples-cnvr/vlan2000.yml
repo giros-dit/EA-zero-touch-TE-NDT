@@ -1,0 +1,23 @@
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: vlan2000
+spec:
+  config: '{
+        "cniVersion": "0.4.0",
+        "type": "vlan",
+        "master": "vlannet-k8s",
+        "mtu": 1500,
+        "vlanId": 2000,
+        "linkInContainer": true
+        "capabilities": { "ips": true },
+        "ipam": {
+          "type": "static",
+          "routes": [
+            {
+              "dst": "10.1.0.0/16",
+              "gw": "10.1.2.1"
+            }
+          ]
+        }
+    }'

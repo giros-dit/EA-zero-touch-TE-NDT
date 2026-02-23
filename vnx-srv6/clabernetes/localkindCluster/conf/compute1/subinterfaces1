@@ -1,0 +1,52 @@
+
+auto e1:0
+iface e1:0 inet static
+   mtu 1450
+   address 10.0.0.250
+   netmask 255.255.255.0
+
+auto e5
+iface e5 inet manual
+  up ifconfig e5 up
+  down ifconfig e5 down
+  #
+  # extnet-aux0 (vlan 10)
+  post-up ip link add link e5 extnet-aux0 type vlan proto 802.1Q id 10
+  post-up ip link set extnet-aux0 up
+  pre-down ip link del extnet-aux0
+  #
+  # tunnet (vlan 20)
+  post-up ip link add link e5 tunnet type vlan proto 802.1Q id 20
+  post-up ip addr add 10.0.1.31/24 dev tunnet
+  post-up ip link set tunnet up
+  pre-down ip link del tunnet
+  #
+  # vlannet (vlan 30)
+  post-up ip link add link e5 vlannet type vlan proto 802.1ad id 30
+  post-up ip link set vlannet up
+  pre-down ip link del vlannet
+  #
+  # k8snet (vlan 40)
+  post-up ip link add link e5 k8snet type vlan proto 802.1Q id 40
+  post-up ip addr add 10.0.2.31/24 dev k8snet
+  post-up ip link set k8snet up
+  pre-down ip link del k8snet
+
+# External bridge to separate access to API from VM traffic
+auto vip-extnet
+iface vip-extnet inet static
+    address 10.0.10.31
+    netmask 255.255.255.0
+    bridge_ports extnet-aux1
+    bridge_ports extnet-aux0
+    pre-up ip link add dev extnet-aux1 type veth peer name extnet
+    pre-up ip link set dev extnet-aux1 up
+    pre-up ip link set dev extnet up
+    pre-down ip link del extnet-aux1
+
+# External vip 
+auto vip-extnet:0
+iface vip-extnet:0 inet static
+   mtu 1450
+   address 10.0.10.250
+   netmask 255.255.255.0

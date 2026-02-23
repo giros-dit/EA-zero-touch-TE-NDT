@@ -1,0 +1,10 @@
+#!/bin/bash
+
+INVENTORY="/root/kolla/share/kolla-ansible/ansible/inventory/multinode"
+
+# Estas opciones no parecen acelerar la configuracion...
+#OPTIONS="-e 'pipelining=True' --forks 100"
+
+source /root/kolla/bin/activate
+ansible -i $INVENTORY all -m ping
+kolla-ansible $OPTIONS -i $INVENTORY --configdir /etc/kolla/ reconfigure

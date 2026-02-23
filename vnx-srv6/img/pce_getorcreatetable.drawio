@@ -1,0 +1,132 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:138.0) Gecko/20100101 Firefox/138.0" version="27.0.6">
+  <diagram name="Página-1" id="5ZEsdyTTH_yTgwRlBEIL">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="gr897YVTYBfEAT5z5MyA-1" value="get_or_create_table(tables, path)" style="shape=trapezoid;perimeter=trapezoidPerimeter;fixedSize=1;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="26" y="40" width="278" height="63" as="geometry" />
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-2" value="route_str = &#39;-&gt;&#39;.join(path)&#xa;    Imprimir: Buscando tabla para ruta" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="35" y="133" width="260" height="102" as="geometry" />
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-3" value="Para cada tabla (tid, info) en tables" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="35" y="260" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-4" value="table_route_str = &#39;-&gt;&#39;.join(info.get(&#39;route&#39;, []))&#xa;    Imprimir: Comparando con tabla" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="35" y="360" width="260" height="126" as="geometry" />
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-5" value="¿table_route_str == route_str?" style="rhombus;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="50" y="548" width="230" height="222" as="geometry" />
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-6" value="Imprimir: Encontrada tabla existente&#xa;    Retornar tid, False" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="26" y="830" width="240" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-7" value="Continuar bucle" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="330" y="830" width="172" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-8" value="Después del bucle: No se encontró tabla" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="286" y="917" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-9" value="Extraer IDs numéricos existentes&#xa;    next_id = max(table_ids) + 1" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="286" y="1020" width="260" height="126" as="geometry" />
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-10" value="¿next_id en {0, 253, 254, 255}?" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="286" y="1180" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-11" value="next_id += 1" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="120" y="1330" width="148" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-12" value="Crear nueva tabla:&#xa;    tid = f&#39;t{next_id}&#39;&#xa;    tables[tid] = {&#39;route&#39;: path}&#xa;    metrics[&#39;tables_created&#39;] += 1" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="311" y="1330" width="260" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-13" value="Imprimir: Nueva tabla creada" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="311" y="1510" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-14" value="Retornar tid, True" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="348.5" y="1620" width="185" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-15" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="gr897YVTYBfEAT5z5MyA-1" target="gr897YVTYBfEAT5z5MyA-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-16" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="gr897YVTYBfEAT5z5MyA-2" target="gr897YVTYBfEAT5z5MyA-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-17" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="gr897YVTYBfEAT5z5MyA-3" target="gr897YVTYBfEAT5z5MyA-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-18" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="gr897YVTYBfEAT5z5MyA-4" target="gr897YVTYBfEAT5z5MyA-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-19" value="Sí" style="curved=1;startArrow=none;endArrow=block;exitX=0.46;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="gr897YVTYBfEAT5z5MyA-5" target="gr897YVTYBfEAT5z5MyA-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="140" y="790" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-20" value="No" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.85;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="gr897YVTYBfEAT5z5MyA-5" target="gr897YVTYBfEAT5z5MyA-7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="330" y="740" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-21" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="gr897YVTYBfEAT5z5MyA-7" target="gr897YVTYBfEAT5z5MyA-8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-22" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="gr897YVTYBfEAT5z5MyA-8" target="gr897YVTYBfEAT5z5MyA-9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-23" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="gr897YVTYBfEAT5z5MyA-9" target="gr897YVTYBfEAT5z5MyA-10">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-24" value="Sí" style="curved=1;startArrow=none;endArrow=block;exitX=0.02;exitY=1;entryX=0.48;entryY=0;rounded=0;" edge="1" parent="1" source="gr897YVTYBfEAT5z5MyA-10" target="gr897YVTYBfEAT5z5MyA-11">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="210" y="1280" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-25" value="No" style="curved=1;startArrow=none;endArrow=block;exitX=0.55;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="gr897YVTYBfEAT5z5MyA-10" target="gr897YVTYBfEAT5z5MyA-12">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="441" y="1300" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-26" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.68;exitY=0;entryX=0.27;entryY=1;rounded=0;" edge="1" parent="1" source="gr897YVTYBfEAT5z5MyA-11" target="gr897YVTYBfEAT5z5MyA-10">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="298" y="1300" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-27" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="gr897YVTYBfEAT5z5MyA-12" target="gr897YVTYBfEAT5z5MyA-13">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gr897YVTYBfEAT5z5MyA-28" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="gr897YVTYBfEAT5z5MyA-13" target="gr897YVTYBfEAT5z5MyA-14">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

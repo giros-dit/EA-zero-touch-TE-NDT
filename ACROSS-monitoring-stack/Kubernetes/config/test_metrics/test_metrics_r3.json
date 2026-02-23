@@ -1,0 +1,47 @@
+{
+    "period_0": { 
+        "total_bytes": "62500000", 
+        "total_packets": "52083" 
+    },
+    "period_1": { 
+        "total_bytes": "125000000", 
+        "total_packets": "104166" 
+    },
+    "period_2": { 
+        "total_bytes": "187500000", 
+        "total_packets": "156249" 
+    },
+    "period_3": { 
+        "total_bytes": "250000000", 
+        "total_packets": "208332" 
+    },
+    "period_4": { 
+        "total_bytes": "312500000", 
+        "total_packets": "260415" 
+    },
+    "period_5": { 
+        "total_bytes": "375000000", 
+        "total_packets": "312498" 
+    },
+    "period_6": { 
+        "total_bytes": "437500000", 
+        "total_packets": "364581" 
+    },
+    "period_7": { 
+        "total_bytes": "500000000", 
+        "total_packets": "416664" 
+    },
+    "period_8": { 
+        "total_bytes": "562500000", 
+        "total_packets": "468747" 
+    },
+    "period_9": { 
+        "total_bytes": "625000000", 
+        "total_packets": "520830" 
+    },
+    "period_10": { 
+        "total_bytes": "687500000", 
+        "total_packets": "572913" 
+    }
+  }
+  

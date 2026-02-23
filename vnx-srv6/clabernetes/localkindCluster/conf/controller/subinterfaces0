@@ -1,0 +1,12 @@
+
+auto e5
+iface e5 inet manual
+  up ifconfig e5 up
+  down ifconfig e5 down
+  #
+  # k8snet (vlan 40)
+  post-up ip link add link e5 k8snet type vlan proto 802.1Q id 40
+  post-up ip addr add 10.0.2.11/24 dev k8snet
+  post-up ip link set k8snet up
+  pre-down ip link del k8snet
+

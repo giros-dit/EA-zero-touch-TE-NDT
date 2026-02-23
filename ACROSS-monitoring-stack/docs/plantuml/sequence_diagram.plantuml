@@ -1,0 +1,16 @@
+@startuml
+participant "<b>Node Exporter</b>" as Node_Exporter order 10
+participant "<b>Prometheus Node Exporter Collector</b>" as Prometheus_Node_Exporter_Collector order 20
+participant "<b>Consumer Application</b>" as Consumer_Application order 30
+
+skinparam sequenceMessageAlign center
+
+Consumer_Application -> Prometheus_Node_Exporter_Collector: HTTP GET\n/metrics/{node_exporter_host}_{node_exporter_port}.json"
+
+Prometheus_Node_Exporter_Collector -> Node_Exporter: HTTP GET /metrics
+Node_Exporter --> Prometheus_Node_Exporter_Collector: HTTP 200 OK\n(text/plain)
+
+note over Prometheus_Node_Exporter_Collector: Process metrics\nand generate JSON
+
+Prometheus_Node_Exporter_Collector --> Consumer_Application: HTTP 200 OK\n(application/json)
+@enduml

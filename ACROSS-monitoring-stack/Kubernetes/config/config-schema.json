@@ -1,0 +1,77 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "experiment_id": {
+            "type": "string",
+            "description": "Experiment unique identifier"
+        },
+        "flag_original_metrics": {
+            "type": "boolean",
+            "description": "Flag for showing orignial node exporter's metrics or not"
+        },
+        "flag_debug_params": {
+            "type": "boolean",
+            "description": "Flag for showing debug params or not"
+        },
+        "max_throughput_mbps": {
+            "type": "integer",
+            "description": "Maximum bit rate for router's links [Mbps]"
+        },
+        "polling_interval": {
+            "type": "integer",
+            "description": "Time between node exporter collector metrics requests [s]"
+        },
+        "requests_timeout": {
+            "type": "number",
+            "description": "Timeout for node exporter collector metrics requests [s]"
+        },
+        "multiplier": {
+            "type": "integer",
+            "description": "Multiplier applied to packet releated metrics values [1:2000]"
+        },
+        "routers": {
+            "type": "array",
+            "description": "List of monitored routers",
+            "items": {
+                "type": "object",
+                "patternProperties": {
+                    ".+": {
+                        "type": "object",
+                        "properties": {
+                            "collector_url": {
+                                "type": "string",
+                                "format": "uri",
+                                "description": "Node exporter collector endpoint for each router's metrics"
+                            },
+                            "topic": {
+                                "type": "string",
+                                "description": "Kafka input topic for each router's metrics"
+                            },
+                            "interfaces": {
+                                "type": "array",
+                                "items": {"type": "string"},
+                                "description": "List of router's interfaces monitored in each experiment"
+                            },
+                            "test_metrics": {
+                                "type": "boolean",
+                                "description": "Flag for using manual test metrics in each router or not"
+                            }
+                        },
+                        "required": ["collector_url", "topic", "interfaces", "router_type", "test_metrics"]
+                    }
+                },
+                "additionalProperties": false
+            }
+        }
+    },
+    "required": [
+        "experiment_id",
+        "flag_original_metrics",
+        "flag_debug_params",
+        "max_throughput_mbps",
+        "polling_interval",
+        "multiplier",
+        "routers"
+    ]
+}

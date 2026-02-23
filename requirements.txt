@@ -1,0 +1,4 @@
+snappi
+urllib3
+keyboard
+boto3

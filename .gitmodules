@@ -1,0 +1,6 @@
+[submodule "ACROSS-monitoring-stack/docker/ml_models"]
+	path = ACROSS-monitoring-stack/docker/ml_models
+	url = https://github.com/MMB-UPM/Router_Power_Consumption_ML
+[submodule "ACROSS-monitoring-stack/Kubernetes/docker/ml_models"]
+	path = ACROSS-monitoring-stack/Kubernetes/docker/ml_models
+	url = https://github.com/MMB-UPM/Router_Power_Consumption_ML

@@ -1,0 +1,7 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+    name: across-tc32
+    labels:
+        pod-security.kubernetes.io/enforce: privileged

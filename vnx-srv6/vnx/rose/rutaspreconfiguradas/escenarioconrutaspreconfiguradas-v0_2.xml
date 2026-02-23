@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vnx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="/usr/share/xml/vnx/vnx-2.00.xsd">
+  <global>
+    <version>2.0</version>
+    <scenario_name>pruebaSRIPv6</scenario_name>
+    <automac/>
+    <vm_mgmt type="none" />
+    <vm_defaults>
+        <console id="0" display="no"/>
+        <console id="1" display="yes"/>
+    </vm_defaults>
+    
+  </global>
+
+
+  <net name="Net12" mode="virtual_bridge" />
+  <net name="Net23" mode="virtual_bridge" />
+  <net name="Net27" mode="virtual_bridge" />
+  <net name="Net34" mode="virtual_bridge" />
+  <net name="Net45" mode="virtual_bridge" />
+  <net name="Net46" mode="virtual_bridge" />
+  <net name="Net56" mode="virtual_bridge" />
+  <net name="Net67" mode="virtual_bridge" />
+  <net name="Net68" mode="virtual_bridge" />
+  <net name="Net78" mode="virtual_bridge" />
+  <net name="Net111" mode="virtual_bridge" />
+  <net name="Net112" mode="virtual_bridge" />
+  <net name="Net113" mode="virtual_bridge" />
+  <net name="Net331" mode="virtual_bridge" />
+  <net name="Net332" mode="virtual_bridge" />
+  <net name="Net333" mode="virtual_bridge" />
+  <net name="Net551" mode="virtual_bridge" />
+  <net name="Net552" mode="virtual_bridge" />
+  <net name="Net553" mode="virtual_bridge" />
+  <net name="Net881" mode="virtual_bridge" />
+  <net name="Net882" mode="virtual_bridge" />
+  <net name="Net883" mode="virtual_bridge" />
+
+  <!--
+  
+  SISTEMAS FINALES
+
+  -->
+  <!-- SISTEMAS R1-->
+  <vm name="h11" type="lxc" exec_mode="lxc-attach" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-22.04-v025</filesystem>
+    <if id="1" net="Net111">
+      <ipv6>fd00:0:11::2/64</ipv6>
+    </if>
+    <route type="ipv6" gw="fd00:0:11::1">default</route>   
+  </vm>
+  
+  <vm name="h12" type="lxc" exec_mode="lxc-attach" arch="x86_64"> 
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-22.04-v025</filesystem>
+    <if id="1" net="Net112">
+      <ipv6>fd00:0:12::2/64</ipv6>
+    </if>
+    <route type="ipv6" gw="fd00:0:12::1">default</route>   
+  </vm>
+
+  <vm name="h13" type="lxc" exec_mode="lxc-attach" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-22.04-v025</filesystem>
+    <if id="1" net="Net113">
+      <ipv6>fd00:0:13::2/64</ipv6>
+    </if>
+    <route type="ipv6" gw="fd00:0:13::1">default</route>   
+  </vm>
+
+<!-- SISTEMAS R3-->
+<vm name="h31" type="lxc" exec_mode="lxc-attach" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-22.04-v025</filesystem>
+    <if id="1" net="Net331">
+      <ipv6>fd00:0:31::2/64</ipv6>
+    </if>
+    <route type="ipv6" gw="fd00:0:31::1">default</route>   
+  </vm>
+  
+  <vm name="h32" type="lxc" exec_mode="lxc-attach" arch="x86_64"> 
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-22.04-v025</filesystem>
+    <if id="1" net="Net332">
+      <ipv6>fd00:0:32::2/64</ipv6>
+    </if>
+    <route type="ipv6" gw="fd00:0:32::1">default</route>   
+  </vm>
+
+  <vm name="h33" type="lxc" exec_mode="lxc-attach" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-22.04-v025</filesystem>
+    <if id="1" net="Net333">
+      <ipv6>fd00:0:33::2/64</ipv6>
+    </if>
+    <route type="ipv6" gw="fd00:0:33::1">default</route>   
+  </vm>
+
+<!-- SISTEMAS R5-->
+  <vm name="h51" type="lxc" exec_mode="lxc-attach" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-22.04-v025</filesystem>
+    <if id="1" net="Net551">
+      <ipv6>fd00:0:51::2/64</ipv6>
+    </if>
+    <route type="ipv6" gw="fd00:0:51::1">default</route>   
+  </vm>
+  <vm name="h52" type="lxc" exec_mode="lxc-attach" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-22.04-v025</filesystem>
+    <if id="1" net="Net552">
+      <ipv6>fd00:0:52::2/64</ipv6>
+    </if>
+    <route type="ipv6" gw="fd00:0:52::1">default</route>   
+  </vm>
+  <vm name="h53" type="lxc" exec_mode="lxc-attach" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-22.04-v025</filesystem>
+    <if id="1" net="Net553">
+      <ipv6>fd00:0:53::2/64</ipv6>
+    </if>
+    <route type="ipv6" gw="fd00:0:53::1">default</route>   
+  </vm>
+
+<!-- SISTEMAS R8-->
+  <vm name="h81" type="lxc" exec_mode="lxc-attach" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-22.04-v025</filesystem>
+    <if id="1" net="Net881">
+      <ipv6>fd00:0:81::2/64</ipv6>
+    </if>
+    <route type="ipv6" gw="fd00:0:81::1">default</route>   
+  </vm>
+  <vm name="h82" type="lxc" exec_mode="lxc-attach" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-22.04-v025</filesystem>
+    <if id="1" net="Net882">
+      <ipv6>fd00:0:82::2/64</ipv6>
+    </if>
+    <route type="ipv6" gw="fd00:0:82::1">default</route>   
+  </vm>
+  <vm name="h83" type="lxc" exec_mode="lxc-attach" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-22.04-v025</filesystem>
+    <if id="1" net="Net883">
+      <ipv6>fd00:0:83::2/64</ipv6>
+    </if>
+    <route type="ipv6" gw="fd00:0:83::1">default</route>   
+  </vm>  
+  <!--
+  
+  ROUTERS
+
+  -->
+
+  <vm name="r1" type="lxc" exec_mode="lxc-attach" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-22.04-v025</filesystem>
+    <if net="lo" id="1">
+        <ipv6>fcff:1::1</ipv6>
+    </if>
+    <if id="2" net="Net12">
+      <ipv6>fcf0:0:1:2::1/64</ipv6>
+    </if>
+    <if id="3" net="Net111">
+      <ipv6>fd00:0:11::1/64</ipv6>
+    </if>
+    <if id="4" net="Net112">
+      <ipv6>fd00:0:12::1/64</ipv6>
+    </if>
+    <if id="5" net="Net113">
+      <ipv6>fd00:0:13::1/64</ipv6>
+    </if>
+    <route type="ipv6" gw="fcf0:0:1:2::2">fd00:0:31::/64</route>
+    <route type="ipv6" gw="fcf0:0:1:2::2">fd00:0:32::/64</route>
+    <route type="ipv6" gw="fcf0:0:1:2::2">fd00:0:33::/64</route>
+    
+    <route type="ipv6" gw="fcf0:0:1:2::2">fd00:0:51::/64</route>
+    <route type="ipv6" gw="fcf0:0:1:2::2">fd00:0:52::/64</route>
+    <route type="ipv6" gw="fcf0:0:1:2::2">fd00:0:53::/64</route>
+    
+    <route type="ipv6" gw="fcf0:0:1:2::2">fd00:0:81::/64</route>
+    <route type="ipv6" gw="fcf0:0:1:2::2">fd00:0:82::/64</route>
+    <route type="ipv6" gw="fcf0:0:1:2::2">fd00:0:83::/64</route>
+    <forwarding type="ip" />
+  </vm>
+
+  <vm name="r2" type="lxc" exec_mode="lxc-attach" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-22.04-v025</filesystem>
+    <if net="lo" id="1">
+        <ipv6>fcff:2::1</ipv6>
+    </if>
+    <if id="2" net="Net12">
+      <ipv6>fcf0:0:1:2::2/64</ipv6>
+    </if>
+    <if id="3" net="Net23">
+      <ipv6>fcf0:0:2:3::1/64</ipv6>
+    </if>
+    <if id="4" net="Net27">
+      <ipv6>fcf0:0:2:7::1/64</ipv6>
+    </if>
+    
+    <route type="ipv6" gw="fcf0:0:1:2::1">fd00:0:11::/64</route>
+    <route type="ipv6" gw="fcf0:0:1:2::1">fd00:0:12::/64</route>
+    <route type="ipv6" gw="fcf0:0:1:2::1">fd00:0:13::/64</route>
+    
+    <route type="ipv6" gw="fcf0:0:2:3::2">fd00:0:31::/64</route>
+    <route type="ipv6" gw="fcf0:0:2:3::2">fd00:0:32::/64</route>
+    <route type="ipv6" gw="fcf0:0:2:3::2">fd00:0:33::/64</route>
+    
+    <route type="ipv6" gw="fcf0:0:2:7::2">fd00:0:51::/64</route>
+    <route type="ipv6" gw="fcf0:0:2:7::2">fd00:0:52::/64</route>
+    <route type="ipv6" gw="fcf0:0:2:7::2">fd00:0:53::/64</route>
+    
+    <route type="ipv6" gw="fcf0:0:2:7::2">fd00:0:81::/64</route>
+    <route type="ipv6" gw="fcf0:0:2:7::2">fd00:0:82::/64</route>
+    <route type="ipv6" gw="fcf0:0:2:7::2">fd00:0:83::/64</route>
+    <forwarding type="ip" />
+  </vm>
+
+  <vm name="r3" type="lxc" exec_mode="lxc-attach" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-22.04-v025</filesystem>
+    <if net="lo" id="1">
+        <ipv6>fcff:3::1</ipv6>
+    </if>
+    <if id="2" net="Net23">
+      <ipv6>fcf0:0:2:3::2/64</ipv6>
+    </if>
+    <if id="3" net="Net34">
+      <ipv6>fcf0:0:3:4::1/64</ipv6>
+    </if>
+    <if id="4" net="Net331">
+      <ipv6>fd00:0:31::1/64</ipv6>
+    </if>
+    <if id="5" net="Net332">
+      <ipv6>fd00:0:32::1/64</ipv6>
+    </if>
+    <if id="6" net="Net333">
+      <ipv6>fd00:0:33::1/64</ipv6>
+    </if>
+    
+    <route type="ipv6" gw="fcf0:0:2:3::1">fd00:0:11::/64</route>
+    <route type="ipv6" gw="fcf0:0:2:3::1">fd00:0:12::/64</route>
+    <route type="ipv6" gw="fcf0:0:2:3::1">fd00:0:13::/64</route>
+    
+    <route type="ipv6" gw="fcf0:0:3:4::2">fd00:0:51::/64</route>
+    <route type="ipv6" gw="fcf0:0:3:4::2">fd00:0:52::/64</route>
+    <route type="ipv6" gw="fcf0:0:3:4::2">fd00:0:53::/64</route>
+    
+    <route type="ipv6" gw="fcf0:0:3:4::2">fd00:0:81::/64</route>
+    <route type="ipv6" gw="fcf0:0:3:4::2">fd00:0:82::/64</route>
+    <route type="ipv6" gw="fcf0:0:3:4::2">fd00:0:83::/64</route>
+
+    <forwarding type="ip" />
+  </vm>
+
+  <vm name="r4" type="lxc" exec_mode="lxc-attach" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-22.04-v025</filesystem>
+    <if net="lo" id="1">
+        <ipv6>fcff:4::1</ipv6>
+    </if>
+    <if id="2" net="Net34">
+      <ipv6>fcf0:0:3:4::2/64</ipv6>
+    </if>
+    <if id="3" net="Net45">
+      <ipv6>fcf0:0:4:5::1/64</ipv6>
+    </if>
+    <if id="4" net="Net46">
+      <ipv6>fcf0:0:4:6::1/64</ipv6>
+    </if>
+   
+    <route type="ipv6" gw="fcf0:0:3:4::1">fd00:0:11::/64</route>
+    <route type="ipv6" gw="fcf0:0:3:4::1">fd00:0:12::/64</route>
+    <route type="ipv6" gw="fcf0:0:3:4::1">fd00:0:13::/64</route>
+    
+    <route type="ipv6" gw="fcf0:0:3:4::1">fd00:0:31::/64</route>
+    <route type="ipv6" gw="fcf0:0:3:4::1">fd00:0:32::/64</route>
+    <route type="ipv6" gw="fcf0:0:3:4::1">fd00:0:33::/64</route>
+
+    <route type="ipv6" gw="fcf0:0:4:5::2">fd00:0:51::/64</route>
+    <route type="ipv6" gw="fcf0:0:4:5::2">fd00:0:52::/64</route>
+    <route type="ipv6" gw="fcf0:0:4:5::2">fd00:0:53::/64</route>
+    
+    <route type="ipv6" gw="fcf0:0:4:6::2">fd00:0:81::/64</route>
+    <route type="ipv6" gw="fcf0:0:4:6::2">fd00:0:82::/64</route>
+    <route type="ipv6" gw="fcf0:0:4:6::2">fd00:0:83::/64</route>
+    <forwarding type="ip" />
+  </vm>
+
+  <vm name="r5" type="lxc" exec_mode="lxc-attach" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-22.04-v025</filesystem>
+    <if net="lo" id="1">
+        <ipv6>fcff:5::1</ipv6>
+    </if>
+    <if id="2" net="Net45">
+      <ipv6>fcf0:0:4:5::2/64</ipv6>
+    </if>
+    <if id="3" net="Net56">
+      <ipv6>fcf0:0:5:6::1/64</ipv6>
+    </if>
+    <if id="4" net="Net551">
+      <ipv6>fd00:0:51::1/64</ipv6>
+    </if>
+    <if id="5" net="Net552">
+      <ipv6>fd00:0:52::1/64</ipv6>
+    </if>
+    <if id="6" net="Net553">
+      <ipv6>fd00:0:53::1/64</ipv6>
+    </if>
+   
+    <route type="ipv6" gw="fcf0:0:4:5::1">fd00:0:11::/64</route>
+    <route type="ipv6" gw="fcf0:0:4:5::1">fd00:0:12::/64</route>
+    <route type="ipv6" gw="fcf0:0:4:5::1">fd00:0:13::/64</route>
+
+    <route type="ipv6" gw="fcf0:0:4:5::1">fd00:0:31::/64</route>
+    <route type="ipv6" gw="fcf0:0:4:5::1">fd00:0:32::/64</route>
+    <route type="ipv6" gw="fcf0:0:4:5::1">fd00:0:33::/64</route>
+    
+    <route type="ipv6" gw="fcf0:0:5:6::2">fd00:0:81::/64</route>
+    <route type="ipv6" gw="fcf0:0:5:6::2">fd00:0:82::/64</route>
+    <route type="ipv6" gw="fcf0:0:5:6::2">fd00:0:83::/64</route>
+    <forwarding type="ip" />
+  </vm>
+
+  <vm name="r6" type="lxc" exec_mode="lxc-attach" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-22.04-v025</filesystem>
+    <if net="lo" id="1">
+        <ipv6>fcff:6::1</ipv6>
+    </if>
+    <if id="2" net="Net46">
+      <ipv6>fcf0:0:4:6::2/64</ipv6>
+    </if>
+    <if id="3" net="Net56">
+      <ipv6>fcf0:0:5:6::2/64</ipv6>
+    </if>
+    <if id="4" net="Net67">
+      <ipv6>fcf0:0:6:7::1/64</ipv6>
+    </if>
+    <if id="5" net="Net68">
+      <ipv6>fcf0:0:6:8::1/64</ipv6>
+    </if>
+   
+    <route type="ipv6" gw="fcf0:0:6:7::2">fd00:0:11::/64</route>
+    <route type="ipv6" gw="fcf0:0:6:7::2">fd00:0:12::/64</route>
+    <route type="ipv6" gw="fcf0:0:6:7::2">fd00:0:13::/64</route>
+
+    <route type="ipv6" gw="fcf0:0:4:6::1">fd00:0:31::/64</route>
+    <route type="ipv6" gw="fcf0:0:4:6::1">fd00:0:32::/64</route>
+    <route type="ipv6" gw="fcf0:0:4:6::1">fd00:0:33::/64</route>
+    
+    <route type="ipv6" gw="fcf0:0:5:6::1">fd00:0:51::/64</route>
+    <route type="ipv6" gw="fcf0:0:5:6::1">fd00:0:52::/64</route>
+    <route type="ipv6" gw="fcf0:0:5:6::1">fd00:0:53::/64</route>
+    
+    <route type="ipv6" gw="fcf0:0:6:8::2">fd00:0:81::/64</route>
+    <route type="ipv6" gw="fcf0:0:6:8::2">fd00:0:82::/64</route>
+    <route type="ipv6" gw="fcf0:0:6:8::2">fd00:0:83::/64</route>
+    <forwarding type="ip" />
+  </vm>
+
+  <vm name="r7" type="lxc" exec_mode="lxc-attach" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-22.04-v025</filesystem>
+    <if net="lo" id="1">
+        <ipv6>fcff:7::1</ipv6>
+    </if>
+    <if id="2" net="Net27">
+      <ipv6>fcf0:0:2:7::2/64</ipv6>
+    </if>
+    <if id="3" net="Net67">
+      <ipv6>fcf0:0:6:7::2/64</ipv6>
+    </if>
+    <if id="4" net="Net78">
+      <ipv6>fcf0:0:7:8::1/64</ipv6>
+    </if>
+   
+    <route type="ipv6" gw="fcf0:0:2:7::1">fd00:0:11::/64</route>
+    <route type="ipv6" gw="fcf0:0:2:7::1">fd00:0:12::/64</route>
+    <route type="ipv6" gw="fcf0:0:2:7::1">fd00:0:13::/64</route>
+
+    <route type="ipv6" gw="fcf0:0:2:7::1">fd00:0:31::/64</route>
+    <route type="ipv6" gw="fcf0:0:2:7::1">fd00:0:32::/64</route>
+    <route type="ipv6" gw="fcf0:0:2:7::1">fd00:0:33::/64</route>
+    
+    <route type="ipv6" gw="fcf0:0:6:7::1">fd00:0:51::/64</route>
+    <route type="ipv6" gw="fcf0:0:6:7::1">fd00:0:52::/64</route>
+    <route type="ipv6" gw="fcf0:0:6:7::1">fd00:0:53::/64</route>
+    
+    <route type="ipv6" gw="fcf0:0:7:8::2">fd00:0:81::/64</route>
+    <route type="ipv6" gw="fcf0:0:7:8::2">fd00:0:82::/64</route>
+    <route type="ipv6" gw="fcf0:0:7:8::2">fd00:0:83::/64</route>
+    <forwarding type="ip" />
+  </vm>
+
+  <vm name="r8" type="lxc" exec_mode="lxc-attach" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-22.04-v025</filesystem>
+    <if net="lo" id="1">
+        <ipv6>fcff:8::1</ipv6>
+    </if>
+    <if id="2" net="Net68">
+      <ipv6>fcf0:0:6:8::2/64</ipv6>
+    </if>
+    <if id="3" net="Net78">
+      <ipv6>fcf0:0:7:8::2/64</ipv6>
+    </if>
+    <if id="4" net="Net881">
+      <ipv6>fd00:0:81::1/64</ipv6>
+    </if>
+    <if id="5" net="Net882">
+      <ipv6>fd00:0:82::1/64</ipv6>
+    </if>
+    <if id="6" net="Net883">
+      <ipv6>fd00:0:83::1/64</ipv6>
+    </if>
+   
+    <route type="ipv6" gw="fcf0:0:7:8::1">fd00:0:11::/64</route>
+    <route type="ipv6" gw="fcf0:0:7:8::1">fd00:0:12::/64</route>
+    <route type="ipv6" gw="fcf0:0:7:8::1">fd00:0:13::/64</route>
+
+    <route type="ipv6" gw="fcf0:0:6:8::1">fd00:0:31::/64</route>
+    <route type="ipv6" gw="fcf0:0:6:8::1">fd00:0:32::/64</route>
+    <route type="ipv6" gw="fcf0:0:6:8::1">fd00:0:33::/64</route>
+    
+    <route type="ipv6" gw="fcf0:0:6:8::1">fd00:0:51::/64</route>
+    <route type="ipv6" gw="fcf0:0:6:8::1">fd00:0:52::/64</route>
+    <route type="ipv6" gw="fcf0:0:6:8::1">fd00:0:53::/64</route>
+    <forwarding type="ip" />
+  </vm>
+</vnx>

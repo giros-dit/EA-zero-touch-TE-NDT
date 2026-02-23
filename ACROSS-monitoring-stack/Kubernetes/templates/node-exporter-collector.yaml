@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-exporter-collector
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: node-exporter-collector-app
+  template:
+    metadata:
+      labels:
+        app: node-exporter-collector-app
+    spec:
+      containers:
+      - name: node-exporter-collector-service
+        image: ghcr.io/giros-dit/across-monitoring-stack/node-exporter-collector:latest
+        ports:
+        - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-exporter-collector-service
+  labels:
+    name: node-exporter-collector-app
+spec:
+  ports:
+  - name: node-exporter-collector-port
+    port: 8000
+    protocol: TCP
+  selector:
+    app: node-exporter-collector-app

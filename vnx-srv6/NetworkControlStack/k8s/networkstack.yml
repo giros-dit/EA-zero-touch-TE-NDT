@@ -1,0 +1,96 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: networkstack
+  namespace: across-tc32
+spec:
+  selector:
+    matchLabels:
+      app: networkstack
+  template:
+    metadata:
+      labels:
+        app: networkstack
+    spec:
+      containers:
+      - name: networkstack
+        image: ghcr.io/giros-dit/vnx-srv6/network-control-stack:latest
+        ports:
+        - containerPort: 5000
+          name: flask-api
+        env:
+        - name: TZ
+          value: "Europe/Madrid"
+        - name: S3_ENDPOINT
+          value: "http://138.4.21.162:9000"
+        - name: S3_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: experiment-analysis-secrets
+              key: S3_ACCESS_KEY
+        - name: S3_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: experiment-analysis-secrets
+              key: S3_SECRET_KEY
+        - name: S3_API
+          value: "s3v4"
+        - name: S3_PATH
+          value: "auto"
+        - name: S3_BUCKET
+          value: "concurrency-test"
+        - name: ENERGYAWARE
+          value: "false"
+        - name: DEBUG_COSTS
+          value: "true"
+        - name: LOGTS # Variable para medida de tiempo
+          value: "true"  
+        # Variables de configuración para optimizaciones
+        - name: OCCUPANCY_LIMIT
+          value: "0.8"
+        - name: ROUTER_LIMIT
+          value: "0.95"
+        - name: NODE_TIMEOUT
+          value: "15"
+        - name: LOOP_PERIOD
+          value: "1"
+        volumeMounts:
+        - name: networkinfo-volume
+          mountPath: /app/networkinfo.json
+          subPath: networkinfo.json
+        command: ["python3", "-u", "/app/app.py"]
+        # Health checks
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+      volumes:
+      - name: networkinfo-volume
+        configMap:
+          name: networkinfo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: nsc-api
+  name: nsc-api
+  namespace: across-tc32
+spec:
+  type: NodePort
+  ports:
+  - name: nsc-port
+    port: 5000
+    protocol: TCP
+    targetPort: 5000
+    nodePort: 32500
+  selector:
+    app: networkstack

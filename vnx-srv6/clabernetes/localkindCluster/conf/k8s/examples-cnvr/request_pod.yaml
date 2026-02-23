@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: request-pod
+spec:
+  containers:
+  - name: request-pod
+    command: ["/bin/bash", "-c", "<solicitud cada 1 segundo al servicio nginx>"]
+    image: dougbtv/centos-network
+

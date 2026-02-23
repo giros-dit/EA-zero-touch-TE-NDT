@@ -1,0 +1,29 @@
+
+auto e5
+iface e5 inet manual
+  up ifconfig e5 up
+  down ifconfig e5 down
+  #
+  # extnet (vlan 10)
+  post-up ip link add link e5 extnet type vlan proto 802.1Q id 10
+  post-up ip addr add 10.0.10.33/24 dev extnet
+  post-up ip link set extnet up
+  pre-down ip link del extnet
+  #
+  # tunnet (vlan 20)
+  post-up ip link add link e5 tunnet type vlan proto 802.1Q id 20
+  post-up ip addr add 10.0.1.33/24 dev tunnet
+  post-up ip link set tunnet up
+  pre-down ip link del tunnet
+  #
+  # vlannet (vlan 30)
+  post-up ip link add link e5 vlannet type vlan proto 802.1ad id 30
+  post-up ip link set vlannet up
+  pre-down ip link del vlannet
+  #
+  # k8snet (vlan 40)
+  post-up ip link add link e5 k8snet type vlan proto 802.1Q id 40
+  post-up ip addr add 10.0.2.33/24 dev k8snet
+  post-up ip link set k8snet up
+  pre-down ip link del k8snet
+

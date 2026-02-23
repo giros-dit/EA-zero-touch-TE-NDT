@@ -1,0 +1,5 @@
+Cliente:
+iperf3 -c fd00:0:2::2 -V -u -b 300M -l 1200 -t 300
+
+Servidor:
+iperf3 -s -V -B fd00:0:2::2

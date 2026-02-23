@@ -1,0 +1,103 @@
+name: srv6
+
+topology:
+  nodes:
+    r1:
+      kind: linux
+      image: avillaseca01/srv6-frr:latest
+      binds:
+        - conf/r1/daemons:/etc/frr/daemons
+        - conf/r1/isisd.conf:/etc/frr/isisd.conf
+        - conf/r1/zebra.conf:/etc/frr/zebra.conf
+    r2:
+      kind: linux
+      image: avillaseca01/srv6-frr:latest
+      binds:
+        - conf/r2/daemons:/etc/frr/daemons
+        - conf/r2/isisd.conf:/etc/frr/isisd.conf
+        - conf/r2/zebra.conf:/etc/frr/zebra.conf
+    r3:
+      kind: linux
+      image: avillaseca01/srv6-frr:latest
+      binds:
+        - conf/r3/daemons:/etc/frr/daemons
+        - conf/r3/isisd.conf:/etc/frr/isisd.conf
+        - conf/r3/zebra.conf:/etc/frr/zebra.conf
+    r4:
+      kind: linux
+      image: avillaseca01/srv6-frr:latest
+      binds:
+        - conf/r4/daemons:/etc/frr/daemons
+        - conf/r4/isisd.conf:/etc/frr/isisd.conf
+        - conf/r4/zebra.conf:/etc/frr/zebra.conf
+    r5:
+      kind: linux
+      image: avillaseca01/srv6-frr:latest
+      binds:
+        - conf/r5/daemons:/etc/frr/daemons
+        - conf/r5/isisd.conf:/etc/frr/isisd.conf
+        - conf/r5/zebra.conf:/etc/frr/zebra.conf
+    r6:
+      kind: linux
+      image: avillaseca01/srv6-frr:latest
+      binds:
+        - conf/r6/daemons:/etc/frr/daemons
+        - conf/r6/isisd.conf:/etc/frr/isisd.conf
+        - conf/r6/zebra.conf:/etc/frr/zebra.conf
+    r7:
+      kind: linux
+      image: avillaseca01/srv6-frr:latest
+      binds:
+        - conf/r7/daemons:/etc/frr/daemons
+        - conf/r7/isisd.conf:/etc/frr/isisd.conf
+        - conf/r7/zebra.conf:/etc/frr/zebra.conf
+    r11:
+      kind: linux
+      image: avillaseca01/srv6-frr:latest
+      binds:
+        - conf/r11/daemons:/etc/frr/daemons
+        - conf/r11/isisd.conf:/etc/frr/isisd.conf
+        - conf/r11/zebra.conf:/etc/frr/zebra.conf
+    r12:
+      kind: linux
+      image: avillaseca01/srv6-frr:latest
+      binds:
+        - conf/r12/daemons:/etc/frr/daemons
+        - conf/r12/isisd.conf:/etc/frr/isisd.conf
+        - conf/r12/zebra.conf:/etc/frr/zebra.conf
+    r13:
+      kind: linux
+      image: avillaseca01/srv6-frr:latest
+      binds:
+        - conf/r13/daemons:/etc/frr/daemons
+        - conf/r13/isisd.conf:/etc/frr/isisd.conf
+        - conf/r13/zebra.conf:/etc/frr/zebra.conf
+    gNB1:
+      kind: linux
+      image: praqma/network-multitool:latest
+    gNB2:
+      kind: linux
+      image: praqma/network-multitool:latest
+    UPF:
+      kind: linux
+      image: praqma/network-multitool:latest
+
+  links:
+    - endpoints: ["r1:eth1", "r2:eth1"]
+    - endpoints: ["r1:eth2", "r4:eth1"]
+    - endpoints: ["r1:eth3", "r11:eth1"]
+    - endpoints: ["r2:eth2", "r3:eth1"]
+    - endpoints: ["r2:eth3", "r5:eth1"]
+    - endpoints: ["r2:eth4", "r12:eth1"]
+    - endpoints: ["r3:eth2", "r7:eth1"]
+    - endpoints: ["r3:eth3", "r12:eth2"]
+    - endpoints: ["r3:eth4", "r13:eth1"]
+    - endpoints: ["r4:eth2", "r6:eth1"]
+    - endpoints: ["r4:eth3", "r11:eth2"]
+    - endpoints: ["r5:eth2", "r6:eth2"]
+    - endpoints: ["r6:eth3", "r7:eth2"]
+    - endpoints: ["r7:eth3", "r13:eth2"]
+    - endpoints: ["gNB1:eth1", "r11:eth3"]
+    - endpoints: ["gNB2:eth1", "r12:eth3"]
+    - endpoints: ["UPF:eth1", "r13:eth3"]
+    

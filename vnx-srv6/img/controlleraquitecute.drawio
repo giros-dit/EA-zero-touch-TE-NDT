@@ -1,0 +1,50 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" version="26.2.9">
+  <diagram name="Página-1" id="auSPeYdtHTM_Ktll_ShW">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="4ItNveWXjwmvEGRdOlM4-1" value="" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="64" y="190" width="356" height="231" as="geometry" />
+        </mxCell>
+        <mxCell id="4ItNveWXjwmvEGRdOlM4-2" value="mynetworkxkfaka.py" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="136" y="215" width="205" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="4ItNveWXjwmvEGRdOlM4-3" value="tunnelmaker.py" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="154" y="342" width="169" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="4ItNveWXjwmvEGRdOlM4-4" value="Kafka Bus" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="172" y="70" width="133" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="4ItNveWXjwmvEGRdOlM4-5" value="Red SRv6" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="172" y="512" width="133" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="4ItNveWXjwmvEGRdOlM4-6" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="4ItNveWXjwmvEGRdOlM4-2" target="4ItNveWXjwmvEGRdOlM4-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4ItNveWXjwmvEGRdOlM4-8" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=-0.01;rounded=0;" edge="1" parent="1" source="4ItNveWXjwmvEGRdOlM4-3" target="4ItNveWXjwmvEGRdOlM4-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4ItNveWXjwmvEGRdOlM4-11" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="4ItNveWXjwmvEGRdOlM4-4" target="4ItNveWXjwmvEGRdOlM4-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="320" y="310" as="sourcePoint" />
+            <mxPoint x="370" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4ItNveWXjwmvEGRdOlM4-12" value="MinIO" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="490" y="215" width="133" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="n6tCkqnTq2VWOFD0c480-2" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="4ItNveWXjwmvEGRdOlM4-2" target="4ItNveWXjwmvEGRdOlM4-12">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="440" y="370" as="sourcePoint" />
+            <mxPoint x="490" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

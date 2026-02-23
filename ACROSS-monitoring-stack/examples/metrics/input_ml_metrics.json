@@ -1,0 +1,92 @@
+{
+  "node_exporter": "r2:9100",
+  "epoch_timestamp": "1753260323.4672525",
+  "experiment_id": "EA_1",
+  "interfaces": ["eth2", "eth3"],
+  "flag_debug_params": true,
+  "debug_params": {
+    "flag_original_metrics": true,
+    "max_throughput_mbps": 100,
+    "unit": "bytes",
+    "polling_interval": 5,
+    "test_metrics": false,
+    "multiplier": 2000,
+    "metric_timestamp": "1753260323.4672525",
+    "collector_timestamp": "1753260323.5290952",
+    "process_timestamp": "1753260323.582"
+  },
+  "metrics": [
+  {
+    "name": "node_network_receive_bytes_total",
+    "description": "Network device statistic receive_bytes.",
+    "type": "counter",
+    "values": [
+      {
+        "value": "4.2091215804e+10",
+        "labels": [
+          { 
+            "name": "device", 
+            "value": "eth2" 
+          }
+        ]
+      },
+      {
+        "value": "1.98715786e+08",
+        "labels": [
+          { 
+            "name": "device", 
+            "value": "eth3" 
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "node_network_receive_packets_total",
+    "description": "Network device statistic receive_packets.",
+    "type": "counter",
+    "values": [
+      {
+        "value": "5.2003689e+07",
+        "labels": [
+          { 
+            "name": "device",
+            "value": "eth2" 
+          }
+        ]
+      },
+      {
+        "value": "235492",
+        "labels": [
+          { 
+            "name": "device", 
+            "value": "eth3" 
+          }
+        ]
+      }
+    ]
+  }
+  ],
+  "input_ml_metrics": [
+    {
+      "name": "node_network_receive_bytes_total_rate",
+      "type": "rate",
+      "value": 70.6867102032291
+    },
+    {
+      "name": "node_network_receive_packets_total_rate",
+      "type": "rate",
+      "value": 10921.636539117777
+    },
+    {
+      "name": "node_network_average_received_packet_length",
+      "type": "length",
+      "value": 809.0215000065709
+    },
+    {
+      "name": "node_network_router_capacity_occupation",
+      "type": "percentage",
+      "value": 0.706867102032291
+    }
+  ]
+}

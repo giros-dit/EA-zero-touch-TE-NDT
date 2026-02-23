@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ml-r3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: ml-r3-app
+  template:
+    metadata:
+      labels:
+        app: ml-r3-app
+    spec:
+      volumes:
+      - configMap:
+          defaultMode: 0755
+          name: ml-rA-config
+        name: ml-config
+      containers:
+      - name: ml-r3-service
+        image: ghcr.io/giros-dit/across-monitoring-stack/ml-dummy:latest
+        command: ["python3", "-u", "/ml/ml.py"]
+        args: ["TP_r3", "ML_r3"]
+        volumeMounts:
+        - name: ml-config
+          mountPath: /ml/ml-config.txt
+          subPath: ml-rA-config.txt
+      
+        
+        

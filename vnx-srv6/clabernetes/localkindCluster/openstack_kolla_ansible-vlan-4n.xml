@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+~~~~~~~~~~~~~~~~~~~~~~
+ VNX Sample scenarios
+~~~~~~~~~~~~~~~~~~~~~~
+
+Name:        openstack_kolla_ansible-vlan-4n
+
+Description: This is an Openstack tutorial scenario designed to experiment with Openstack free and open-source
+             software platform for cloud-computing. It is made of four kvm machines:
+               - one controller
+               - one network/compute node
+               - two compute nodes
+             Kolla-ansible is used to provision OpenStack platform.
+             Openstack version used: Antelope.
+             The network configuration is based on the one named "Classic with Open vSwitch" described here:
+                  http://docs.openstack.org/liberty/networking-guide/scenario-classic-ovs.html
+
+Author:      David Fernández (david.fernandez@upm.es)
+             Nacho Dominguez (i.dominguezm@upm.es)
+
+This file is part of the Virtual Networks over LinuX (VNX) Project distribution.
+(www: http://www.dit.upm.es/vnx - e-mail: vnx@dit.upm.es)
+
+Copyright (C) 2024 Networking and Virtualization Research Group (GIROS)
+        Departamento de Ingenieria de Sistemas Telematicos (DIT)
+	Universidad Politecnica de Madrid (UPM)
+        SPAIN
+-->
+
+<vnx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="/usr/share/xml/vnx/vnx-2.00.xsd">
+  <global>
+    <version>2.0</version>
+    <scenario_name>openstack_kolla_openstack-vlan</scenario_name>
+    <ssh_key>conf/ssh/id_rsa.pub</ssh_key>
+    <automac/>
+    <vm_mgmt type="private" network="192.168.50.0" mask="24" offset="16">
+       <host_mapping />
+    </vm_mgmt>
+    <vm_defaults>
+        <console id="0" display="no"/>
+        <console id="1" display="yes"/>
+    </vm_defaults>
+    <cmd-seq seq="config-admin">config-admin1,config-admin2</cmd-seq>
+  </global>
+
+  <net name="MgmtNet" mode="openvswitch" mtu="1450"/>
+  <net name="TunnNet" mode="openvswitch" mtu="1450"/>
+  <net name="ExtNet"  mode="openvswitch" />
+  <net name="VlanNet" mode="openvswitch" />
+  <net name="DataNet" mode="openvswitch" />
+  <net name="virbr0"  mode="virtual_bridge" managed="no"/>
+
+  <!--
+    ~~
+    ~~   A D M I N   N O D E
+    ~~
+  -->
+  <vm name="admin" type="lxc" exec_mode="lxc-attach" arch="x86_64">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-22.04-v025</filesystem>
+    <if id="1" net="MgmtNet">
+      <ipv4>10.0.0.1/24</ipv4>
+    </if>
+    <if id="5" net="DataNet">
+    </if>
+    <if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if>
+    <filetree seq="on_boot" root="/usr/bin/">/usr/bin/vnx_config_nat</filetree>
+    <filetree seq="on_boot" root="/root/.ssh/">conf/ssh/id_rsa</filetree>
+    <filetree seq="on_boot" root="/tmp/">conf/admin/hosts</filetree>
+    <filetree seq="on_boot" root="/root/">conf/admin/deploy-ostack</filetree>
+    <filetree seq="on_boot" root="/root/">conf/admin/reconfig-ostack</filetree>
+    <exec seq="on_boot" type="verbatim">
+        dhclient eth9
+        apt-get update
+        apt-get install -y iptables
+        /usr/bin/vnx_config_nat eth1 eth9
+        sudo chown 644 /root/.ssh/id_rsa
+        cat /tmp/hosts >> /etc/hosts
+        rm /tmp/hosts
+        for c in controller compute1 compute2 compute3; do while ! $( nc -z $c 22 ); do sleep 1; done; ssh -o StrictHostKeyChecking=accept-new root@$c w; done
+      
+        ip link add link eth5 name k8snet type vlan id 40
+              ip link set k8snet up
+        ip addr add 10.0.2.1/24 dev k8snet
+    </exec> 
+
+    <exec seq="config-admin1" type="verbatim">
+      for c in controller compute1 compute2 compute3; do while ! $( nc -z $c 22 ); do sleep 1; done; ssh -o StrictHostKeyChecking=accept-new root@$c w; done
+      for c in 10.0.0.11 10.0.0.31 10.0.0.32 10.0.0.33; do while ! $( nc -z $c 22 ); do sleep 1; done; ssh -o StrictHostKeyChecking=accept-new root@$c w; done
+      for c in controller compute1 compute2 compute3; do apt update; done
+      export DEBIAN_FRONTEND=noninteractive
+      sudo apt update
+      sudo apt install -y git python3-dev libffi-dev gcc libssl-dev python3-venv
+      python3 -m venv /root/kolla
+      source /root/kolla/bin/activate
+      pip install -U pip
+      pip install 'ansible>=8,&lt;10'
+      pip install git+https://opendev.org/openstack/kolla-ansible@stable/2024.1
+      sudo mkdir -p /etc/kolla
+      sudo chown $USER:$USER /etc/kolla
+      cp -r /root/kolla/share/kolla-ansible/etc_examples/kolla/* /etc/kolla
+      cp /root/kolla/share/kolla-ansible/ansible/inventory/all-in-one .
+      kolla-ansible install-deps
+      kolla-genpwd
+    
+      # Customize Kolla globals.yml
+      sed -i 's/#kolla_base_distro:.*/kolla_base_distro: "ubuntu"/' /etc/kolla/globals.yml
+      sed -i 's/#network_interface:.*/network_interface: "eth1"/' /etc/kolla/globals.yml
+      sed -i 's/#neutron_external_interface:.*/neutron_external_interface: "vlannet,extnet"/' /etc/kolla/globals.yml
+      sed -i '/neutron_external_interface:/a neutron_bridge_name: "br-vlan,br-ex"' /etc/kolla/globals.yml
+      sed -i 's/#tunnel_interface:.*/tunnel_interface: "tunnet"/' /etc/kolla/globals.yml
+      sed -i 's/#kolla_internal_vip_address:.*/kolla_internal_vip_address: "10.0.0.250"/' /etc/kolla/globals.yml
+      sed -i 's/#kolla_internal_vip_interface:.*/kolla_internal_vip_interface: "eth1"/' /etc/kolla/globals.yml
+      sed -i 's/#kolla_external_vip_address.*/kolla_external_vip_address: "10.0.10.250"/' /etc/kolla/globals.yml
+      sed -i 's/#kolla_external_vip_interface.*/kolla_external_vip_interface: "vip-extnet"/' /etc/kolla/globals.yml
+      sed -i 's/#enable_neutron_provider_networks:.*/enable_neutron_provider_networks: "yes"/' /etc/kolla/globals.yml
+      sed -i 's/#enable_ceilometer:.*/enable_ceilometer: "yes"/' /etc/kolla/globals.yml
+      sed -i 's/#enable_gnocchi:.*/enable_gnocchi: "yes"/' /etc/kolla/globals.yml
+
+      sed -i -e 's/network_vlan_ranges =.*/network_vlan_ranges = physnet1/' /root/kolla/share/kolla-ansible/ansible/roles/neutron/templates/ml2_conf.ini.j2
+            echo 'dhcp-option-force=26,1400' >> /root/kolla/share/kolla-ansible/ansible/roles/neutron/templates/dnsmasq.conf.j2
+            pip install python-openstackclient -c https://releases.openstack.org/constraints/upper/2024.1
+    </exec>
+    <filetree seq="config-admin2" root="/root/kolla/share/kolla-ansible/ansible/inventory/multinode">conf/admin/multinode-4n</filetree>
+    <exec seq="config-admin2" type="verbatim">
+        rm /root/kolla/share/kolla-ansible/ansible/inventory/all-in-one
+    </exec>
+    <exec seq="config-admin3" type="verbatim">
+	    # No funciona. Ejecutar manualmente
+      source /root/kolla/bin/activate
+      kolla-ansible -i /root/kolla/share/kolla-ansible/ansible/inventory/multinode --configdir /etc/kolla/ bootstrap-servers
+      kolla-ansible -i /root/kolla/share/kolla-ansible/ansible/inventory/multinode --configdir /etc/kolla/ prechecks
+      kolla-ansible -i /root/kolla/share/kolla-ansible/ansible/inventory/multinode --configdir /etc/kolla/ deploy
+      kolla-ansible post-deploy
+    </exec>
+
+    <filetree seq="install-terraform2" root="/root/">conf/terraform</filetree>
+    <exec seq="install-terraform" type="verbatim">
+      export DEBIAN_FRONTEND=noninteractive
+      sudo apt update
+      apt -y install gpg
+      wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+      echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+      sudo apt update
+      sudo apt -y install terraform
+    </exec>
+
+    <exec seq="load-img" type="verbatim">
+      source /root/kolla/bin/activate
+      source /etc/kolla/admin-openrc.sh
+
+      # Create flavors if not created
+      openstack flavor show m1.nano >/dev/null 2>&amp;1    || openstack flavor create --id 0 --vcpus 1 --ram 64 --disk 1 m1.nano
+      openstack flavor show m1.tiny >/dev/null 2>&amp;1    || openstack flavor create --id 1 --vcpus 1 --ram 512 --disk 1 m1.tiny
+      openstack flavor show m1.smaller >/dev/null 2>&amp;1 || openstack flavor create --id 6 --vcpus 1 --ram 512 --disk 3 m1.smaller
+      #openstack flavor show m1.octavia >/dev/null 2>&amp;1 || openstack flavor create --id 100 --vcpus 1 --ram 1024 --disk 5 m1.octavia --private --project service
+
+      # Cirros image
+      wget -P /tmp/images http://vnx.dit.upm.es/vnx/filesystems/ostack-images/cirros-0.3.4-x86_64-disk-vnx.qcow2
+      openstack image create "cirros-0.3.4-x86_64-vnx" --file /tmp/images/cirros-0.3.4-x86_64-disk-vnx.qcow2 --disk-format qcow2 --container-format bare --public --progress
+      rm /tmp/images/cirros-0.3.4-x86_64-disk*.qcow2
+
+      # Ubuntu image (focal,20.04)
+      rm -f /tmp/images/focal-server-cloudimg-amd64-vnx.qcow2
+      wget -P /tmp/images http://vnx.dit.upm.es/vnx/filesystems/ostack-images/focal-server-cloudimg-amd64-vnx.qcow2
+      openstack image create "focal-server-cloudimg-amd64-vnx" --file /tmp/images/focal-server-cloudimg-amd64-vnx.qcow2 --disk-format qcow2 --container-format bare --public --progress
+      rm /tmp/images/focal-server-cloudimg-amd64-vnx.qcow2
+
+      # Ubuntu image (jammy,22.04)
+      rm -f /tmp/images/jammy-server-cloudimg-amd64-vnx.qcow2
+      wget -P /tmp/images http://vnx.dit.upm.es/vnx/filesystems/ostack-images/jammy-server-cloudimg-amd64-vnx.qcow2
+	    openstack image create "jammy-server-cloudimg-amd64-vnx" --file /tmp/images/jammy-server-cloudimg-amd64-vnx.qcow2 --disk-format qcow2 --container-format bare --public --progress
+      rm /tmp/images/jammy-server-cloudimg-amd64-vnx.qcow2
+    </exec>
+
+    <exec seq="create-extnet" type="verbatim">
+        # Create external network
+        source /root/kolla/bin/activate
+        source /etc/kolla/admin-openrc.sh
+        openstack network create --share --external --provider-physical-network physnet2 --provider-network-type flat ExtNet
+        openstack subnet create --network ExtNet --gateway 10.0.10.1 --dns-nameserver 10.0.10.1 --subnet-range 10.0.10.0/24 --allocation-pool start=10.0.10.100,end=10.0.10.200 ExtSubNet
+    </exec>
+
+    <!--
+         CREATE DEMO SCENARIO
+    -->
+    <exec seq="create-demo-scenario" type="verbatim">
+      source /root/kolla/bin/activate
+	    . /etc/kolla/admin-openrc.sh
+
+      # Create internal network
+      openstack network create net0
+      openstack subnet create --network net0 --gateway 10.1.1.1 --dns-nameserver 8.8.8.8 --subnet-range 10.1.1.0/24 --allocation-pool start=10.1.1.8,end=10.1.1.100 subnet0
+
+      # Create virtual machine
+      mkdir -p /root/keys
+      openstack keypair create vm1 > /root/keys/vm1
+      openstack server create --flavor m1.tiny --image cirros-0.3.4-x86_64-vnx vm1 --nic net-id=net0 --key-name vm1
+
+      # Create external network
+      #openstack network create --share --external --provider-physical-network provider --provider-network-type flat ExtNet
+      #openstack subnet create --network ExtNet --gateway 10.0.10.1 --dns-nameserver 10.0.10.1 --subnet-range 10.0.10.0/24 --allocation-pool start=10.0.10.100,end=10.0.10.200 ExtSubNet
+      openstack router create r0
+      openstack router set r0 --external-gateway ExtNet
+      openstack router add subnet r0 subnet0
+
+      # Assign floating IP address to vm1
+      openstack server add floating ip vm1 $( openstack floating ip create ExtNet -c floating_ip_address -f value )
+
+      # Create security group rules to allow ICMP, SSH and WWW access
+      openstack security group rule create --proto icmp --dst-port 0  default
+      openstack security group rule create --proto tcp  --dst-port 80 default
+      openstack security group rule create --proto tcp  --dst-port 22 default
+
+    </exec>
+
+    <exec seq="create-demo-vm2" type="verbatim">
+        source /root/kolla/bin/activate
+        source /etc/kolla/admin-openrc.sh
+        # Create virtual machine
+        mkdir -p /root/keys
+        openstack keypair create vm2 > /root/keys/vm2
+        openstack server create --flavor m1.tiny --image cirros-0.3.4-x86_64-vnx vm2 --nic net-id=net0 --key-name vm2
+        # Assign floating IP address to vm2
+        #openstack ip floating add $( openstack ip floating create ExtNet -c ip -f value ) vm2
+        openstack server add floating ip vm2 $( openstack floating ip create ExtNet -c floating_ip_address -f value )
+    </exec>
+        <exec seq="create-demo-vm3" type="verbatim">
+        source /root/kolla/bin/activate
+        source /etc/kolla/admin-openrc.sh
+        # Create virtual machine
+        mkdir -p /root/keys
+        openstack keypair create vm3 > /root/keys/vm3
+        openstack server create --flavor m1.smaller --image focal-server-cloudimg-amd64-vnx vm3 --nic net-id=net0 --key-name vm3
+        # Assign floating IP address to vm3
+        #openstack ip floating add $( openstack ip floating create ExtNet -c ip -f value ) vm3
+        openstack server add floating ip vm3 $( openstack floating ip create ExtNet -c floating_ip_address -f value )
+    </exec>
+
+    <exec seq="create-demo-vm4" type="verbatim">
+        source /root/kolla/bin/activate
+        source /etc/kolla/admin-openrc.sh
+        # Create virtual machine
+        mkdir -p /root/keys
+        openstack keypair create vm4 > /root/keys/vm4
+        openstack server create --flavor m1.smaller --image jammy-server-cloudimg-amd64-vnx vm4 --nic net-id=net0 --key-name vm4 --property VAR1=2 --property VAR2=3
+        # Assign floating IP address to vm4
+        #openstack ip floating add $( openstack ip floating create ExtNet -c ip -f value ) vm4
+        openstack server add floating ip vm4 $( openstack floating ip create ExtNet -c floating_ip_address -f value )
+    </exec>
+
+    <exec seq="delete-demo-scenario" type="verbatim">
+        source /root/kolla/bin/activate
+        source /etc/kolla/admin-openrc.sh
+        openstack server show vm1 >/dev/null  2>&amp;1 &amp;&amp; openstack server delete vm1
+        openstack server show vm2 >/dev/null  2>&amp;1 &amp;&amp; openstack server delete vm2
+        openstack server show vm3 >/dev/null  2>&amp;1 &amp;&amp; openstack server delete vm3
+        openstack server show vm4 >/dev/null  2>&amp;1 &amp;&amp; openstack server delete vm4
+        openstack keypair show vm1 >/dev/null 2>&amp;1 &amp;&amp; openstack keypair delete vm1
+        openstack keypair show vm2 >/dev/null 2>&amp;1 &amp;&amp; openstack keypair delete vm2
+        openstack keypair show vm3 >/dev/null 2>&amp;1 &amp;&amp; openstack keypair delete vm3
+        openstack keypair show vm4 >/dev/null 2>&amp;1 &amp;&amp; openstack keypair delete vm4
+        openstack router show r0 >/dev/null   2>&amp;1 &amp;&amp; (openstack router remove subnet r0 subnet0; openstack router delete r0)
+        openstack subnet show subnet0 >/dev/null 2>&amp;1 &amp;&amp; openstack subnet delete subnet0
+        openstack network show net0   >/dev/null 2>&amp;1 &amp;&amp; openstack network delete net0
+    </exec>
+
+    <exec seq="create-vlan-demo-scenario" type="verbatim">
+        source /root/kolla/bin/activate
+        source /etc/kolla/admin-openrc.sh
+        # Create security group rules to allow ICMP, SSH and WWW access
+        admin_project_id=$(openstack project show admin -c id -f value)
+        default_secgroup_id=$(openstack security group list -f value | grep $admin_project_id | cut -d " " -f1)
+        openstack security group rule create --proto icmp --dst-port 0  $default_secgroup_id
+        openstack security group rule create --proto tcp  --dst-port 80 $default_secgroup_id
+        openstack security group rule create --proto tcp  --dst-port 22 $default_secgroup_id
+
+        # Create vlan based networks and subnetworks
+        openstack network create --share --provider-physical-network physnet1 --provider-network-type vlan --provider-segment 1000 vlan1000
+        openstack network create --share --provider-physical-network physnet1 --provider-network-type vlan --provider-segment 1001 vlan1001
+        openstack subnet create --network vlan1000 --gateway 10.1.2.1 --dns-nameserver 8.8.8.8 --subnet-range 10.1.2.0/24 --allocation-pool start=10.1.2.2,end=10.1.2.99 subvlan1000
+        openstack subnet create --network vlan1001 --gateway 10.1.3.1 --dns-nameserver 8.8.8.8 --subnet-range 10.1.3.0/24 --allocation-pool start=10.1.3.2,end=10.1.3.99 subvlan1001
+
+        # Create virtual machine
+        mkdir -p tmp
+        openstack keypair create vmA1 > tmp/vmA1
+        openstack server create --flavor m1.tiny --image cirros-0.3.4-x86_64-vnx vmA1 --nic net-id=vlan1000 --key-name vmA1
+        openstack keypair create vmB1 > tmp/vmB1
+        openstack server create --flavor m1.tiny --image cirros-0.3.4-x86_64-vnx vmB1 --nic net-id=vlan1001 --key-name vmB1
+
+    </exec>
+
+    <exec seq="delete-vlan-demo-scenario" type="verbatim">
+        source /root/kolla/bin/activate
+        source /etc/kolla/admin-openrc.sh
+        openstack server show vmA1 >/dev/null  2>&amp;1 &amp;&amp; openstack server delete vmA1
+        openstack server show vmB1 >/dev/null  2>&amp;1 &amp;&amp; openstack server delete vmB1
+        openstack keypair show vmA1 >/dev/null 2>&amp;1 &amp;&amp; openstack keypair delete vmA1
+        openstack keypair show vmB1 >/dev/null 2>&amp;1 &amp;&amp; openstack keypair delete vmB1
+        openstack subnet show subvlan1000 >/dev/null 2>&amp;1 &amp;&amp; openstack subnet delete subvlan1000
+        openstack network show vlan1000   >/dev/null 2>&amp;1 &amp;&amp; openstack network delete vlan1000
+        openstack subnet show subvlan1001 >/dev/null 2>&amp;1 &amp;&amp; openstack subnet delete subvlan1001
+        openstack network show vlan1001   >/dev/null 2>&amp;1 &amp;&amp; openstack network delete vlan1001
+    </exec>
+
+
+  </vm>
+
+
+  <!--
+    ~~
+    ~~   C O N T R O L L E R   N O D E
+    ~~
+  -->
+  <vm name="controller" type="libvirt" subtype="kvm" os="linux" exec_mode="sdisk" arch="x86_64" vcpu="4">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_kvm_ubuntu64-22.04-v025.qcow2</filesystem>
+    <mem>12G</mem>
+    <!--console id="0" display="yes"/-->
+
+    <if id="1" net="MgmtNet">
+      <ipv4>10.0.0.11/24</ipv4>
+    </if>
+    <!--if id="4" net="ExtNet">
+      <ipv4>10.0.10.11/24</ipv4>
+    </if-->
+    <if id="5" net="DataNet">
+    </if>
+    <!--if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if-->
+    <route type="ipv4" gw="10.0.0.1">default</route>
+
+    <!-- Copy ntp config and restart service -->
+    <!-- Note: not used because ntp cannot be used inside a container. Clocks are supposed to be synchronized
+         between the vms/containers and the host -->
+    <!--filetree seq="on_boot" root="/etc/chrony/chrony.conf">conf/ntp/chrony-controller.conf</filetree>
+    <exec seq="on_boot" type="verbatim">
+        service chrony restart
+    </exec-->
+
+    <exec seq="on_boot" type="verbatim">
+        # Change MgmtNet and TunnNet interfaces MTU
+        ifconfig eth1 mtu 1450
+        sed -i -e '/iface eth1 inet static/a \   mtu 1450' /etc/network/interfaces
+        ifconfig eth5 mtu 1450
+        sed -i -e '/iface eth5 inet static/a \   mtu 1450' /etc/network/interfaces
+        #systemd-resolve --set-dns=8.8.8.8 --interface=eth1
+        resolvectl dns 2 1.1.1.1
+        #ip link add link eth5 name extnet type vlan id 10
+        #ip addr add 10.0.10.11/24 dev extnet
+        #ip link set extnet up
+
+        ip link add link eth5 name k8snet type vlan id 40
+        ip link set k8snet up
+        ip addr add 10.0.2.11/24 dev k8snet
+    </exec>
+  </vm>
+
+  <!--
+    ~~
+    ~~  C O M P U T E 1  A N D  N E T W O R K  N O D E
+    ~~
+  -->
+  <vm name="compute1" type="libvirt" subtype="kvm" os="linux" exec_mode="sdisk" arch="x86_64" vcpu="4">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_kvm_ubuntu64-22.04-v025.qcow2</filesystem>
+    <mem>15G</mem>
+    <if id="1" net="MgmtNet">
+      <ipv4>10.0.0.31/24</ipv4>
+    </if>
+    <!--if id="2" net="TunnNet">
+      <ipv4>10.0.1.31/24</ipv4>
+    </if>
+    <if id="3" net="VlanNet">
+    </if>
+    <if id="4" net="ExtNet">
+    </if-->
+    <if id="5" net="DataNet">
+    </if>
+    <!--if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if-->
+    <route type="ipv4" gw="10.0.0.1">default</route>
+
+    <exec seq="on_boot" type="verbatim">
+      # Change MgmtNet and TunnNet interfaces MTU
+      ifconfig eth1 mtu 1450
+      sed -i -e '/iface eth1 inet static/a \   mtu 1450' /etc/network/interfaces
+      ifconfig eth5 mtu 1450
+      sed -i -e '/iface eth5 inet static/a \   mtu 1450' /etc/network/interfaces
+      #systemd-resolve --set-dns=8.8.8.8 --interface=eth1
+      resolvectl dns 2 1.1.1.1
+
+	    ip link add link eth5 name extnet-aux0 type vlan id 10
+      ip link set extnet-aux0 up
+      ip link add link eth5 name tunnet type vlan id 20
+      ip addr add 10.0.1.31/24 dev tunnet
+      ip link set tunnet up
+      ip link add link eth5 name vlannet type vlan id 30 proto 802.1ad
+      ip link set vlannet up
+      ip link add link eth5 name k8snet type vlan id 40
+      ip link set k8snet up
+      ip addr add 10.0.2.31/24 dev k8snet
+
+      # Configure extnet bridge to separate management and neutron traffic
+	    ip link add vip-extnet type bridge
+	    ip link set extnet-aux0 master vip-extnet
+      ip addr add 10.0.10.31/24 dev vip-extnet
+      ip link set dev vip-extnet up
+      ip link add dev extnet-aux1 type veth peer name extnet
+	    ip link set extnet-aux1 master vip-extnet
+      ip link set dev extnet-aux1 up
+      ip link set dev extnet up
+
+    </exec>
+
+    <!-- Copy ntp config and restart service -->
+    <!-- Note: not used because ntp cannot be used inside a container. Clocks are supposed to be synchronized
+         between the vms/containers and the host -->
+    <!--filetree seq="on_boot" root="/etc/chrony/chrony.conf">conf/ntp/chrony-others.conf</filetree>
+    <exec seq="on_boot" type="verbatim">
+        service chrony restart
+    </exec-->
+  </vm>
+
+  <!--
+    ~~~
+    ~~~  C O M P U T E 2   N O D E
+    ~~~
+  -->
+  <vm name="compute2" type="libvirt" subtype="kvm" os="linux" exec_mode="sdisk" arch="x86_64" vcpu="4">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_kvm_ubuntu64-22.04-v025.qcow2</filesystem>
+    <mem>15G</mem>
+    <if id="1" net="MgmtNet">
+      <ipv4>10.0.0.32/24</ipv4>
+    </if>
+    <!--if id="2" net="TunnNet">
+      <ipv4>10.0.1.32/24</ipv4>
+    </if>
+    <if id="3" net="VlanNet">
+    </if>
+    <if id="4" net="ExtNet">
+    </if!-->
+    <if id="5" net="DataNet">
+    </if>
+    <!--if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if-->
+    <route type="ipv4" gw="10.0.0.1">default</route>
+
+    <exec seq="on_boot" type="verbatim">
+        # Create /dev/net/tun device
+        #mkdir -p /dev/net/
+        #mknod -m 666 /dev/net/tun  c 10 200
+        # Change MgmtNet and TunnNet interfaces MTU
+        ifconfig eth1 mtu 1450
+        sed -i -e '/iface eth1 inet static/a \   mtu 1450' /etc/network/interfaces
+        ifconfig eth5 mtu 1450
+        sed -i -e '/iface eth5 inet static/a \   mtu 1450' /etc/network/interfaces
+        #systemd-resolve --set-dns=8.8.8.8 --interface=eth1
+        resolvectl dns 2 1.1.1.1
+
+        ip link add link eth5 name extnet type vlan id 10
+        ip link set extnet up
+        ip link add link eth5 name tunnet type vlan id 20
+        ip addr add 10.0.1.32/24 dev tunnet
+        ip link set tunnet up
+        ip link add link eth5 name vlannet type vlan id 30 proto 802.1ad
+        ip link set vlannet up
+        ip link add link eth5 name k8snet type vlan id 40
+        ip link set k8snet up
+        ip addr add 10.0.2.32/24 dev k8snet
+
+    </exec>
+
+    <!-- Copy ntp config and restart service -->
+    <!-- Note: not used because ntp cannot be used inside a container. Clocks are supposed to be synchronized
+         between the vms/containers and the host -->
+    <!--filetree seq="on_boot" root="/etc/chrony/chrony.conf">conf/ntp/chrony-others.conf</filetree>
+    <exec seq="on_boot" type="verbatim">
+        service chrony restart
+    </exec-->
+  </vm>
+
+  <!--
+    ~~~
+    ~~~  C O M P U T E 3   N O D E
+    ~~~
+  -->
+  <vm name="compute3" type="libvirt" subtype="kvm" os="linux" exec_mode="sdisk" arch="x86_64" vcpu="4">
+    <filesystem type="cow">/usr/share/vnx/filesystems/vnx_rootfs_kvm_ubuntu64-22.04-v025.qcow2</filesystem>
+    <mem>15G</mem>
+    <if id="1" net="MgmtNet">
+      <ipv4>10.0.0.33/24</ipv4>
+    </if>
+    <!--if id="2" net="TunnNet">
+      <ipv4>10.0.1.33/24</ipv4>
+    </if>
+    <if id="3" net="VlanNet">
+    </if>
+    <if id="4" net="ExtNet">
+    </if-->
+    <if id="5" net="DataNet">
+    </if>
+    <!--if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if-->
+    <route type="ipv4" gw="10.0.0.1">default</route>
+
+    <exec seq="on_boot" type="verbatim">
+        # Create /dev/net/tun device
+        #mkdir -p /dev/net/
+        #mknod -m 666 /dev/net/tun  c 10 200
+        # Change MgmtNet and DataNet interfaces MTU
+        ifconfig eth1 mtu 1450
+        sed -i -e '/iface eth1 inet static/a \   mtu 1450' /etc/network/interfaces
+        ifconfig eth5 mtu 1450
+        sed -i -e '/iface eth5 inet static/a \   mtu 1450' /etc/network/interfaces
+        #systemd-resolve --set-dns=8.8.8.8 --interface=eth1
+        resolvectl dns 2 1.1.1.1
+
+        ip link add link eth5 name extnet type vlan id 10
+        ip link set extnet up
+        ip link add link eth5 name tunnet type vlan id 20
+        ip addr add 10.0.1.32/24 dev tunnet
+        ip link set tunnet up
+        ip link add link eth5 name vlannet type vlan id 30 proto 802.1ad
+        ip link set vlannet up
+        ip link add link eth5 name k8snet type vlan id 40
+        ip link set k8snet up
+        ip addr add 10.0.2.33/24 dev k8snet
+
+    </exec>
+
+    <!-- Copy ntp config and restart service -->
+    <!-- Note: not used because ntp cannot be used inside a container. Clocks are supposed to be synchronized
+         between the vms/containers and the host -->
+    <!--filetree seq="on_boot" root="/etc/chrony/chrony.conf">conf/ntp/chrony-others.conf</filetree>
+    <exec seq="on_boot" type="verbatim">
+        service chrony restart
+    </exec-->
+  </vm>
+
+  <!--
+    ~~
+    ~~   H O S T   N O D E
+    ~~
+  -->
+  <host>
+    <!--hostif net="ExtNet">
+       <ipv4>10.0.10.1/24</ipv4>
+    </hostif-->
+    <hostif net="MgmtNet">
+      <ipv4>10.0.0.2/24</ipv4>
+    </hostif>
+    <hostif net="DataNet">
+    </hostif>
+    <exec seq="on_boot" type="verbatim">
+        # Enable QinQ support in OVS
+        # https://developers.redhat.com/blog/2017/06/06/open-vswitch-overview-of-802-1ad-qinq-support
+        ovs-vsctl set Open_vSwitch . other_config:vlan-limit=2
+        ovs-appctl revalidator/purge
+	      ip link set DataNet up
+        ip link add link DataNet name extnet type vlan id 10
+        ip addr add 10.0.10.1/24 dev extnet
+        ip link set extnet up
+        ip link add link DataNet name k8snet type vlan id 40
+        ip link set k8snet up
+        ip addr add 10.0.2.2/24 dev k8snet
+    </exec>
+  </host>
+
+
+</vnx>

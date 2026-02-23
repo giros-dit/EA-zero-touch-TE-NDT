@@ -1,0 +1,135 @@
+#!/bin/bash
+
+#ssh root@controller
+
+function pak {
+  if [ ! -z "$PAUSE"  ]; then
+    read -p "Press any key to continue...";
+  fi
+}
+
+while getopts ":pc" opt; do
+  case ${opt} in
+    p )
+      PAUSE="yes"
+      shift
+      ;;
+    \? )
+      echo "Usage: $0 [-p] [-c]" 1>&2
+      exit 1
+      ;;
+  esac
+done
+
+echo $1
+echo $PAUSE
+
+KUSER=$1
+
+echo "--"
+echo "-- Creating K8S user ${KUSER}"
+echo "--"
+
+if [ -d "./$KUSER" ]; then
+  echo "--"
+  echo "-- ERROR: $KUSER directory already exists. Delete it if you want to recreate user."
+  echo "--"
+  exit 1
+fi
+
+mkdir -p $KUSER
+cd $KUSER 
+
+echo "--   Creating private key..."
+openssl genrsa -out $KUSER.key 2048
+pak
+
+echo "--   Generating certificate request..."
+openssl req -new -key $KUSER.key -out $KUSER.csr -subj "/CN=$KUSER"
+cat $KUSER.csr | base64 | tr -d "\n" > $KUSER-base64.csr
+pak
+
+echo "--   Sending request to master..."
+cat <<EOF | kubectl apply -f -
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: $KUSER
+spec:
+  groups:
+  - system:authenticated
+  request: $(cat $KUSER-base64.csr)
+  signerName: kubernetes.io/kube-apiserver-client
+  expirationSeconds: 864000  # ten days
+  usages:
+  - client auth
+EOF
+pak
+
+echo "--   Checking request status..."
+kubectl get certificatesigningrequests
+pak
+
+echo "--   Approving the request..."
+kubectl certificate approve $KUSER
+kubectl get certificatesigningrequests
+pak
+
+echo "--   Getting the certificate..."
+kubectl get certificatesigningrequests $KUSER -o jsonpath='{ .status.certificate }' | base64 --decode > $KUSER.crt
+pak
+
+#echo "--   Creamos el fichero de configuracion para el usuario desde el controlador:
+
+echo "--   Defining new cluster..."
+kubectl config set-cluster kubernetes-$KUSER --server=https://10.0.0.11:6443 --certificate-authority=/etc/kubernetes/pki/ca.crt --embed-certs=true --kubeconfig=$KUSER.conf
+pak
+
+echo "--   Configuring auth info for new user..."
+kubectl config set-credentials $KUSER --client-key=$KUSER.key --client-certificate=$KUSER.crt --embed-certs=true --kubeconfig=$KUSER.conf
+pak
+
+
+echo "--   Creating new namespace..."
+kubectl create ns $KUSER
+pak
+
+echo "--   Creating new role and associating it to namespace..."
+kubectl create role $KUSER-role --verb=create,get,delete,list,watch,patch --resource=pods,deployments,services,configmaps,secrets,persistentvolumes,topologies,pods/exec --namespace $KUSER
+kubectl create rolebinding $KUSER-rolebinding --role=$KUSER-role --user=$KUSER --namespace $KUSER
+pak
+
+echo "--   Creating new context with new cluster and user auth info..."
+kubectl config set-context $KUSER@kubernetes-$KUSER --cluster=kubernetes-$KUSER --user=$KUSER --kubeconfig=$KUSER.conf --namespace=$KUSER
+pak
+
+echo "--   Configuring context for new kubeconfig:"
+kubectl config use-context $KUSER@kubernetes-$KUSER --kubeconfig=$KUSER.conf
+
+echo "-- Configuring Calico ingress policy for namespace:"
+cat <<EOF | kubectl apply -f -
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ns-only-ingress
+  namespace: $KUSER
+spec:
+  podSelector: {}
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: $KUSER
+  policyTypes:
+  - Ingress
+EOF
+pak
+
+#echo "--   Desplegamos un pod de ejemplo:
+
+#kubectl apply -f ../k8s-examples/debian.yml --kubeconfig=$KUSER.conf -n $KUSER
+#kubectl get pods --kubeconfig=$KUSER.conf -n $KUSER
+
+echo "--"
+echo "-- User ${KUSER} created."
+echo "--"

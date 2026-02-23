@@ -1,0 +1,26 @@
+{
+    "experiment_id": "1",
+    "flag_original_metrics": true,
+    "flag_debug_params": true,
+    "max_throughput_mbps": 100,
+    "polling_interval": 5,
+    "multiplier": 2000,
+    "routers": [
+        {
+            "r1": {
+                "collector_url": "http://prometheus-node-exporter-collector:8000/metrics/node-exporter-1_9100.json",
+                "topic": "TD_r1",
+                "interfaces": ["eth0"],
+                "test_metrics": false
+            }
+        },
+        {
+            "r2": {
+                "collector_url": "http://prometheus-node-exporter-collector:8000/metrics/node-exporter-2_9100.json",
+                "topic": "TD_r2",
+                "interfaces": ["eth0"],
+                "test_metrics": false
+            }
+        }
+    ]
+}

@@ -1,0 +1,7 @@
+
+# Archivos de seguridad - NUNCA commitear
+*.jar
+*secrets*
+*.secret*
+.env*
+**/credentials*

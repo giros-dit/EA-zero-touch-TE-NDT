@@ -1,0 +1,94 @@
+apiVersion: v1
+data:
+  configured-pull-secrets: |
+    []
+  ixia-c: |
+    name: clabernetes-ixia-c
+    prefix: ""
+    topology:
+        defaults:
+            ports:
+                - 60000:21/tcp
+                - 60001:22/tcp
+                - 60002:23/tcp
+                - 60003:80/tcp
+                - 60000:161/udp
+                - 60004:443/tcp
+                - 60005:830/tcp
+                - 60006:5000/tcp
+                - 60007:5900/tcp
+                - 60008:6030/tcp
+                - 60009:9339/tcp
+                - 60010:9340/tcp
+                - 60011:9559/tcp
+                - 60012:57400/tcp
+        nodes:
+            ixia-c:
+                kind: keysight_ixia-c-one
+                image: ghcr.io/open-traffic-generator/ixia-c-one:latest
+                ports:
+                    - 8443:8443/tcp
+        links:
+            - endpoints:
+                - ixia-c:eth3
+                - host:ixia-c-eth3
+            - endpoints:
+                - ixia-c:eth4
+                - host:ixia-c-eth4
+    debug: false
+  ixia-c-files-from-url: ""
+  r1: |
+    name: clabernetes-r1
+    prefix: ""
+    topology:
+        defaults:
+            ports:
+                - 60000:21/tcp
+                - 60001:22/tcp
+                - 60002:23/tcp
+                - 60003:80/tcp
+                - 60000:161/udp
+                - 60004:443/tcp
+                - 60005:830/tcp
+                - 60006:5000/tcp
+                - 60007:5900/tcp
+                - 60008:6030/tcp
+                - 60009:9339/tcp
+                - 60010:9340/tcp
+                - 60011:9559/tcp
+                - 60012:57400/tcp
+        nodes:
+            r1:
+                kind: linux
+                image: pablofl01/alpine-iperf
+                exec:
+                    - ip address add dev eth1 192.168.0.2/30
+                    - ip address add dev eth2 192.168.1.1/30
+                    - arp -i eth2 -s 192.168.1.2 02:00:00:00:01:ff
+                ports: []
+        links:
+            - endpoints:
+                - r1:eth3
+                - host:r1-eth3
+            - endpoints:
+                - r1:eth4
+                - host:r1-eth4
+    debug: false
+  r1-files-from-url: ""
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2025-09-24T14:41:01Z"
+  labels:
+    clabernetes/app: clabernetes
+    clabernetes/name: ixia
+    clabernetes/topologyKind: containerlab
+    clabernetes/topologyOwner: ixia
+  name: ixia
+  namespace: giros
+  ownerReferences:
+  - apiVersion: clabernetes.containerlab.dev/v1alpha1
+    kind: Topology
+    name: ixia
+    uid: c57bdbe6-325f-4894-9992-5995fabfe8b2
+  resourceVersion: "117166998"
+  uid: 5e5cf297-61da-40d5-8853-a4b02264e76c

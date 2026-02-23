@@ -1,0 +1,51 @@
+
+auto e1:0
+iface e1:0 inet static
+   mtu 1450
+   address 10.0.0.250
+   netmask 255.255.255.0
+
+auto e5.10
+iface e5.10 inet manual
+  pre-up ip link set dev e5.10 name extnet-aux0
+  post-up ifconfig extnet-aux0 up
+  pre-down ifconfig extnet-aux0 down
+  down ip link set dev extnet-aux0 name e5.10; sleep 1
+
+auto e5.20
+iface e5.20 inet manual
+  pre-up ip link set dev e5.20 name tunnet
+  post-up ifconfig tunnet 10.0.1.31/24 up
+  pre-down ifconfig tunnet down
+  down ip link set dev tunnet name e5.20; sleep 1
+
+auto e5.30
+iface e5.30 inet manual
+  pre-up ip link set dev e5.30 name vlannet
+  post-up ifconfig vlannet up
+  pre-down ifconfig vlannet down
+  down ip link set dev vlannet name e5.30; sleep 1
+
+auto e5.40
+iface e5.40 inet manual
+  pre-up ip link set dev e5.40 name k8snet
+  post-up ifconfig k8snet 10.0.2.31/24 up
+  pre-down ifconfig k8snet down
+  down ip link set dev k8snet name e5.40; sleep 1
+
+auto vip-extnet
+iface vip-extnet inet static
+    address 10.0.10.31
+    netmask 255.255.255.0
+    bridge_ports extnet-aux1
+    bridge_ports extnet-aux0
+    pre-up ip link add dev extnet-aux1 type veth peer name extnet
+    pre-up ip link set dev extnet-aux1 up
+    pre-up ip link set dev extnet up
+    pre-down ip link del extnet-aux1
+
+auto vip-extnet:0
+iface vip-extnet:0 inet static
+   mtu 1450
+   address 10.0.10.250
+   netmask 255.255.255.0

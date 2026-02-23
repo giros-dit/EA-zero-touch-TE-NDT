@@ -1,0 +1,258 @@
+#!/bin/bash
+
+START_TIME=$SECONDS
+
+MASTERIP='10.0.0.11'     # Main address of of k8s master (used in kubeadm init command)
+CNIINTERFACE='k8snet'    # Name of interface used by CNI for interpod communications
+
+
+# Systems
+MASTER='controller'
+COMP1='compute1'
+COMP2='compute2'
+COMP3='compute3'
+ALL="$MASTER $COMP1 $COMP2 $COMP3"
+
+# Versions to install
+K8SVERS="1.30"
+CALICOVERS="3.27.0"
+INGRESSVERS="1.10.1"
+METALLBVERS="0.14.5"
+
+function pak { 
+  if [ ! -z "$PAUSE"  ]; then
+    read -p "Press any key to continue..."; 
+  fi
+}
+
+function msg () { 
+  echo "--"
+  echo "-- $1"
+  echo "--" 
+}
+
+while getopts ":pc" opt; do
+  case ${opt} in
+    p )
+      PAUSE="yes"
+      ;;
+    c )
+      INSTALLCONT="yes"
+      ;;
+    \? )
+      echo "Usage: $0 [-p] [-c]" 1>&2
+      exit 1
+      ;;
+  esac
+done
+
+#if [[ "$1" == "-p" ]]; then PAUSE="yes"; fi
+[ ! -z "$PAUSE"  ] && echo "-- Pause mode activated"
+[ ! -z "$INSTALLCONT"  ] && echo "-- Install containerd"
+
+
+for m in $ALL; do 
+  msg "Testing conectivity to $m"
+  echo ssh root@${m} w
+  ssh root@${m} w
+done
+pak
+
+for m in $ALL; do 
+
+  msg "Initial configuration of $m"
+  pak
+  ssh root@${m} "
+      sed -i '/swap/d' /etc/fstab
+      swapoff -a
+      echo 'overlay' >> /etc/modules-load.d/containerd.conf
+      echo 'br_netfilter' >> /etc/modules-load.d/containerd.conf
+      modprobe overlay
+      modprobe br_netfilter
+
+      echo 'net.bridge.bridge-nf-call-ip6tables = 1' >> /etc/sysctl.d/kubernetes.conf
+      echo 'net.bridge.bridge-nf-call-iptables = 1' >> /etc/sysctl.d/kubernetes.conf
+      echo 'net.ipv4.ip_forward = 1' >> /etc/sysctl.d/kubernetes.conf
+
+      sysctl --system
+  "
+  #pak
+
+  msg "Step 3) Install containerd run time"
+  echo ssh root@${m} 'apt install -y curl gnupg2 software-properties-common apt-transport-https ca-certificates'
+  ssh root@${m} 'DEBIAN_FRONTEND=noninteractive apt install -y curl gnupg2 software-properties-common apt-transport-https ca-certificates'
+  #pak
+
+  if [ ! -z "$INSTALLCONT"  ]; then
+      # Install containerd. Not needed if the instalation is done after OpenStack installation
+      echo ssh root@${m} 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg  --dearmor | tee /etc/apt/trusted.gpg.d/docker.gpg > /dev/null'
+      #ssh root@${m} 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/trusted.gpg.d/docker.gpg'
+      # See: https://gist.github.com/notpushkin/1cbdd3cbab0cf3570f87b7f2c0cb852d
+      ssh root@${m} 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg  --dearmor | tee /etc/apt/trusted.gpg.d/docker.gpg > /dev/null'
+
+      echo ssh root@${m} 'add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"'
+      ssh root@${m} 'add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"'
+
+      echo ssh root@${m} 'apt update'
+      ssh root@${m} 'apt update'
+
+      echo ssh root@${m} 'apt install -y containerd.io'
+      ssh root@${m} 'apt install -y containerd.io'
+  fi
+
+  echo ssh root@${m} 'containerd config default | tee /etc/containerd/config.toml >/dev/null 2>&1'
+  ssh root@${m} 'containerd config default | tee /etc/containerd/config.toml >/dev/null 2>&1'
+  #pak
+
+  echo ssh root@${m} "sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml"
+  ssh root@${m} "sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml"
+  #pak
+
+  echo ssh root@${m} 'systemctl restart containerd'
+  ssh root@${m} 'systemctl restart containerd'
+  #pak
+
+  echo ssh root@${m} 'systemctl enable containerd'
+  ssh root@${m} 'systemctl enable containerd'
+  #pak
+
+done
+
+for m in $ALL; do 
+
+  msg "Step 4) Add apt repository for Kubernetes ($m)"
+  ssh root@${m} "
+      curl -fsSL https://pkgs.k8s.io/core:/stable:/v${K8SVERS}/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg > /dev/null
+      echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v${K8SVERS}/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+      # Deprecated (https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
+      # curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor | tee /etc/apt/trusted.gpg.d/k8s.gpg > /dev/null
+      ##curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+      #apt-add-repository 'deb http://apt.kubernetes.io/ kubernetes-xenial main'
+  "
+  msg "Step 5) Install Kubernetes components Kubectl, kubeadm & kubelet ($m)"
+  ssh root@${m} "
+      apt update
+      apt install -y kubelet kubeadm kubectl
+      apt-mark hold kubelet kubeadm kubectl
+  "
+#  msg "Step 4/5) Install Kubernetes components Kubectl, kubeadm & kubelet ($m) as snap packages"
+#  ssh root@${m} "
+#      snap install kubectl --classic
+#      snap install kubeadm --classic
+#      snap install kubelet --classic
+#      apt install critcl
+#  "
+  pak
+
+done
+
+
+msg "Step 6) Initialize Kubernetes cluster with Kubeadm command (controller)"
+msg "  Downloading images..."
+pak
+ssh root@controller "kubeadm config images pull"
+msg "  Executing kubeadm init on master node..."
+msg "     kubeadm init --control-plane-endpoint=$MASTERIP"
+ssh root@controller "
+  echo 1 > /proc/sys/net/ipv4/ip_forward
+  kubeadm init --control-plane-endpoint=$MASTERIP
+
+  mkdir -p \$HOME/.kube
+  cp -i /etc/kubernetes/admin.conf \$HOME/.kube/config
+  chown \$(id -u):\$(id -g) \$HOME/.kube/config
+  kubectl cluster-info
+  kubectl get nodes
+"
+pak
+
+JOINCMD=$( ssh root@controller "kubeadm token create --print-join-command" )
+echo $JOINCMD
+pak
+
+msg "Adding $COMP1..."
+ssh root@$COMP1 "
+  echo 1 > /proc/sys/net/ipv4/ip_forward
+  $JOINCMD
+"
+pak
+
+msg "Adding $COMP2..."
+ssh root@$COMP2 "
+  echo 1 > /proc/sys/net/ipv4/ip_forward
+  $JOINCMD
+"
+pak
+
+msg "Adding $COMP3..."
+ssh root@$COMP3 "
+  echo 1 > /proc/sys/net/ipv4/ip_forward
+  $JOINCMD
+"
+pak
+
+ssh root@controller "kubectl get nodes"
+pak
+
+msg "Step 6) Install Calico Pod Network Add-on"
+#  curl https://projectcalico.docs.tigera.io/manifests/calico.yaml -O
+#  kubectl apply -f calico.yaml
+ssh root@controller "
+  kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v${CALICOVERS}/manifests/calico.yaml
+  kubectl set env daemonset/calico-node -n kube-system  IP_AUTODETECTION_METHOD=interface=$CNIINTERFACE
+"
+
+sleep 30
+ssh root@controller "kubectl get pods -n kube-system"
+pak
+
+msg "Step 7) Install Multus"
+ssh root@controller "
+    mkdir -p k8s
+    cd k8s
+    git clone https://github.com/k8snetworkplumbingwg/multus-cni.git
+    cd multus-cni
+    cat ./deployments/multus-daemonset-thick.yml | kubectl apply -f -
+    sleep 10
+    kubectl get pods --all-namespaces | grep -i multus
+"
+pak
+
+msg "Step 8) Install Ingress NGINX"
+ssh root@controller "
+    cd k8s/
+    wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v${INGRESSVERS}/deploy/static/provider/baremetal/deploy.yaml
+    sed -i 's/NodePort/LoadBalancer/' deploy.yaml
+    kubectl apply -f deploy.yaml
+    kubectl get pods -n ingress-nginx
+"
+pak
+
+msg "Step 9) Install MetalLB"
+scp -r conf/k8s/metallb/* root@controller:conf/k8s/
+ssh root@controller "
+    kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v${METALLBVERS}/config/manifests/metallb-native.yaml
+    sleep 20
+    kubectl apply -f conf/k8s/metallb/config-pool.yaml
+    kubectl apply -f conf/k8s/metallb/config-l2adv.yaml
+    kubectl get all -n metallb-system
+"
+
+msg "Step 10) Configure Calico global egress policy"
+scp -r conf/k8s/calico/global-egress-policy.yaml root@controller:
+ssh root@controller "
+    kubectl apply -f global-egress-policy.yaml
+    kubectl get GlobalNetworkPolicies
+"
+
+ssh root@controller "
+    mkdir -p /root/bin
+"
+scp -r conf/k8s/k8s-examples/ root@controller:
+scp conf/k8s/create-k8s-user root@controller:bin
+
+ELAPSED_TIME=$(($SECONDS - $START_TIME))
+echo "--"
+echo "-- K8s installed in $ELAPSED_TIME seconds"
+echo "--"
+

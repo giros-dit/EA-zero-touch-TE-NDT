@@ -1,0 +1,45 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36" version="27.0.9">
+  <diagram name="Página-1" id="XjpoNEU9o90cF0CHlCEy">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="cQj1UlHPzCTV-ahHtoay-1" value="table_entry_exists(tid)" style="shape=trapezoid;perimeter=trapezoidPerimeter;fixedSize=1;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="191.5" y="30" width="218" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="cQj1UlHPzCTV-ahHtoay-2" value="entry = f&#39;{tid} tunnel{tid}&#39;" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="180" y="114" width="241" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="cQj1UlHPzCTV-ahHtoay-3" value="cmd = &#39;grep -qx {entry} /etc/iproute2/rt_tables&#39;" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="170.5" y="210" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="cQj1UlHPzCTV-ahHtoay-4" value="ssh_ru(cmd)" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="227" y="340" width="147" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="cQj1UlHPzCTV-ahHtoay-5" value="Retornar proc.returncode == 0" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="170.5" y="430" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="cQj1UlHPzCTV-ahHtoay-6" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=-0.01;rounded=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="cQj1UlHPzCTV-ahHtoay-1" target="cQj1UlHPzCTV-ahHtoay-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cQj1UlHPzCTV-ahHtoay-7" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.5;entryY=-0.01;rounded=0;" edge="1" parent="1" source="cQj1UlHPzCTV-ahHtoay-2" target="cQj1UlHPzCTV-ahHtoay-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cQj1UlHPzCTV-ahHtoay-8" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.5;entryY=-0.01;rounded=0;" edge="1" parent="1" source="cQj1UlHPzCTV-ahHtoay-3" target="cQj1UlHPzCTV-ahHtoay-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cQj1UlHPzCTV-ahHtoay-9" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.5;entryY=-0.01;rounded=0;" edge="1" parent="1" source="cQj1UlHPzCTV-ahHtoay-4" target="cQj1UlHPzCTV-ahHtoay-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

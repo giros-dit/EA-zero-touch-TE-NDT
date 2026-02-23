@@ -1,0 +1,57 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36" version="27.0.9">
+  <diagram name="Página-1" id="yFwNUP2m-krRATDVsJw0">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="0ZL4ZwcKmFHWyT75UXPF-1" value="rule_exists(dest, tid)" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="270" y="50.000000000000455" width="210" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="0ZL4ZwcKmFHWyT75UXPF-2" value="¿Regla existe?" style="rhombus;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="299" y="154.00000000000045" width="152" height="152" as="geometry" />
+        </mxCell>
+        <mxCell id="0ZL4ZwcKmFHWyT75UXPF-3" value="Imprimir: Done flow" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="273" y="633.0000000000005" width="204" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="0ZL4ZwcKmFHWyT75UXPF-4" value="ssh_ru: Añadir regla&#xa;    ip -6 rule add" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="350" y="378.00000000000045" width="202" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="0ZL4ZwcKmFHWyT75UXPF-5" value="Imprimir resultado regla" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="334" y="529.0000000000005" width="234" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="0ZL4ZwcKmFHWyT75UXPF-7" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="0ZL4ZwcKmFHWyT75UXPF-1" target="0ZL4ZwcKmFHWyT75UXPF-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0ZL4ZwcKmFHWyT75UXPF-8" value="Sí" style="curved=1;startArrow=none;endArrow=block;exitX=0.16;exitY=1;entryX=0.27;entryY=0;rounded=0;" edge="1" parent="1" source="0ZL4ZwcKmFHWyT75UXPF-2" target="0ZL4ZwcKmFHWyT75UXPF-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="299" y="342.00000000000045" />
+              <mxPoint x="299" y="608.0000000000005" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0ZL4ZwcKmFHWyT75UXPF-9" value="No" style="curved=1;startArrow=none;endArrow=block;exitX=0.84;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="0ZL4ZwcKmFHWyT75UXPF-2" target="0ZL4ZwcKmFHWyT75UXPF-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="451" y="342.00000000000045" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0ZL4ZwcKmFHWyT75UXPF-10" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="0ZL4ZwcKmFHWyT75UXPF-4" target="0ZL4ZwcKmFHWyT75UXPF-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0ZL4ZwcKmFHWyT75UXPF-11" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.73;entryY=0;rounded=0;" edge="1" parent="1" source="0ZL4ZwcKmFHWyT75UXPF-5" target="0ZL4ZwcKmFHWyT75UXPF-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="451" y="608.0000000000005" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

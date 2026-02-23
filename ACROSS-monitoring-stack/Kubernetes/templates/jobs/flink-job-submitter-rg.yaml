@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: flink-job-submitter-test-rg
+spec:
+  template:
+    spec:
+      containers:
+      - name: flink-job-submitter-test-rg
+        image: ghcr.io/giros-dit/across-monitoring-stack/flink-operator:latest
+        args:
+        - "/opt/flink/bin/flink"
+        - "run"
+        - "-m"
+        - "flink-job-cluster-jobmanager:8081"
+        - "-d"
+        - "/opt/flink/usrlib/traffic-rate.jar"
+        - "kafka-service:9092"
+        - "TD_rg"
+        - "TP_rg"
+        - "1"
+      restartPolicy: Never

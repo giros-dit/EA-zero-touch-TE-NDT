@@ -1,0 +1,150 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:135.0) Gecko/20100101 Firefox/135.0" version="26.0.6">
+  <diagram name="Página-1" id="x9qQQLviX-wNVTuX-PN3">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-1" value="Inicio" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="342" y="20" width="97" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-2" value="Bucle Infinito" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="315" y="124" width="152" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-3" value="Imprimir&#xa;Updating network state..." style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="178" y="228" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-4" value="Crear grafo&#xa;create_graph" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="184" y="356" width="249" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-5" value="Obtener energía&#xa;fetch_energy" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="178" y="460" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-6" value="Obtener flujos&#xa;fetch_flows" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="182" y="588" width="253" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-7" value="Verificar routers&#xa;críticos - router_checkup" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="178" y="692" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-8" value="¿Existen flujos&#xa;afectados?" style="rhombus;strokeWidth=2;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="183" y="820" width="250" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-9" value="Actualizar versiones&#xa;update_flow_versions" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="1143" width="297" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-10" value="Re-obtener flujos&#xa;fetch_flows" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="38" y="1271" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-11" value="Usar flujos actuales" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="348" y="1283" width="200" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-12" value="Asignar costos&#xa;assign_costs" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="178" y="1399" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-13" value="Verificar capacidad&#xa;check_capacity" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="178" y="1527" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-14" value="Asignar rutas&#xa;assign_routes" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="178" y="1655" width="260" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-15" value="Esperar 5 segundos" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="289" y="1783" width="203" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-16" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="u-LHMv7-CHCJPOdenJZV-1" target="u-LHMv7-CHCJPOdenJZV-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-17" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.22;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="u-LHMv7-CHCJPOdenJZV-2" target="u-LHMv7-CHCJPOdenJZV-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="308" y="203" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-18" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="u-LHMv7-CHCJPOdenJZV-3" target="u-LHMv7-CHCJPOdenJZV-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-19" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="u-LHMv7-CHCJPOdenJZV-4" target="u-LHMv7-CHCJPOdenJZV-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-20" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="u-LHMv7-CHCJPOdenJZV-5" target="u-LHMv7-CHCJPOdenJZV-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-21" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="u-LHMv7-CHCJPOdenJZV-6" target="u-LHMv7-CHCJPOdenJZV-7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-22" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="u-LHMv7-CHCJPOdenJZV-7" target="u-LHMv7-CHCJPOdenJZV-8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-23" value="Sí" style="curved=1;startArrow=none;endArrow=block;exitX=0.07;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="u-LHMv7-CHCJPOdenJZV-8" target="u-LHMv7-CHCJPOdenJZV-9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="168" y="1106" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-24" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="u-LHMv7-CHCJPOdenJZV-9" target="u-LHMv7-CHCJPOdenJZV-10">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-25" value="No" style="curved=1;startArrow=none;endArrow=block;exitX=0.93;exitY=1;entryX=0.5;entryY=-0.01;rounded=0;" edge="1" parent="1" source="u-LHMv7-CHCJPOdenJZV-8" target="u-LHMv7-CHCJPOdenJZV-11">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="448" y="1106" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-26" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.17;entryY=0;rounded=0;" edge="1" parent="1" source="u-LHMv7-CHCJPOdenJZV-10" target="u-LHMv7-CHCJPOdenJZV-12">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="168" y="1374" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-27" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.83;entryY=0;rounded=0;" edge="1" parent="1" source="u-LHMv7-CHCJPOdenJZV-11" target="u-LHMv7-CHCJPOdenJZV-12">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="448" y="1374" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-28" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="u-LHMv7-CHCJPOdenJZV-12" target="u-LHMv7-CHCJPOdenJZV-13">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-29" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="1" source="u-LHMv7-CHCJPOdenJZV-13" target="u-LHMv7-CHCJPOdenJZV-14">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-30" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.29;entryY=-0.01;rounded=0;" edge="1" parent="1" source="u-LHMv7-CHCJPOdenJZV-14" target="u-LHMv7-CHCJPOdenJZV-15">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="308" y="1758" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="u-LHMv7-CHCJPOdenJZV-31" value="" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.02;entryX=1;entryY=0.85;rounded=0;" edge="1" parent="1" source="u-LHMv7-CHCJPOdenJZV-15" target="u-LHMv7-CHCJPOdenJZV-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="598" y="1758" />
+              <mxPoint x="598" y="203" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

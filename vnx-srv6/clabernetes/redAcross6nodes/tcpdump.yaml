@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tcpdump-pod
+  namespace: across-tc32
+  annotations:
+    k8s.v1.cni.cncf.io/networks: '[{"name": "net2003", "namespace": "across-tc32", "interface":"net2003"}]'
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: b5g-p4
+  containers:
+    - name: tcpdump-container
+      image: corfr/tcpdump
+      command: ["sleep", "infinity"]
+      securityContext:
+        capabilities:
+          add:
+            - NET_ADMIN  # Required for tcpdump
+            - NET_RAW
+      resources:
+        limits:
+          cpu: "500m"
+          memory: "256Mi"
+        requests:
+          cpu: "100m"
+          memory: "128Mi"
+  restartPolicy: Never
+

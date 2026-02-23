@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ml-models-configmap
+data:
+  rA.deep_neural_network: http://138.4.21.162:8080/rA-deep_neural_network.tar.gz
+  rA.linear_regression: http://138.4.21.162:8080/rA-linear_regression.tar.gz
+  rA.polynomial_regression: http://138.4.21.162:8080/rA-polynomial_regression.tar.gz
+  rA.random_forest: http://138.4.21.162:8080/rA-random_forest.tar.gz
+  rB.deep_neural_network: http://138.4.21.162:8080/rB-deep_neural_network.tar.gz
+  rB.linear_regression: http://138.4.21.162:8080/rB-linear_regression.tar.gz
+  rB.polynomial_regression: http://138.4.21.162:8080/rB-polynomial_regression.tar.gz
+  rB.random_forest: http://138.4.21.162:8080/rB-random_forest.tar.gz

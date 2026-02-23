@@ -1,0 +1,57 @@
+name: ixia
+topology:
+  nodes:
+    ixia-c:
+      kind: keysight_ixia-c-one
+      image: ghcr.io/open-traffic-generator/ixia-c-one:latest
+      ports:
+        - 8443:8443
+
+    r1:
+      kind: linux
+      image: pablofl01/alpine-iperf
+      exec:
+      - "ip address add dev eth1 192.168.0.2/30"
+      - "ip address add dev eth2 192.168.1.1/30"
+      - "arp -i eth2 -s 192.168.1.2 02:00:00:00:01:ff"
+
+  links:
+    - type: multus
+      endpoint:
+        node: ixia-c
+        interface: eth1
+        mac: 02:00:00:00:01:aa
+      host-interface: net2100
+      mode: bridge
+
+    - type: multus
+      endpoint:
+        node: r1
+        interface: eth1
+        mac: 02:00:00:00:02:aa
+      host-interface: net2100
+      mode: bridge
+
+    - type: multus
+      endpoint:
+        node: ixia-c
+        interface: eth2
+        mac: 02:00:00:00:01:ff
+      host-interface: net2101
+      mode: bridge
+
+    - type: multus
+      endpoint:
+        node: r1
+        interface: eth2
+        mac: 02:00:00:00:02:ff
+      host-interface: net2101
+      mode: bridge
+   
+    - endpoints: ["ixia-c:eth3", "r1:eth3"]
+    - endpoints: ["ixia-c:eth4", "r1:eth4"]
+
+    - endpoints: ["ixia-c:eth5", "multus:net2102"]
+    - endpoints: ["r1:eth5", "multus:net2102"]
+    - endpoints: ["ixia-c:eth6", "multus:net2103"]
+    - endpoints: ["r1:eth6", "multus:net2103"]

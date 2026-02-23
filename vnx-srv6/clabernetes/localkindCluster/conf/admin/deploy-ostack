@@ -1,0 +1,16 @@
+#!/bin/bash
+
+INVENTORY="/root/kolla/share/kolla-ansible/ansible/inventory/multinode"
+
+# Estas opciones no parecen acelerar la configuracion...
+#OPTIONS="-e 'pipelining=True' --forks 100"
+
+source /root/kolla/bin/activate
+# https://www.reddit.com/r/openstack/comments/1g02stu/kolla_ansible_openstack/
+pip install --force-reinstall MarkupSafe==2.1.5
+ansible -i $INVENTORY all -m ping
+kolla-ansible $OPTIONS -i $INVENTORY --configdir /etc/kolla/ bootstrap-servers
+for i in controller compute1 compute2 compute3; do ssh $i pip install --force-reinstall requests==2.31.0; done
+kolla-ansible $OPTIONS -i $INVENTORY --configdir /etc/kolla/ prechecks
+kolla-ansible $OPTIONS -i $INVENTORY --configdir /etc/kolla/ deploy
+kolla-ansible post-deploy

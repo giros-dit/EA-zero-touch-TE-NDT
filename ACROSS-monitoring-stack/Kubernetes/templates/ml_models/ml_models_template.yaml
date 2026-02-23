@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ml-models-{{ROUTER_ID}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: ml-models-{{ROUTER_ID}}-app
+  template:
+    metadata:
+      labels:
+        app: ml-models-{{ROUTER_ID}}-app
+    spec:
+      volumes:
+        - configMap:
+            defaultMode: 0755
+            name: ml-inference
+          name: ml-inference
+        - configMap:
+            defaultMode: 0755
+            name: ml-models-configmap
+          name: ml-models-configmap
+        - name: ml-inference-models
+          emptyDir: {}
+      initContainers:
+      - name: download-models
+        image: busybox
+        env:
+        - name: MODEL_TYPE
+          value: "{{MODEL_TYPE}}"
+        - name: ROUTER_TYPE
+          value: "{{ROUTER_TYPE}}"
+        command: ["sh", "-c"]
+        args:
+          - |
+            URL=$(cat /etc/config/models/${ROUTER_TYPE}.${MODEL_TYPE})
+            echo "Downloading model archive from $URL"
+            mkdir -p /app/models/$ROUTER_TYPE/$MODEL_TYPE
+            wget -O /tmp/model.tar.gz "$URL"
+            tar --strip-components=1 -xzf /tmp/model.tar.gz -C /app/models/$ROUTER_TYPE/$MODEL_TYPE
+            rm /tmp/model.tar.gz
+        volumeMounts:
+        - name: ml-inference-models
+          mountPath: /app/models/{{ROUTER_TYPE}}/{{MODEL_TYPE}}
+        - name: ml-models-configmap
+          mountPath: /etc/config/models
+      containers:
+      - name: ml-model-{{ROUTER_ID}}-service
+        image: ghcr.io/giros-dit/tc32_ml/ml-models:latest
+        #command: ["python3", "-u", "/ml/ml.py"]
+        #args: ["TP_r1", "ML_r1"]
+        volumeMounts:
+        - name: ml-inference
+          mountPath: /app/inference.py
+          subPath: inference.py
+        - name: ml-models-configmap
+          mountPath: /etc/config/models
+        - name: ml-inference-models
+          mountPath: /app/models/{{ROUTER_TYPE}}/{{MODEL_TYPE}}
+        env:
+        - name: PYTHONUNBUFFERED
+          value: "1"
+        - name: MODEL_TYPE
+          value: "{{MODEL_TYPE}}"
+        - name: ROUTER_TYPE
+          value: "{{ROUTER_TYPE}}"
+        - name: MODEL_VERSION
+          value: "1.0.0"
+        - name: KAFKA_INPUT_TOPIC
+          value: "TP_{{ROUTER_ID}}"
+        - name: KAFKA_OUTPUT_TOPIC
+          value: "ML_{{ROUTER_ID}}"
+        - name: KAFKA_BROKERS
+          value: "kafka-service:9092"
+        - name: LOG_LEVEL
+          value: "INFO"
+        - name: EPSILON
+          value: "0.01"

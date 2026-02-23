@@ -1,0 +1,22 @@
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: vlan1000
+spec:
+  config: '{
+      "cniVersion": "0.3.1",
+      "type": "macvlan",
+      "master": "vlannet.1000",
+      "vlanId": 1000,
+      "mode": "bridge",
+      "capabilities": { "ips": true },
+      "ipam": {
+        "type": "static",
+        "routes": [
+          {
+            "dst": "10.1.0.0/16",
+            "gw": "10.1.2.1"
+          }
+        ]
+      }
+    }'

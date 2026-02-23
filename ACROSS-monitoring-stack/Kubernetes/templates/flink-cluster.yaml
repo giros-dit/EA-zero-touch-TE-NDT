@@ -1,0 +1,31 @@
+apiVersion: flinkoperator.k8s.io/v1beta1
+kind: FlinkCluster
+metadata:
+  name: flink-job-cluster
+spec:
+  flinkVersion: "1.14"
+  image:
+    name: ghcr.io/giros-dit/across-monitoring-stack/flink-operator:latest
+    #tag: 1.14.4
+  jobManager:
+    ports:
+      ui: 8081
+    resources:
+      limits:
+        memory: "2Gi"
+        cpu: "500m"
+    replicas: 1
+  taskManager:
+    replicas: 3
+    resources:
+      limits:
+        memory: "2Gi"
+        cpu: "500m"
+  flinkProperties:
+    taskmanager.numberOfTaskSlots: "4"
+  #job:
+  #jarFile: /opt/flink/usrlib/traffic-rate-1.0.jar
+  #args: ["kafka-service:9092", "TD_r1", "TP_r1", "1"]
+  #parallelism: 1
+  #restartPolicy: Never
+  

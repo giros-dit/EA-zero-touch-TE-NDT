@@ -1,0 +1,20 @@
+FROM python:3.11.10-slim
+
+WORKDIR /app
+
+# Install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the consumer script
+COPY s3_consumer.py .
+
+# Set the script as executable
+RUN chmod +x s3_consumer.py
+
+# Create a non-root user
+RUN useradd -m appuser
+USER appuser
+
+# Keep the container running
+CMD ["python", "/app/s3_consumer.py"]

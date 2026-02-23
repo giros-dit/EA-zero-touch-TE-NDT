@@ -1,0 +1,18 @@
+r1:
+ip -6 route add fd00:0:2::/64 encap seg6 mode encap segs fcff:2::1,fcff:3::1 dev eth3
+
+r3:
+ip -6 route add fd00:0:1::/64 encap seg6 mode encap segs fcff:2::1,fcff:1::1 dev eth3
+
+wireshark
+
+sudo ip netns exec clab-srv6-r1 tcpdump -U -n -i eth1 -w - | wireshark -k -i -
+sudo ip netns exec clab-srv6-r1 tcpdump -U -n -i eth3 -w - | wireshark -k -i -
+sudo ip netns exec clab-srv6-r3 tcpdump -U -n -i eth2 -w - | wireshark -k -i -
+sudo ip netns exec clab-srv6-r3 tcpdump -U -n -i eth3 -w - | wireshark -k -i -
+sudo ip netns exec clab-srv6-r2 tcpdump -U -n -i eth1 -w - | wireshark -k -i -
+sudo ip netns exec clab-srv6-r4 tcpdump -U -n -i eth1 -w - | wireshark -k -i -
+
+avillaseca01/containerlabubuntufrr:jammy
+
+docker rm -f $(docker ps -aq)
