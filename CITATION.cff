@@ -1,0 +1,112 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Network Digital Twin for Smart Energy-aware Zero-touch Traffic Engineering"
+type: software
+license: Apache-2.0
+repository-code: "https://github.com/giros-dit/EA-zero-touch-TE-NDT"
+abstract: >
+  This work propose a Network Digital Twin (NDT) approach aims to convert network telemetry events 
+  into intelligent zero-touch traffic engineering (TE) decisions by taking into account energy consumption 
+  considerations. The NDT solution uses Artificial Intelligence (AI) inference models to predict energy 
+  consumption associated with different traffic profiles carried on network equipment, and the NDT framework 
+  monitors network telemetry statistics to validate these predictions. Based on the inferred energy consumption, 
+  the NDT solution automates TE mechanisms to implement an energy-aware dynamic routing, forwarding traffic along 
+  the most energy-efficient paths. This work was carried out under the TC3.2 use case of the ACROSS European project.
+keywords:
+  - energy efficiency
+  - network telemetry
+  - Traffic Engineering
+  - Network Digital Twin
+  - Artificial Intelligence
+authors:
+  - family-names: "Bellido Triana"
+    given-names: "Luis"
+    orcid: "https://orcid.org/0000-0001-9591-0928"
+    affiliation: "Universidad Politécnica de Madrid"
+  - family-names: "González-Sánchez"
+    given-names: "Daniel"
+    orcid: "https://orcid.org/0000-0002-7691-0030"
+    affiliation: "Universidad Politécnica de Madrid"
+  - family-names: "Lentisco"
+    given-names: "Carlos M."
+    orcid: "https://orcid.org/0000-0002-7444-0872"
+    affiliation: "Universidad Politécnica de Madrid"
+  - family-names: "Fernández-López"
+    given-names: "Pablo"
+    orcid: "https://orcid.org/0009-0004-5780-615X"
+    affiliation: "Universidad Politécnica de Madrid"
+  - family-names: "Vicente Albertos"
+    given-names: "Mario"
+    affiliation: "Universidad Politécnica de Madrid"
+  - family-names: "Villaseca Martínez"
+    given-names: "Alejandro"
+    affiliation: "Universidad Politécnica de Madrid"
+  - family-names: "Karamchandani Batra"
+    given-names: "Amit"
+    orcid: "https://orcid.org/0000-0002-0311-6610"
+    affiliation: "Universidad Politécnica de Madrid"
+  - family-names: "de la Cal García"
+    given-names: "Luis"
+    affiliation: "Universidad Politécnica de Madrid"
+  - family-names: "Mozo Velasco"
+    given-names: "Bonifacio Alberto"
+    orcid: "https://orcid.org/0000-0001-9743-8604"
+    affiliation: "Universidad Politécnica de Madrid"
+  - family-names: "De la Osa Mostazo"
+    given-names: "David"
+    orcid: "https://orcid.org/0000-0002-3819-3982"
+    affiliation: "Telefónica Innovación Digital"
+  - family-names: "Pastor Perales"
+    given-names: "Antonio"
+    orcid: "https://orcid.org/0000-0003-2849-9782"
+    affiliation: "Telefónica Innovación Digital"
+  - family-names: "R. Lopez"
+    given-names: "Diego"
+    affiliation: "Telefónica Innovación Digital"
+references:
+  - type: data
+    title: "Power Consumption and Network Traffic Telemetry Datasets of Carrier-Grade Network Equipment for Smart Energy-aware Zero-touch Traffic Engineering"
+    authors:
+      - family-names: "Lentisco"
+        given-names: "Carlos M."
+      - family-names: "De la Osa Mostazo"
+        given-names: "David"
+      - family-names: "Karamchandani Batra"
+        given-names: "Amit"
+      - family-names: "González Sanchez"
+        given-names: "Daniel"
+      - family-names: "de la Cal García"
+        given-names: "Luis"
+      - family-names: "Bellido Triana"
+        given-names: "Luis"
+      - family-names: "Mozo Velasco"
+        given-names: "Bonifacio Alberto"
+      - family-names: "Pastor Perales"
+        given-names: "Antonio"
+      - family-names: "R. López"
+        given-names: "Diego"
+    doi: "10.5281/zenodo.17282065"
+    year: 2025
+  - type: software-code
+    title: "ML Inference Engine for Smart Energy-aware Zero-touch Traffic Engineering"
+    authors:
+      - family-names: "Karamchandani Batra"
+        given-names: "Amit"
+      - family-names: "González Sanchez"
+        given-names: "Daniel"
+      - family-names: "de la Cal García"
+        given-names: "Luis"
+      - family-names: "Bellido Triana"
+        given-names: "Luis"
+      - family-names: "Mozo Velasco"
+        given-names: "Bonifacio Alberto"
+      - family-names: "Lentisco"
+        given-names: "Carlos M."
+      - family-names: "De la Osa Mostazo"
+        given-names: "David"
+      - family-names: "Pastor Perales"
+        given-names: "Antonio"
+      - family-names: "R. López"
+        given-names: "Diego"
+    doi: "10.5281/zenodo.18717975"
+    year: 2026

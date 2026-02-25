@@ -2,7 +2,7 @@
 
 [![es](https://img.shields.io/badge/lang-es-blue)](./README.md)
 
-This work propose a Network Digital Twin (NDT) approach aims to convert network telemetry events into intelligent zero-touch traffic engineering (TE) decisions by taking into account energy consumption considerations. The NDT solution uses Artificial Intelligence (AI) inference models to predict energy consumption associated with different traffic profiles carried on network equipment, and the NDT framework monitors network telemetry statistics to validate these predictions. Based on the inferred energy consumption, the NDT solution automates TE mechanisms to implement an energy-aware dynamic routing, forwarding traffic along the most energy-efficient paths.
+This work propose a Network Digital Twin (NDT) approach aims to convert network telemetry events into intelligent zero-touch traffic engineering (TE) decisions by taking into account energy consumption considerations. The NDT solution uses Artificial Intelligence (AI) inference models to predict energy consumption associated with different traffic profiles carried on network equipment, and the NDT framework monitors network telemetry statistics to validate these predictions. Based on the inferred energy consumption, the NDT solution automates TE mechanisms to implement an energy-aware dynamic routing, forwarding traffic along the most energy-efficient paths. This work was carried out under the TC3.2 use case of the [ACROSS](https://across-he.eu/) European project.
 
 This repository contains the requirements, instructions and scripts to reproduce the NDT solution.
 

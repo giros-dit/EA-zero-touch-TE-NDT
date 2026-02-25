@@ -1,0 +1,106 @@
+{
+  "title": "Network Digital Twin for Smart Energy-aware Zero-touch Traffic Engineering",
+  "upload_type": "software",
+  "access_right": "open",
+  "description": "This work propose a Network Digital Twin (NDT) approach aims to convert network telemetry events into intelligent zero-touch traffic engineering (TE) decisions by taking into account energy consumption considerations. The NDT solution uses Artificial Intelligence (AI) inference models to predict energy consumption associated with different traffic profiles carried on network equipment, and the NDT framework monitors network telemetry statistics to validate these predictions. Based on the inferred energy consumption, the NDT solution automates TE mechanisms to implement an energy-aware dynamic routing, forwarding traffic along the most energy-efficient paths. This work was carried out under the TC3.2 use case of the ACROSS European project.",
+  "keywords": [
+    "energy efficiency",
+    "network telemetry",
+    "Traffic Engineering",
+    "Network Digital Twin",
+    "Artificial Intelligence"
+  ],
+  "creators": [
+    {
+      "name": "Bellido Triana, Luis",
+      "orcid": "0000-0001-9591-0928",
+      "affiliation": "Universidad Politécnica de Madrid",
+      "type": "ProjectMember"
+    },
+    {
+      "name": "González-Sánchez, Daniel",
+      "orcid": "0000-0002-7691-0030",
+      "affiliation": "Universidad Politécnica de Madrid",
+      "type": "ProjectMember"
+    },
+    {
+      "name": "Lentisco, Carlos M.",
+      "orcid": "0000-0002-7444-0872",
+      "affiliation": "Universidad Politécnica de Madrid",
+      "type": "ProjectMember"
+    },
+    {
+      "name": "Fernández-López, Pablo",
+      "orcid": "0009-0004-5780-615X",
+      "affiliation": "Universidad Politécnica de Madrid",
+      "type": "ProjectMember"
+    },
+    {
+      "name": "Vicente Albertos, Mario",
+      "affiliation": "Universidad Politécnica de Madrid",
+      "type": "ProjectMember"
+    },
+    {
+      "name": "Villaseca Martínez, Alejandro",
+      "affiliation": "Universidad Politécnica de Madrid",
+      "type": "ProjectMember"
+    },
+    {
+      "name": "Karamchandani Batra, Amit",
+      "orcid": "0000-0002-0311-6610",
+      "affiliation": "Universidad Politécnica de Madrid",
+      "type": "ProjectMember"
+    },
+    {
+      "name": "de la Cal García, Luis",
+      "orcid": "0000-0002-1798-8743",
+      "affiliation": "Universidad Politécnica de Madrid",
+      "type": "ProjectMember"
+    },
+    {
+      "name": "Mozo Velasco, Bonifacio Alberto",
+      "orcid": "0000-0001-9743-8604",
+      "affiliation": "Universidad Politécnica de Madrid",
+      "type": "ProjectMember"
+    },
+    {
+      "name": "De la Osa Mostazo, David",
+      "orcid": "0000-0002-3819-3982",
+      "affiliation": "Telefónica Innovación Digital",
+      "type": "ProjectMember"
+    },
+    {
+      "name": "Pastor Perales, Antonio",
+      "orcid": "0000-0003-2849-9782",
+      "affiliation": "Telefónica Innovación Digital",
+      "type": "ProjectMember"
+    },
+    {
+      "name": "R. Lopez, Diego",
+      "orcid": "0000-0002-8326-2000",
+      "affiliation": "Telefónica Innovación Digital",
+      "type": "ProjectMember"
+    }
+  ],
+  "license": "Apache-2.0",
+  "grants": [
+    {
+      "id": "10.3030/101097122"
+    },
+    {
+      "id": "TSI-063000-2021-81"
+    }
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.17282065",
+      "relation": "isDerivedFrom",
+      "resource_type": "dataset"
+    },
+    {
+      "identifier": "10.5281/zenodo.18717975",
+      "relation": "isDerivedFrom",
+      "resource_type": "software"
+    }
+  ]
+}
