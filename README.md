@@ -452,7 +452,7 @@ When running `ixia_GUI.py`, a graphical interface will be displayed with telemet
 
 ## Acknowledgements
 
-This work has been supported in part by the European Union’s Horizon Europe Research and Innovation Program under Grant Agreement 101097122 ([ACROSS](https://across-he.eu/)), and in part by the Ministry of Economic Affairs and Digital Transformation of the Spanish Government and the NextGenerationEU (Recovery, Transformation and Resilience Plan- PRTR) Projects of the UNICO-5G I+D Program under Grant Agreement TSI-063000-2021-81 ([B5GEMINI-INFRA](https://www.dit.upm.es/~giros/project/b5gemini/)).
+This work has been supported in part by the European Union’s Horizon Europe Research and Innovation Program under Grant Agreement 101097122 ([ACROSS](https://across-he.eu/)), and in part by the Ministry of Economic Affairs and Digital Transformation of the Spanish Government and the NextGenerationEU (Recovery, Transformation and Resilience Plan - PRTR) project of the UNICO-5G I+D Program under Grant Agreement TSI-063000-2021-81 ([B5GEMINI-INFRA](https://www.dit.upm.es/~giros/project/b5gemini/)).
 
 [ACROSS](https://across-he.eu/)<br />(101097122) | [B5GEMINI-INFRA](https://www.dit.upm.es/~giros/project/b5gemini/)<br />(TSI-063000-2021-81) 
 :-------------------------:|:-------------------------:

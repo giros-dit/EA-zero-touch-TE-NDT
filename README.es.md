@@ -473,7 +473,7 @@ Al ejecutar `ixia_GUI.py`, se mostrará una interfaz gráfica con la telemetría
 
 ## Agradecimientos
 
-Este trabajo ha sido financiado en parte por el Programa de Investigación e Innovación Horizonte Europa de la Unión Europea con el acuerdo de *Grant Agreement* 101097122 ([ACROSS](https://across-he.eu/)), y en parte por el Ministerio de Economía y Transformación Digital del Gobierno de España y los proyectos NextGenerationEU (Plan de Recuperación, Transformación y Resiliencia - PRTR) del Programa UNICO-5G I+D con el acuerdo de *Grant Agreement* TSI-063000-2021-81 ([B5GEMINI-INFRA](https://www.dit.upm.es/~giros/project/b5gemini/)).
+Este trabajo ha sido financiado en parte por el Programa de Investigación e Innovación Horizonte Europa de la Unión Europea con el acuerdo de *Grant Agreement* 101097122 ([ACROSS](https://across-he.eu/)), y en parte por un proyecto financiado por el Ministerio de Asuntos Económicos y Transformación Digital del Gobierno de España y NextGenerationEU (Plan de Recuperación, Transformación y Resiliencia - PRTR) del Programa UNICO-5G I+D con el acuerdo de *Grant Agreement* TSI-063000-2021-81 ([B5GEMINI-INFRA](https://www.dit.upm.es/~giros/project/b5gemini/)).
 
 [ACROSS](https://across-he.eu/)<br />(101097122) | [B5GEMINI-INFRA](https://www.dit.upm.es/~giros/project/b5gemini/)<br />(TSI-063000-2021-81) 
 :-------------------------:|:-------------------------:
