@@ -1,17 +1,19 @@
-# B5Gemini ACROSS Experiment Stack
+# Network Digital Twin for Smart Energy-aware Zero-touch Traffic Engineering
 
 [![es](https://img.shields.io/badge/lang-es-blue)](./README.md)
 
-This repository contains the requirements, instructions and scripts to execute experiments on the B5Gemini cluster.
+This work propose a Network Digital Twin (NDT) approach aims to convert network telemetry events into intelligent zero-touch traffic engineering (TE) decisions by taking into account energy consumption considerations. The NDT solution uses Artificial Intelligence (AI) inference models to predict energy consumption associated with different traffic profiles carried on network equipment, and the NDT framework monitors network telemetry statistics to validate these predictions. Based on the inferred energy consumption, the NDT solution automates TE mechanisms to implement an energy-aware dynamic routing, forwarding traffic along the most energy-efficient paths.
+
+This repository contains the requirements, instructions and scripts to reproduce the NDT solution.
 
 ## Table of Contents
 
-1. [Scenario Description](#scenario-description)
+- [Scenario Description](#scenario-description)
     - [Architecture and software](#architecture-and-software)
     - [Network connections](#network-connections)
     - [Virtual scenario structure](#virtual-scenario-structure)
 
-2. [Scenario deployment and experiment execution](#scenario-deployment-and-experiment-execution)
+- [Scenario deployment and experiment execution](#scenario-deployment-and-experiment-execution)
     - [*clabernetes* installation](#clabernetes-installation)
     - [Deployment modification for VlanNet connectivity](#deployment-modification-for-vlannet-connectivity)
     - [*Network emulation* deployment using containerlab topology in clabernetes](#network-emulation-deployment-using-containerlab-topology-in-clabernetes)
@@ -27,16 +29,18 @@ This repository contains the requirements, instructions and scripts to execute e
         - [MinIO initial configuration](#minio-initial-configuration)
         - [Complete deployment](#complete-deployment)
     - [Creation and execution of experiments using Ixia-c traffic generator](#creation-and-execution-of-experiments-using-ixia-c-traffic-generator)
+- [Acknowledgements](#acknowledgements)
+- [License](#license)
 
 ## Scenario Description
 
-For the purposes of the experiments contained in this repository, the B5Gemini cluster has one machine that acts as a controller and four others that act as compute nodes.
+For the purposes of the experiments contained in this repository, the cluster infrastructure has one machine that acts as a controller and four others that act as compute nodes.
 
 ### Architecture and software
 
 ![B5Gemini Schema](./img/b5g.png)
 
-> The cluster has an additional *compute4* node with the same configuration, but it is not shown in this diagram.
+> The cluster has an additional *compute4* node with the same configuration as *compute2* and *compute3*, but it is not shown in this diagram.
 
 As indicated in the diagram, the [OpenStack](https://www.openstack.org/) virtualization platform and the [Kubernetes](https://kubernetes.io/es/) container orchestration platform are deployed on the cluster, on which the virtualized infrastructure for the experiments will run.
 
@@ -50,7 +54,7 @@ Additionally, the following components run on Kubernetes:
 ### Network connections
 
 ![B5Gemini network schema](./img/b5g_net.png)
-> The cluster has an additional *compute4* node with the same configuration, but it is not shown in this diagram.
+> The cluster has an additional *compute4* node with the same configuration as *compute2* and *compute3*, but it is not shown in this diagram.
 
 Connectivity between nodes is established through a switch that handles traffic on various interfaces. The experiments contained here focus especially on the use of VLAN 30 network with virtual network bridges that allow establishing a second tagging for traffic segmentation.
 
@@ -71,6 +75,8 @@ The virtual scenario for experiments has various components that work together:
 - **NDT Data Fabric:** Apache Kafka deployment where each component publishes processed data, using a *topic* per router and stage.
 
 - **[Experiment analysis stack:](./experiment-analysis-stack/)** Consists of an [*InfluxDB*](https://www.influxdata.com/products/influxdb/) instance to store time series and visualize telemetry data in real time. Additionally, it has an instance of the [*MinIO*](https://min.io/) storage server where a replica of data is permanently stored in *S3*-compatible format. It is the only set of resources deployed on a "heavy" virtual machine in *OpenStack*.
+
+- **Traffic generator:** A powerful solution based on [*Ixia-C*](https://github.com/open-traffic-generator/ixia-c) is used to generate traffic. This traffic generator solution enables programming the definition of dynamic traffic profiles while providing per traffic flow statistics, such as throughput and one-way latency.
 
 ## Scenario deployment and experiment execution
 
@@ -146,7 +152,7 @@ clabverter --naming non-prefixed --outputDirectory ./converted
 
 This modified clabverter image will export the files:
 
-- `_<topology name>-ns.yaml`: Creates the *namespace* where the topology will be deployed. Can be omitted if we work on an existing *namespace* that has been defined using the `--namespace` option of clabverter.
+- `<topology name>-ns.yaml`: Creates the *namespace* where the topology will be deployed. Can be omitted if we work on an existing *namespace* that has been defined using the `--namespace` option of clabverter.
 
 - `<topology name>.yaml`: File that deploys a *Topology* object on the indicated *namespace*. Clabernetes will automatically create the necessary resources (*deployments*, *services*...) to execute the topology.
 
@@ -204,7 +210,7 @@ kubectl rollout restart deployment kafka-producer
 
 ### *ML Stack* deployment
 
-The *ML Stack* deployment is invoked from the general deployment script of the *Monitoring Stack* thanks to the input arguments <router_type> and <model_type> defined in [k8s-deploy.sh](./ACROSS-monitoring-stack/Kubernetes/k8s-deploy.sh). However, there is a complementary script [launch_ml_stack.sh](./ACROSS-monitoring-stack/Kubernetes/scripts/ml_models/launch_ml_stack.sh) that allows deploying the Machine Learning inference engine stack for all routers in the network scenario specified in the [config.json](./ACROSS-monitoring-stack/Kubernetes/config/config.json) configuration file.
+The *ML Stack* deployment is invoked from the general deployment script of the *Monitoring Stack* thanks to the input arguments <router_type> and <model_type> defined in [k8s-deploy-ml-models.sh](./ACROSS-monitoring-stack/Kubernetes/k8s-deploy-ml-models.sh). However, there is a complementary script [launch_ml_stack.sh](./ACROSS-monitoring-stack/Kubernetes/scripts/ml_models/launch_ml_stack.sh) that allows deploying the Machine Learning inference engine stack for all routers in the network scenario specified in the [config.json](./ACROSS-monitoring-stack/Kubernetes/config/config.json) configuration file.
 
 ```shell
 ./launch_ml_stack.sh <router_type> <model_type>
@@ -229,7 +235,7 @@ At the same time, there is a final script that allows deploying a single ML mode
 
 Both router type <router_type>: `rA`, and model type <model_type>: `linear` are the default values used if no input parameters are specified.
 
-The three scripts [k8s-deploy.sh](./ACROSS-monitoring-stack/Kubernetes/k8s-deploy.sh), [launch_ml_stack.sh](./ACROSS-monitoring-stack/Kubernetes/scripts/ml_models/launch_ml_stack.sh) and [launch_ml_model.sh](./ACROSS-monitoring-stack/Kubernetes/scripts/ml_models/launch_ml_model.sh) use as default values the router type and model type `rA` and `linear`, respectively, if no input parameters are specified. In contrast, for the last script [launch_ml_model.sh](./ACROSS-monitoring-stack/Kubernetes/scripts/ml_models/launch_ml_model.sh) it is necessary to identify the router ID to use, for example: r1, r2, r3, r4, r5, r6 or r7.
+The three scripts [k8s-deploy-ml-models.sh](./ACROSS-monitoring-stack/Kubernetes/k8s-deploy-ml-models.sh), [launch_ml_stack.sh](./ACROSS-monitoring-stack/Kubernetes/scripts/ml_models/launch_ml_stack.sh) and [launch_ml_model.sh](./ACROSS-monitoring-stack/Kubernetes/scripts/ml_models/launch_ml_model.sh) use as default values the router type and model type `rA` and `linear`, respectively, if no input parameters are specified. In contrast, for the last script [launch_ml_model.sh](./ACROSS-monitoring-stack/Kubernetes/scripts/ml_models/launch_ml_model.sh) it is necessary to identify the router ID to use, for example: r1, r2, r3, r4, r5, r6 or r7.
 
 To switch the ML Stack between ML models and dummy ML, you can use the [switch_ml_stack.sh](./ACROSS-monitoring-stack/Kubernetes/scripts/ml_models/switch_ml_stack.sh) script as follows:
 
@@ -288,7 +294,7 @@ python3 networkinfo.py /path/to/topology.clab.yml --final_filter "^(edge\d+|core
 **Complete program documentation**
 For more examples and detailed use cases, consult the [complete documentation](./vnx-srv6/blob/c72db89ff44b3050c68a8548313c43ff750f1b41/NetworkControlStack/readme_networkinfo.md).
 
-#### Deployment on b5g
+#### Deployment on cluster infrastructure
 
 ⚠️ Important: Once the networkinfo.json file is generated, you must copy it to the vnx-srv6 repository folder:
 
@@ -426,7 +432,7 @@ After these definitions, simply start the containers:
 docker compose up -d
 ```
 
-### Creation and execution of experiments using Ixia-c traffic generator
+### Creation and execution of experiments using Ixia-C traffic generator
 
 In the [experiment-scripts](./experiment-scripts/) directory you will find the necessary files to launch experiments on the scenario.
 
@@ -440,6 +446,19 @@ Experiments can be launched by executing the [`ixia_GUI.py`](./experiment-script
 
 On the other hand, it is also necessary to import the flow definition function from one of the files within [flow_definitions](./experiment-scripts/flow_definitions/) and, optionally, a `variation_interval` function that defines an ordered sequence of flow startup and shutdown. Examples can be found in the files [fixed_packet_size_fixed_rate_mbps_continuous.py](./experiment-scripts/flow_definitions/fixed_packet_size_fixed_rate_mbps_continuous.py) and [fixed_packet_size_fixed_rate_mbps_interval.py](./experiment-scripts/flow_definitions/fixed_packet_size_fixed_rate_mbps_interval.py).
 
-> The complete Ixia-c API documentation is available [here](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/open-traffic-generator/models/v0.13.0/artifacts/openapi.yaml#tag/Configuration).
+> The complete Ixia-C API documentation is available [here](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/open-traffic-generator/models/v0.13.0/artifacts/openapi.yaml#tag/Configuration).
 
 When running `ixia_GUI.py`, a graphical interface will be displayed with telemetry extracted from the flow generator and one or more buttons that allow starting or stopping flows.
+
+## Acknowledgements
+
+This work has been supported in part by the European Union’s Horizon Europe Research and Innovation Program under Grant Agreement 101097122 ([ACROSS](https://across-he.eu/)), and in part by the Ministry of Economic Affairs and Digital Transformation of the Spanish Government and the NextGenerationEU (Recovery, Transformation and Resilience Plan- PRTR) Projects of the UNICO-5G I+D Program under Grant Agreement TSI-063000-2021-81 ([B5GEMINI-INFRA](https://www.dit.upm.es/~giros/project/b5gemini/)).
+
+[ACROSS](https://across-he.eu/)<br />(101097122) | [B5GEMINI-INFRA](https://www.dit.upm.es/~giros/project/b5gemini/)<br />(TSI-063000-2021-81) 
+:-------------------------:|:-------------------------:
+[![](img/across-logo.jpg)](https://across-he.eu/) | [![](img/b5gemini-logo.png)](https://www.dit.upm.es/~giros/project/b5gemini/)
+[![](img/eu-union.jpg)]()| [![](img/gob-spain.png)]()
+
+## License
+
+This project is licensed under [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0).

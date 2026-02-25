@@ -1,17 +1,19 @@
-# B5Gemini ACROSS Experiment Stack
+# Network Digital Twin for Smart Energy-aware Zero-touch Traffic Engineering
 
 [![en](https://img.shields.io/badge/lang-en-red)](./README.en.md)
 
-Este repositorio contiene los requisitos, instrucciones y scripts para ejecutar experimentos sobre el clúster B5Gemini.
+Este trabajo propone un enfoque de gemelo digital de red (NDT) cuyo objetivo es convertir los eventos de telemetría de red en decisiones inteligentes de ingeniería de tráfico (TE) sin intervención humana, teniendo en cuenta consideraciones de consumo energético. La solución NDT utiliza modelos de inferencia de inteligencia artificial (IA) para predecir el consumo energético asociado a los diferentes perfiles de tráfico que se transportan en los equipos de red, y el marco NDT monitoriza las estadísticas de telemetría de red para validar estas predicciones. Basándose en el consumo energético inferido, la solución NDT automatiza los mecanismos de TE para implementar un enrutamiento dinámico consciente del consumo energético, reenviando el tráfico por las rutas más eficientes desde el punto de vista energético.
+
+Este repositorio contiene los requisitos, las instrucciones y los scripts para reproducir la solución NDT.
 
 ## Índice
 
-1. [Descripción del escenario](#descripción-del-escenario)
+- [Descripción del escenario](#descripción-del-escenario)
     - [Arquitectura y software](#arquitectura-y-software)
     - [Conexiones de red](#conexiones-de-red)
     - [Estructura del escenario virtual](#estructura-del-escenario-virtual)
 
-2. [Despliegue del escenario y ejecución de experimentos](#despliegue-del-escenario-y-ejecución-de-experimentos)
+- [Despliegue del escenario y ejecución de experimentos](#despliegue-del-escenario-y-ejecución-de-experimentos)
     - [Instalación de *clabernetes*](#instalación-de-clabernetes)
         - [Modificación del despliegue para conectividad mediante VlanNet](#modificación-del-despliegue-para-conectividad-mediante-vlannet)
         - [Despliegue del *Network emulation* mediante una topología de containerlab en clabernetes](#despliegue-del-network-emulation-mediante-una-topología-de-containerlab-en-clabernetes)
@@ -27,16 +29,18 @@ Este repositorio contiene los requisitos, instrucciones y scripts para ejecutar 
             - [Configuración inicial de MinIO](#configuración-inicial-de-minio)
             - [Despliegue completo](#despliegue-completo)
         - [Creación y ejecución de experimentos mediante el generador de tráfico Ixia-c](#creación-y-ejecución-de-experimentos-mediante-el-generador-de-tráfico-ixia-c)
+- [Agradecimientos](#agradecimientos)
+- [Licencia](#licencia)
 
 ## Descripción del escenario
 
-A efectos de los experimentos recogidos en este repositorio, el clúster B5Gemini cuenta con una máquina que actúa de controlador y otras cuatro que actúan como nodos de computación.
+A efectos de los experimentos recogidos en este repositorio, la infraestructura del clúster cuenta con una máquina que actúa de controlador y otras cuatro que actúan como nodos de computación.
 
 ### Arquitectura y software
 
 ![Esquema B5Gemini](./img/b5g.png)
 
-> El clúster cuenta con un nodo *compute4* adicional con la misma configuración, pero que no figura en este diagrama.
+> El clúster cuenta con un nodo *compute4* adicional con la misma configuración que los nodos *compute2* y *compute3*, pero que no figura en este diagrama.
 
 Tal y como se indica en el gráfico, sobre el clúster se encuentran desplegadas la plataforma de virtualización [OpenStack](https://www.openstack.org/) y la plataforma de orquestación de contenedores [Kubernetes](https://kubernetes.io/es/), sobre los que se ejecutará la infraestructura virtualizada para los experimentos.
 
@@ -50,7 +54,7 @@ Adicionalmente, sobre Kubernetes se ejecutan los siguientes componentes:
 ### Conexiones de red
 
 ![Esquema de red B5Gemini](./img/b5g_net.png)
-> El clúster cuenta con un nodo *compute4* adicional con la misma configuración, pero que no figura en este diagrama.
+> El clúster cuenta con un nodo *compute4* adicional con la misma configuración que los nodos *compute2* y *compute3*, pero que no figura en este diagrama.
 
 La conectividad entre nodos se establece mediante un conmutador que se para el tráfico en diversas interfaces. Los experimentos aquí recogidos se centran especialmente en el empleo de las red VLAN 30 con puentes de red virtuales que permitan establecer un segundo etiquetado para la segmentación del tráfico.
 
@@ -71,6 +75,9 @@ El escenario virtual para experimentos cuenta con diversos componentes que traba
 - **NDT Data Fabric:** Despliegue de Apache Kafka en el que cada uno de los componentes publica los datos procesados, empleando para ello un *topic* por enrutador y etapa.
 
 - **[Experiment analysis stack:](./experiment-analysis-stack/)** Consta de una instancia de [*InfluxDB*](https://www.influxdata.com/products/influxdb/) para almacenar series temporales y visualizar los datos de telemetría en tiempo real. Además, cuenta con una instancia del servidor de almacenamiento [*MinIO*](https://min.io/) en el que se almacena una replica de los datos de forma permanente y en formato compatible con *S3*. Es el único conjunto de recursos desplegado sobre una máquina virtual "pesada" en *OpenStack*.
+
+- **Traffic generator:** Se utiliza una potente solución basada en [*Ixia-C*](https://github.com/open-traffic-generator/ixia-c) para generar tráfico. Esta solución de generador de tráfico permite programar la definición de perfiles de tráfico dinámicos, al tiempo que proporciona estadísticas por flujo de tráfico, como el rendimiento y la latencia unidireccional.
+
 
 ## Despliegue del escenario y ejecución de experimentos
 
@@ -146,7 +153,7 @@ clabverter --naming non-prefixed --outputDirectory ./converted
 
 Esta imagen modificada de clabverter exportará los ficheros:
 
-- `_<nombre de la topología>-ns.yaml`: Crea el *namespace* en el que se desplegará la topología. Puede omitirse si trabajamos sobre un *namespace* existente que haya sido definido mediante la opción `--namespace` de clabverter.
+- `<nombre de la topología>-ns.yaml`: Crea el *namespace* en el que se desplegará la topología. Puede omitirse si trabajamos sobre un *namespace* existente que haya sido definido mediante la opción `--namespace` de clabverter.
 
 - `<nombre de la topología>.yaml`: Fichero que despliega un objeto *Topology* sobre el *namespace* indicado. Clabernetes creará automáticamente los recursos necesarios (*deployments*, *services*...) para ejecutar la topología.
 
@@ -204,7 +211,7 @@ kubectl rollout restart deployment kafka-producer
 
 ### Despliegue del *ML Stack*
 
-El despliegue del *ML Stack* se invoca desde el script de despliegue general del *Monitoring Stack* gracias a los argumentos de entrada <router_type> y <model_type> definidos en [k8s-deploy.sh](./ACROSS-monitoring-stack/Kubernetes/k8s-deploy.sh). Sin embargo, existe un script complementario [launch_ml_stack.sh](./ACROSS-monitoring-stack/Kubernetes/scripts/ml_models/launch_ml_stack.sh) que permite desplegar la pila de motores de inferencia de Machine Learning para todos los routers del escenario de red especificados en el fichero de configuración [config.json](./ACROSS-monitoring-stack/Kubernetes/config/config.json).
+El despliegue del *ML Stack* se invoca desde el script de despliegue general del *Monitoring Stack* gracias a los argumentos de entrada <router_type> y <model_type> definidos en [k8s-deploy-ml-models.sh]](./ACROSS-monitoring-stack/Kubernetes/k8s-deploy-ml-models.sh). Sin embargo, existe un script complementario [launch_ml_stack.sh](./ACROSS-monitoring-stack/Kubernetes/scripts/ml_models/launch_ml_stack.sh) que permite desplegar la pila de motores de inferencia de Machine Learning para todos los routers del escenario de red especificados en el fichero de configuración [config.json](./ACROSS-monitoring-stack/Kubernetes/config/config.json).
 
 ```shell
 ./launch_ml_stack.sh <router_type> <model_type>
@@ -229,7 +236,7 @@ A su vez, existe un último script que permite desplegar un único modelo de ML 
 
 Tanto el tipo de router <router_type>: `rA`, como el tipo de modelo <model_type>: `linear` son los valores por defecto que se utlizan si no se especifican los parámetros de entrada.
 
-Los tres scripts [k8s-deploy.sh](./ACROSS-monitoring-stack/Kubernetes/k8s-deploy.sh), [launch_ml_stack.sh](./ACROSS-monitoring-stack/Kubernetes/scripts/ml_models/launch_ml_stack.sh) y [launch_ml_model.sh](./ACROSS-monitoring-stack/Kubernetes/scripts/ml_models/launch_ml_model.sh) utilizan como valores por defecto los tipos de router y modelo `rA` y `linear`, respectivamente, si no se especifican los parámetros de entrada. En cambio para el último script [launch_ml_model.sh](./ACROSS-monitoring-stack/Kubernetes/scripts/ml_models/launch_ml_model.sh) es necesario identificar el ID del router a emplear, por ejemplo: r1, r2, r3, r4, r5, r6 o r7.
+Los tres scripts [k8s-deploy-ml-models.sh](./ACROSS-monitoring-stack/Kubernetes/k8s-deploy-ml-models.sh), [launch_ml_stack.sh](./ACROSS-monitoring-stack/Kubernetes/scripts/ml_models/launch_ml_stack.sh) y [launch_ml_model.sh](./ACROSS-monitoring-stack/Kubernetes/scripts/ml_models/launch_ml_model.sh) utilizan como valores por defecto los tipos de router y modelo `rA` y `linear`, respectivamente, si no se especifican los parámetros de entrada. En cambio para el último script [launch_ml_model.sh](./ACROSS-monitoring-stack/Kubernetes/scripts/ml_models/launch_ml_model.sh) es necesario identificar el ID del router a emplear, por ejemplo: r1, r2, r3, r4, r5, r6 o r7.
 
 Para cambiar el ML Stack entre modelos ML y dummy ML, se puede utilizar el script [switch_ml_stack.sh](./ACROSS-monitoring-stack/Kubernetes/scripts/ml_models/switch_ml_stack.sh) de la siguiente manera:
 
@@ -288,7 +295,7 @@ python3 networkinfo.py /path/to/topology.clab.yml --final_filter "^(edge\d+|core
 **Documentanción completa del programa**
 Para más ejemplos y casos de uso detallados, consulta la [documentación completa](./vnx-srv6/blob/c72db89ff44b3050c68a8548313c43ff750f1b41/NetworkControlStack/readme_networkinfo.md).
 
-#### Despliegue en el b5g
+#### Despliegue en la infraestructura del clúster
 
 ⚠️ Importante: Una vez generado el archivo networkinfo.json, debes copiarlo a la carpeta del repositorio vnx-srv6:
 
@@ -446,7 +453,7 @@ docker compose up -d
 
 > ⚠️ Importante: El *bucket* debe haberse creado previamente desde la interfaz de *MinIO*, tal y como se indica en el apartado *[Configuración inicial de MinIO](#configuración-inicial-de-minio)*.
 
-### Creación y ejecución de experimentos mediante el generador de tráfico Ixia-c
+### Creación y ejecución de experimentos mediante el generador de tráfico Ixia-C
 
 En el directorio [experiment-scripts](./experiment-scripts/) se encuentran los ficheros necesarios para lanzar experimentos sobre el escenario.
 
@@ -460,6 +467,19 @@ Los experimentos pueden lanzarse al ejecutar el fichero [`ixia_GUI.py`](./experi
 
 Por otro lado, también es neceasrio importar la función de definición de flujos desde alguno de los ficheros dentro de [flow_definitions](./experiment-scripts/flow_definitions/) y, opcionalmente, una función `variation_interval` que defina una secuencia ordenada de arranque y detención de flujos. Pueden consultarse ejemplos en los ficheros [fixed_packet_size_fixed_rate_mbps_continuous.py](./experiment-scripts/flow_definitions/fixed_packet_size_fixed_rate_mbps_continuous.py) y [fixed_packet_size_fixed_rate_mbps_interval.py](./experiment-scripts/flow_definitions/fixed_packet_size_fixed_rate_mbps_interval.py).
 
-> La documentación completa de la API de Ixia-c está disponible [aquí](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/open-traffic-generator/models/v0.13.0/artifacts/openapi.yaml#tag/Configuration).
+> La documentación completa de la API de Ixia-C está disponible [aquí](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/open-traffic-generator/models/v0.13.0/artifacts/openapi.yaml#tag/Configuration).
 
 Al ejecutar `ixia_GUI.py`, se mostrará una interfaz gráfica con la telemetría extraída del generador de flujo y uno o varios botones que permiten iniciar o detener los flujos.
+
+## Agradecimientos
+
+Este trabajo ha sido financiado en parte por el Programa de Investigación e Innovación Horizonte Europa de la Unión Europea con el acuerdo de *Grant Agreement* 101097122 ([ACROSS](https://across-he.eu/)), y en parte por el Ministerio de Economía y Transformación Digital del Gobierno de España y los proyectos NextGenerationEU (Plan de Recuperación, Transformación y Resiliencia - PRTR) del Programa UNICO-5G I+D con el acuerdo de *Grant Agreement* TSI-063000-2021-81 ([B5GEMINI-INFRA](https://www.dit.upm.es/~giros/project/b5gemini/)).
+
+[ACROSS](https://across-he.eu/)<br />(101097122) | [B5GEMINI-INFRA](https://www.dit.upm.es/~giros/project/b5gemini/)<br />(TSI-063000-2021-81) 
+:-------------------------:|:-------------------------:
+[![](img/across-logo.jpg)](https://across-he.eu/) | [![](img/b5gemini-logo.png)](https://www.dit.upm.es/~giros/project/b5gemini/)
+[![](img/eu-union.jpg)]()| [![](img/gob-spain.png)]()
+
+## Licencia
+
+Este proyecto está bajo licencia [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0).
