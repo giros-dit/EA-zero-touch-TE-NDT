@@ -3,6 +3,9 @@ message: "If you use this software, please cite it as below."
 title: "Network Digital Twin for Smart Energy-aware Zero-touch Traffic Engineering"
 type: software
 license: Apache-2.0
+version: 1.0
+doi: 10.5281/zenodo.18774756
+date-released: 2026-02-25
 repository-code: "https://github.com/giros-dit/EA-zero-touch-TE-NDT"
 abstract: >
   This work propose a Network Digital Twin (NDT) approach aims to convert network telemetry events 
